@@ -1,0 +1,159 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--header-height);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.logo {
+  width: auto;
+  height: clamp(2rem, 8vw, 2.75rem);
+  max-width: min(10rem, 42vw);
+  object-fit: contain;
+}
+
+.desktopNav,
+.actions {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-navy-900);
+  transition: color 160ms ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--link-accent);
+}
+
+.actions {
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cta {
+  white-space: nowrap;
+}
+
+.mobileActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+.menuButton:hover,
+.menuButton:focus-visible {
+  border-color: var(--link-accent);
+  background: var(--color-sand-100);
+}
+
+.menuButton:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.menuIcon,
+.menuIcon::before,
+.menuIcon::after {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-navy-900);
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.menuIcon {
+  position: relative;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menuIcon::before {
+  top: -0.35rem;
+}
+
+.menuIcon::after {
+  top: 0.35rem;
+}
+
+.menuIcon[data-open="true"] {
+  background: transparent;
+}
+
+.menuIcon[data-open="true"]::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menuIcon[data-open="true"]::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+@media (min-width: 960px) {
+  .inner {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-5);
+  }
+
+  .desktopNav {
+    display: block;
+    justify-self: center;
+  }
+
+  .actions {
+    display: inline-flex;
+  }
+
+  .mobileActions {
+    display: none;
+  }
+}

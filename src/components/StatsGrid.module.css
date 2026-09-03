@@ -1,0 +1,37 @@
+.section {
+  background: var(--color-sand-100);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+}
+
+.card {
+  min-width: 0;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.value {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: 1;
+  color: var(--color-blue-500);
+}
+
+.label {
+  margin: 0;
+  font-size: clamp(0.9rem, 2.4vw, 1rem);
+  line-height: 1.45;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}

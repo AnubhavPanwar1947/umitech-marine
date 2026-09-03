@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Clean marine energy placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2240"/>
+      <stop offset="55%" stop-color="#1e6bb8"/>
+      <stop offset="100%" stop-color="#5eb4ef"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#12345f"/>
+      <stop offset="100%" stop-color="#061428"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <rect y="430" width="1200" height="370" fill="url(#sea)"/>
+  <circle cx="920" cy="150" r="70" fill="#f4f7fa" opacity="0.9"/>
+  <path d="M120 520 C260 470 420 560 560 520 S860 470 1080 540 L1080 800 L120 800 Z" fill="#2f8fd6" opacity="0.35"/>
+  <rect x="360" y="300" width="480" height="180" rx="24" fill="#f4f7fa" opacity="0.12"/>
+  <text x="600" y="405" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="42" font-weight="700">Decarbonization</text>
+  <text x="600" y="455" text-anchor="middle" fill="#e8eef4" font-family="Arial, sans-serif" font-size="24">Placeholder media</text>
+</svg>

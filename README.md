@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UMITECH Marine Rebuild
 
-## Getting Started
+Independent Next.js rebuild of the public UMITECH Marine Consultants homepage.
 
-First, run the development server:
+Reference site: https://www.umitech.co.jp/
+
+This project is intentionally separate from `pelagic-marine`.
+
+## Tech stack
+
+- Next.js App Router
+- JavaScript / JSX
+- Plain CSS + CSS Modules
+- Semantic HTML
+- `next/image` for responsive images
+
+## Getting started
 
 ```bash
+cd C:\Users\Admin\Projects\umitech-marine-rebuild
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — start local development server
+- `npm run build` — production build
+- `npm run start` — run production server
+- `npm run lint` — ESLint
 
-## Learn More
+## Folder structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/
+  app/
+    globals.css
+    layout.js
+    page.js
+  components/
+    Header.js
+    MobileNav.js
+    Hero.js
+    StatsGrid.js
+    ServicesGrid.js
+    AboutSection.js
+    Testimonials.js
+    ContactSection.js
+    Footer.js
+  lib/
+    site-data.js
+public/
+  images/
+    logo-placeholder.svg
+    hero-placeholder.svg
+    about-placeholder.svg
+    service-*.svg
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Replace placeholder assets
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Do not hotlink assets from the live reference site. Replace these local placeholders when approved assets are available:
 
-## Deploy on Vercel
+- `public/images/logo-placeholder.svg`
+- `public/images/hero-placeholder.svg`
+- `public/images/about-placeholder.svg`
+- `public/images/service-naval.svg`
+- `public/images/service-engineering.svg`
+- `public/images/service-inspection.svg`
+- `public/images/service-legal.svg`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Update paths in `src/lib/site-data.js` if filenames change.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact form
+
+The contact form is frontend-only for now. See the TODO in `src/components/ContactSection.js` before connecting email delivery or a backend.
+
+## Responsive testing
+
+Test at:
+
+- 190px
+- 320px
+- 375px
+- 480px
+- 768px
+- 1024px
+- 1280px
+- 1440px
+
+Confirm there is no horizontal scrolling, clipped buttons, or unreadable text.

@@ -1,0 +1,31 @@
+.section {
+  background: var(--bg-section-cta);
+  color: var(--text-on-dark);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  max-width: 42rem;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  line-height: 1.15;
+  color: var(--text-on-dark);
+}
+
+.lead {
+  margin: 0 0 var(--space-4);
+  max-width: 36rem;
+  color: var(--text-on-dark-muted);
+  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  overflow-wrap: anywhere;
+}
+
+.section .eyebrow {
+  color: var(--color-blue-400);
+}
