@@ -9,7 +9,7 @@ export function Footer() {
       <div className={`container ${styles.inner}`}>
         <div className={styles.columns}>
           <div className={styles.brand}>
-            <Link href="#home" className={styles.brandLink}>
+            <Link href="/" className={styles.brandLink}>
               <Image
                 src="/images/logo.png"
                 alt="UMITECH MARINE"

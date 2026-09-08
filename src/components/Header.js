@@ -3,7 +3,9 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { navigation } from "@/lib/site-data";
+import { isNavItemCurrent } from "@/lib/nav-current";
 import { getSearchPanelStyle } from "@/lib/search-panel-position";
 import styles from "./Header.module.css";
 import { MobileNav } from "./MobileNav";
@@ -11,6 +13,7 @@ import { SearchButton } from "./SearchButton";
 import { SearchPanel } from "./SearchPanel";
 
 export function Header() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
@@ -29,7 +32,17 @@ export function Header() {
     };
   }, [menuOpen]);
 
+  const isSolidHeaderPage =
+    pathname === "/about" ||
+    pathname === "/contact" ||
+    pathname === "/services" ||
+    pathname === "/team";
+
   useEffect(() => {
+    if (isSolidHeaderPage) {
+      return;
+    }
+
     const hero = document.getElementById("home");
     if (!hero) {
       setPastHero(true);
@@ -48,7 +61,7 @@ export function Header() {
     return () => {
       window.removeEventListener("scroll", updateScrolled);
     };
-  }, []);
+  }, [isSolidHeaderPage]);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -169,17 +182,20 @@ export function Header() {
     closeSearch();
   };
 
+  const solidHeader = isSolidHeaderPage || pastHero;
+
   return (
     <header
       ref={headerRef}
       className={styles.header}
-      data-scrolled={pastHero ? "true" : undefined}
+      data-scrolled={solidHeader ? "true" : undefined}
+      data-about-page={isSolidHeaderPage ? "true" : undefined}
       data-menu-open={menuOpen ? "true" : undefined}
       data-search-open={searchOpen ? "true" : undefined}
     >
       <div className={`container ${styles.inner}`}>
         <Link
-          href="#home"
+          href="/"
           className={styles.brand}
           onClick={() => {
             closeMenu();
@@ -201,7 +217,13 @@ export function Header() {
           <ul className={styles.navList}>
             {navigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className={styles.navLink}>
+                <Link
+                  href={item.href}
+                  className={styles.navLink}
+                  aria-current={
+                    isNavItemCurrent(pathname, item.href) ? "page" : undefined
+                  }
+                >
                   {item.label}
                 </Link>
               </li>
@@ -217,7 +239,7 @@ export function Header() {
             ariaControls={searchPanelId}
             onClick={toggleSearch}
           />
-          <Link href="#contact" className={`button ${styles.cta}`}>
+          <Link href="/contact" className={`button ${styles.cta}`}>
             Contact Us
           </Link>
         </div>
@@ -251,7 +273,7 @@ export function Header() {
         onClose={closeSearch}
         onNavigate={handleSearchNavigate}
       />
-      <MobileNav id={menuId} open={menuOpen} onNavigate={closeMenu} />
+      <MobileNav id={menuId} open={menuOpen} onNavigate={closeMenu} pathname={pathname} />
     </header>
   );
 }

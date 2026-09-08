@@ -46,6 +46,12 @@
   color: #1a557c;
 }
 
+.link[aria-current="page"] {
+  background: var(--color-brand-blue);
+  color: #1a557c;
+  font-weight: 600;
+}
+
 .panel .contact {
   width: 100%;
   max-width: 100%;

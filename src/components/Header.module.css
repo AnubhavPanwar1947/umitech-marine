@@ -23,6 +23,7 @@
 }
 
 .header[data-scrolled="true"],
+.header[data-about-page="true"],
 .header[data-menu-open="true"],
 .header[data-search-open="true"] {
   background: var(--header-surface-bg);
@@ -30,12 +31,14 @@
 }
 
 .header[data-scrolled="true"] .logo,
+.header[data-about-page="true"] .logo,
 .header[data-menu-open="true"] .logo,
 .header[data-search-open="true"] .logo {
   filter: var(--header-logo-invert);
 }
 
 .header[data-scrolled="true"] .navLink,
+.header[data-about-page="true"] .navLink,
 .header[data-menu-open="true"] .navLink,
 .header[data-search-open="true"] .navLink {
   color: var(--header-surface-ink);
@@ -43,6 +46,8 @@
 
 .header[data-scrolled="true"] .navLink:hover,
 .header[data-scrolled="true"] .navLink:focus-visible,
+.header[data-about-page="true"] .navLink:hover,
+.header[data-about-page="true"] .navLink:focus-visible,
 .header[data-menu-open="true"] .navLink:hover,
 .header[data-menu-open="true"] .navLink:focus-visible,
 .header[data-search-open="true"] .navLink:hover,
@@ -51,9 +56,11 @@
 }
 
 .header[data-scrolled="true"] .actions .search,
+.header[data-about-page="true"] .actions .search,
 .header[data-menu-open="true"] .actions .search,
 .header[data-search-open="true"] .actions .search,
 .header[data-scrolled="true"] .mobileActions .mobileControl,
+.header[data-about-page="true"] .mobileActions .mobileControl,
 .header[data-menu-open="true"] .mobileActions .mobileControl,
 .header[data-search-open="true"] .mobileActions .mobileControl {
   border-color: transparent;
@@ -63,12 +70,16 @@
 
 .header[data-scrolled="true"] .actions .search:hover,
 .header[data-scrolled="true"] .actions .search:focus-visible,
+.header[data-about-page="true"] .actions .search:hover,
+.header[data-about-page="true"] .actions .search:focus-visible,
 .header[data-menu-open="true"] .actions .search:hover,
 .header[data-menu-open="true"] .actions .search:focus-visible,
 .header[data-search-open="true"] .actions .search:hover,
 .header[data-search-open="true"] .actions .search:focus-visible,
 .header[data-scrolled="true"] .mobileActions .mobileControl:hover,
 .header[data-scrolled="true"] .mobileActions .mobileControl:focus-visible,
+.header[data-about-page="true"] .mobileActions .mobileControl:hover,
+.header[data-about-page="true"] .mobileActions .mobileControl:focus-visible,
 .header[data-menu-open="true"] .mobileActions .mobileControl:hover,
 .header[data-menu-open="true"] .mobileActions .mobileControl:focus-visible,
 .header[data-search-open="true"] .mobileActions .mobileControl:hover,
@@ -79,6 +90,7 @@
 }
 
 .header[data-scrolled="true"] .menuButton,
+.header[data-about-page="true"] .menuButton,
 .header[data-menu-open="true"] .menuButton,
 .header[data-search-open="true"] .menuButton {
   border-color: transparent;
@@ -87,6 +99,8 @@
 
 .header[data-scrolled="true"] .menuButton:hover,
 .header[data-scrolled="true"] .menuButton:focus-visible,
+.header[data-about-page="true"] .menuButton:hover,
+.header[data-about-page="true"] .menuButton:focus-visible,
 .header[data-menu-open="true"] .menuButton:hover,
 .header[data-menu-open="true"] .menuButton:focus-visible,
 .header[data-search-open="true"] .menuButton:hover,
@@ -97,6 +111,8 @@
 
 .header[data-scrolled="true"] .menuButton:hover .menuIcon,
 .header[data-scrolled="true"] .menuButton:focus-visible .menuIcon,
+.header[data-about-page="true"] .menuButton:hover .menuIcon,
+.header[data-about-page="true"] .menuButton:focus-visible .menuIcon,
 .header[data-menu-open="true"] .menuButton:hover .menuIcon,
 .header[data-menu-open="true"] .menuButton:focus-visible .menuIcon,
 .header[data-search-open="true"] .menuButton:hover .menuIcon,
@@ -105,6 +121,7 @@
 }
 
 .header[data-scrolled="true"] .menuIcon,
+.header[data-about-page="true"] .menuIcon,
 .header[data-menu-open="true"] .menuIcon,
 .header[data-search-open="true"] .menuIcon {
   --menu-bar-color: var(--header-surface-ink);
@@ -160,6 +177,19 @@
 .navLink:hover,
 .navLink:focus-visible {
   color: var(--header-chrome-accent);
+}
+
+.navLink[aria-current="page"] {
+  color: var(--header-chrome-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.header[data-scrolled="true"] .navLink[aria-current="page"],
+.header[data-about-page="true"] .navLink[aria-current="page"],
+.header[data-menu-open="true"] .navLink[aria-current="page"],
+.header[data-search-open="true"] .navLink[aria-current="page"] {
+  color: var(--header-surface-ink-hover);
 }
 
 .actions {

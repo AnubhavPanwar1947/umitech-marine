@@ -1,0 +1,49 @@
+.section {
+  background: var(--bg-section-alt);
+  border-block: 1px solid var(--color-sand-200);
+}
+
+.inner {
+  max-width: 42rem;
+  margin-inline: auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.heading {
+  color: var(--link-accent);
+  overflow-wrap: anywhere;
+}
+
+.points {
+  margin: var(--space-6) auto 0;
+  padding: 0;
+  list-style: none;
+  max-width: 36rem;
+  text-align: left;
+}
+
+.point {
+  position: relative;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-on-light-muted);
+  font-size: clamp(1rem, 2.3vw, 1.08rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.point + .point {
+  margin-top: var(--space-4);
+}
+
+.point::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--color-navy-900);
+}

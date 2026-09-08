@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { navigation } from "@/lib/site-data";
+import { isNavItemCurrent } from "@/lib/nav-current";
 import styles from "./MobileNav.module.css";
 
-export function MobileNav({ id, open, onNavigate }) {
+export function MobileNav({ id, open, onNavigate, pathname }) {
   return (
     <nav
       id={id}
@@ -19,6 +20,9 @@ export function MobileNav({ id, open, onNavigate }) {
             <Link
               href={item.href}
               className={styles.link}
+              aria-current={
+                isNavItemCurrent(pathname, item.href) ? "page" : undefined
+              }
               onClick={onNavigate}
               tabIndex={open ? 0 : -1}
             >
@@ -28,7 +32,7 @@ export function MobileNav({ id, open, onNavigate }) {
         ))}
       </ul>
       <Link
-        href="#contact"
+        href="/contact"
         className={`button ${styles.contact}`}
         onClick={onNavigate}
         tabIndex={open ? 0 : -1}

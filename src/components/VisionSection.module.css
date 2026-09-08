@@ -1,0 +1,30 @@
+.section {
+  background: var(--bg-section);
+}
+
+.inner {
+  max-width: 40rem;
+  margin-inline: auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.heading {
+  overflow-wrap: anywhere;
+}
+
+.quote {
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3.2vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--color-navy-900);
+  overflow-wrap: anywhere;
+}
+
+.quote p {
+  margin: 0;
+}
