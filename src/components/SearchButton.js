@@ -1,11 +1,19 @@
+import { forwardRef } from "react";
 import styles from "./SearchButton.module.css";
 
-export function SearchButton({ className = "" }) {
+export const SearchButton = forwardRef(function SearchButton(
+  { className = "", onClick, ariaExpanded = false, ariaControls },
+  ref
+) {
   return (
     <button
+      ref={ref}
       type="button"
       className={`${styles.button} ${className}`.trim()}
       aria-label="Search"
+      aria-expanded={ariaExpanded}
+      aria-controls={ariaControls}
+      onClick={onClick}
     >
       <svg
         className={styles.icon}
@@ -25,4 +33,4 @@ export function SearchButton({ className = "" }) {
       </svg>
     </button>
   );
-}
+});

@@ -5,9 +5,9 @@
   display: grid;
   align-content: start;
   gap: var(--space-6);
-  padding: var(--space-6) var(--space-4);
-  background: var(--bg-nav);
-  border-top: 1px solid var(--color-border);
+  padding: clamp(var(--space-4), 4vw, var(--space-6)) clamp(var(--space-3), 3vw, var(--space-4));
+  background: var(--color-brand-white);
+  border-top: 1px solid rgba(16, 28, 51, 0.12);
   transform: translateY(-8%);
   opacity: 0;
   pointer-events: none;
@@ -35,18 +35,28 @@
   padding: var(--space-3) var(--space-2);
   border-radius: var(--radius-sm);
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-navy-900);
+  overflow-wrap: anywhere;
 }
 
 .link:hover,
 .link:focus-visible {
-  background: var(--color-sand-100);
-  color: var(--link-accent);
+  background: var(--color-brand-blue);
+  color: #1a557c;
 }
 
-.contact {
+.panel .contact {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: #1a557c;
+  color: var(--text-on-dark);
+}
+
+.panel .contact:hover,
+.panel .contact:focus-visible {
+  background: #15466a;
 }
 
 @media (min-width: 960px) {

@@ -1,5 +1,5 @@
 .section {
-  background: var(--bg-section);
+  background: var(--color-brand-white);
 }
 
 .grid {
@@ -8,6 +8,17 @@
   margin: var(--space-10) 0 0;
   padding: 0;
   list-style: none;
+}
+
+.grid > li {
+  min-width: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
 }
 
 .card {
@@ -29,7 +40,7 @@
 
 .media {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
 }
 
 .image {
@@ -39,29 +50,18 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 34, 64, 0.08) 0%,
-    rgba(10, 34, 64, 0.5) 100%
-  );
-}
-
-.body {
-  padding: var(--space-5);
+  background: rgba(10, 34, 64, 0.1);
 }
 
 .title {
-  margin: 0 0 var(--space-3);
+  margin: var(--space-4) 0 0;
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 3vw, 1.4rem);
+  font-weight: 500;
   line-height: 1.2;
+  letter-spacing: normal;
   color: var(--color-navy-900);
-}
-
-.description {
-  margin: 0;
-  color: var(--text-on-light-muted);
-  font-size: clamp(0.92rem, 2.3vw, 1rem);
+  text-align: center;
   overflow-wrap: anywhere;
 }
 

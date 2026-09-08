@@ -1,6 +1,7 @@
 .hero {
   position: relative;
-  min-height: clamp(24rem, 72vh, 40rem);
+  min-height: 100dvh;
+  margin-top: calc(-1 * var(--header-height));
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -13,23 +14,52 @@
 
 .image {
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .media {
+    background-image: var(--hero-image);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .image {
+    visibility: hidden;
+  }
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    var(--hero-overlay-top) 0%,
-    var(--hero-overlay-mid) 58%,
-    var(--hero-overlay-bottom) 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 25, 47, 0.38) 0%,
+      rgba(0, 25, 47, 0.14) 16%,
+      rgba(0, 25, 47, 0) 30%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 25, 47, 0) 0%,
+      rgba(0, 25, 47, 0.32) 55%,
+      rgba(0, 25, 47, 0.48) 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--hero-overlay-top) 0%,
+      var(--hero-overlay-mid) 58%,
+      var(--hero-overlay-bottom) 100%
+    );
 }
 
 .content {
   position: relative;
   z-index: 1;
+  width: min(100% - 1.5rem, var(--container-max));
+  margin-inline: auto;
   padding-block: clamp(3rem, 10vw, 5.5rem);
   color: var(--text-on-dark);
 }
@@ -39,16 +69,21 @@
   max-width: 22ch;
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 7vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: normal;
   overflow-wrap: anywhere;
+}
+
+.titleAccent {
+  color: var(--color-blue-400);
 }
 
 .subheadline {
   margin: 0 0 var(--space-4);
   max-width: 34rem;
   font-size: clamp(1.05rem, 3vw, 1.35rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.45;
   color: var(--text-on-dark);
   overflow-wrap: anywhere;
@@ -76,4 +111,46 @@
 
 .actions .button-secondary:hover {
   background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 320px) {
+  .hero {
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+  }
+
+  .content {
+    width: min(100%, calc(100vw - clamp(0.25rem, 2vw, 0.75rem)));
+    max-width: min(100%, calc(100vw - clamp(0.25rem, 2vw, 0.75rem)));
+    margin-inline: auto;
+    padding-block: clamp(1.5rem, 8vw, 3rem);
+    padding-inline: clamp(0.125rem, 2vw, 0.75rem);
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .title {
+    font-size: clamp(1.25rem, 7vw, 1.75rem);
+  }
+
+  .subheadline {
+    font-size: clamp(0.875rem, 3vw, 1.05rem);
+  }
+
+  .lead {
+    margin-bottom: var(--space-6);
+    font-size: clamp(0.8125rem, 2.4vw, 0.95rem);
+  }
+
+  .cta {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: clamp(2.25rem, 10vw, 3rem);
+    padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.5rem, 2vw, 0.75rem);
+    font-size: clamp(0.8125rem, 2.5vw, 1rem);
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
 }

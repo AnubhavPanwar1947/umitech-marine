@@ -1,5 +1,6 @@
 .section {
-  background: var(--color-white);
+  background: var(--color-brand-blue);
+  border-block: 1px solid var(--color-sand-200);
 }
 
 .layout {
@@ -10,6 +11,25 @@
 
 .copy {
   min-width: 0;
+}
+
+.copy :global(.eyebrow) {
+  font-size: clamp(0.8125rem, 5vw, 1.25rem);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 320px) {
+  .copy :global(.eyebrow) {
+    letter-spacing: 0.08em;
+  }
+}
+
+.title {
+  overflow-wrap: anywhere;
+}
+
+.titleAccent {
+  color: var(--color-blue-500);
 }
 
 .paragraph + .paragraph {
@@ -23,20 +43,37 @@
   overflow-wrap: anywhere;
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-top: var(--space-6);
+}
+
+.cta {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .media {
   position: relative;
-  min-height: 16rem;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: var(--radius-xl);
+  border-radius: min(var(--radius-xl), 12%);
   overflow: hidden;
   box-shadow: var(--shadow-md);
 }
 
 .image {
   object-fit: cover;
+  object-position: center 62%;
+  filter: saturate(1.15) contrast(1.08);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .layout {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: var(--space-10);

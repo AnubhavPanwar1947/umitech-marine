@@ -7,24 +7,25 @@ export const navigation = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Team", href: "#team" },
-  { label: "Decarb", href: "#decarbonization" },
   { label: "Blog", href: "#blog" },
 ];
 
 export const hero = {
-  headline: "Your trusted partner at sea.",
-  subheadline:
-    "Where Insight meets precision—24/7 Consultancy you can trust.",
+  headlinePrefix: "Your trusted partner ",
+  headlineAccent: "at sea.",
+  subheadlinePrefix: "Where Insight meets precision—",
+  subheadlineAccent: "24/7 Consultancy",
+  subheadlineSuffix: " you can trust.",
   lead:
     "Strategic guidance for the world's most demanding marine and engineering operations.",
   ctaLabel: "Explore services",
   ctaHref: "#services",
-  image: "/images/hero-placeholder.svg",
-  imageAlt: "Maritime operations placeholder scene",
+  image: "/images/heroImage.jpeg",
+  imageAlt:
+    "Aerial view of an LNG carrier at berth with spherical storage tanks and teal water",
 };
 
 export const servicesSection = {
-  eyebrow: "Our Services",
   title: "Our Services",
   lead:
     "Four practices delivering technical excellence across naval architecture, engineering, surveying, and legal consultancy.",
@@ -33,52 +34,49 @@ export const servicesSection = {
 export const services = [
   {
     title: "Naval Architecture",
-    description:
-      "Hull form, structure, and the analysis behind every design decision.",
-    image: "/images/service-naval.svg",
-    imageAlt: "Naval architecture placeholder illustration",
+    image: "/images/Naval.jpg",
+    imageAlt: "Coast guard patrol vessel docked at a pier with radar mast and hull markings",
   },
   {
     title: "Engineering",
-    description:
-      "Applied engineering that keeps assets designed, converted, and operating safely.",
-    image: "/images/service-engineering.svg",
-    imageAlt: "Marine engineering placeholder illustration",
+    image: "/images/ENGINEERING.jpg",
+    imageAlt: "Engineer in safety gear inspecting industrial machinery with a laptop",
   },
   {
     title: "Inspection, Audits and Surveying",
-    description:
-      "Surveys, audits, and risk work carried out by people who have sailed.",
-    image: "/images/service-inspection.svg",
-    imageAlt: "Inspection and surveying placeholder illustration",
+    image: "/images/Inspection.jpg",
+    imageAlt: "Marine surveyors in hard hats reviewing data on a laptop at a shipyard",
   },
   {
     title: "Legal Consultancy",
-    description:
-      "Pre-legal, technical decision-support that makes the engineering picture defensible.",
-    image: "/images/service-legal.svg",
-    imageAlt: "Legal consultancy placeholder illustration",
+    image: "/images/Law.jpg",
+    imageAlt: "Gavel and scales of justice with a business handshake in the background",
   },
 ];
 
-export const decarbonization = {
-  eyebrow: "Decarbonization",
-  title: "Clean-fuel advisory for a lower-carbon fleet",
+export const about = {
+  eyebrow: "About Us",
+  titlePrefix: "Practical expertise for demanding ",
+  titleAccent: "marine operations",
   paragraphs: [
-    "We help owners and operators navigate alternative fuels, efficiency upgrades, and compliance pathways without losing sight of operational reality.",
-    "From feasibility through implementation support, our team connects naval architecture, engineering, and surveying insight to decarbonization decisions that hold up at sea.",
+    "UMITECH MARINE began its journey in 2024, founded by experienced and forward-thinking professionals from the shipping and engineering industries. Established with a clear vision to deliver premium consultancy backed by practical, hands-on expertise, Umitech Marine is built on the foundation of technical excellence and real-world operational insight.",
+    "We are driven by a commitment to precision, reliability and 24/7 support—delivering solutions that ensure maritime operations run safely, efficiently and seamlessly.",
   ],
-  ctaLabel: "Learn about decarb",
+  ctaLabel: "Know more",
   ctaHref: "#contact",
-  image: "/images/decarbonization-placeholder.svg",
-  imageAlt: "Clean marine energy placeholder illustration",
+  image: "/images/About.jpg",
+  imageAlt:
+    "Container ship underway, looking forward over stacked containers toward the bow, with coastline and city skyline ahead",
+};
+
+export const contactCta = {
+  title: "Let’s Talk",
+  lead: "Connect with us for your varied needs!",
+  ctaLabel: "Connect now",
+  ctaHref: "mailto:info@umitech.co.jp",
 };
 
 export const footer = {
-  brand: {
-    primary: "UMITECH",
-    secondary: "MARINE SOLUTIONS",
-  },
   information: {
     heading: "INFORMATION",
     links: [
@@ -106,3 +104,49 @@ export const footer = {
     { label: "STANDARD T&C OF ENGAGEMENT", href: "#" },
   ],
 };
+
+export const searchIndex = [
+  { label: "Home", href: "#home", keywords: ["home"] },
+  { label: "About", href: "#about", keywords: ["about", "about us"] },
+  {
+    label: "Services",
+    href: "#services",
+    keywords: ["services", "our services"],
+  },
+  {
+    label: "Naval Architecture",
+    href: "#services",
+    keywords: ["naval", "architecture", "naval architecture"],
+  },
+  {
+    label: "Engineering",
+    href: "#services",
+    keywords: ["engineering"],
+  },
+  {
+    label: "Inspection, Audits and Surveying",
+    href: "#services",
+    keywords: ["inspection", "audits", "surveying", "survey"],
+  },
+  {
+    label: "Legal Consultancy",
+    href: "#services",
+    keywords: ["legal", "consultancy", "law"],
+  },
+  {
+    label: "Let's Talk",
+    href: "#contact",
+    keywords: ["lets talk", "let's talk", "talk"],
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    keywords: ["contact", "connect"],
+  },
+];
+
+export const searchPopular = [
+  "Naval Architecture",
+  "Surveying",
+  "Engineering",
+];

@@ -1,6 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { ServicesGrid } from "@/components/ServicesGrid";
-import { DecarbonizationSection } from "@/components/DecarbonizationSection";
+import { AboutSection } from "@/components/AboutSection";
 import { ContactCtaSection } from "@/components/ContactCtaSection";
 
 export default function HomePage() {
@@ -8,7 +8,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <ServicesGrid />
-      <DecarbonizationSection />
+      <AboutSection />
       <ContactCtaSection />
     </main>
   );

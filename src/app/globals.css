@@ -1,9 +1,14 @@
 :root {
-  /* Navy brand scale */
-  --color-navy-950: #04101f;
-  --color-navy-900: #0a2240;
-  --color-navy-800: #12345f;
-  --color-navy-700: #1a446e;
+  /* Brand section palette (homepage + future pages) */
+  --color-brand-white: #ffffff;
+  --color-brand-blue: #eff9ff;
+  --color-brand-navy: #182952;
+
+  /* Navy brand scale (derived from #182952) */
+  --color-navy-950: #182952;
+  --color-navy-900: #182952;
+  --color-navy-800: #1f3460;
+  --color-navy-700: #2a4575;
 
   /* Marine blue accents */
   --color-blue-600: #1a6aad;
@@ -11,35 +16,37 @@
   --color-blue-400: #5aa8dc;
 
   /* Section surfaces */
-  --color-white: #ffffff;
-  --color-sand-100: #eef3f8;
-  --color-sand-200: #dfe8f1;
+  --color-white: var(--color-brand-white);
+  --color-sand-100: var(--color-brand-blue);
+  --color-sand-200: #d9edf8;
 
   /* Text */
   --color-ink: #0f243d;
   --color-muted: #4d6177;
   --color-border: #cdd9e6;
+  --color-border-on-dark: rgba(255, 255, 255, 0.18);
 
   /* Semantic section backgrounds */
-  --bg-nav: var(--color-white);
-  --bg-section: var(--color-white);
-  --bg-section-alt: var(--color-sand-100);
-  --bg-section-cta: var(--color-navy-900);
-  --bg-footer: var(--color-navy-950);
+  --bg-nav: var(--color-brand-navy);
+  --bg-section: var(--color-brand-white);
+  --bg-section-alt: var(--color-brand-blue);
+  --bg-section-cta: var(--color-brand-navy);
+  --bg-footer: var(--color-brand-navy);
 
   /* Text on surfaces */
   --text-on-light: var(--color-ink);
   --text-on-light-muted: var(--color-muted);
   --text-on-dark: var(--color-white);
   --text-on-dark-muted: rgba(255, 255, 255, 0.88);
+  --text-on-nav: var(--text-on-dark);
 
   /* Interactive */
   --link-accent: var(--color-blue-500);
   --link-accent-hover: var(--color-blue-600);
   --focus-ring: var(--color-blue-400);
 
-  --font-sans: var(--font-dm-sans), "Segoe UI", sans-serif;
-  --font-display: var(--font-libre-baskerville), Georgia, serif;
+  --font-sans: var(--font-inter), "Segoe UI", sans-serif;
+  --font-display: var(--font-inter), "Segoe UI", sans-serif;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -62,10 +69,10 @@
   --shadow-md: 0 12px 32px rgba(4, 16, 31, 0.12);
   --shadow-lg: 0 20px 48px rgba(4, 16, 31, 0.16);
 
-  /* Hero overlay (navy tint, no purple) */
-  --hero-overlay-top: rgba(4, 16, 31, 0.42);
-  --hero-overlay-mid: rgba(10, 34, 64, 0.72);
-  --hero-overlay-bottom: rgba(4, 16, 31, 0.9);
+  /* Hero overlay (light full-bleed wash + bottom scrim in Hero.module.css) */
+  --hero-overlay-top: rgba(0, 25, 47, 0.15);
+  --hero-overlay-mid: rgba(0, 25, 47, 0.17);
+  --hero-overlay-bottom: rgba(0, 25, 47, 0.18);
 
   --container-max: 72rem;
   --header-height: 4.75rem;
@@ -157,7 +164,9 @@ textarea {
   margin: 0 0 var(--space-4);
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.75rem);
-  line-height: 1.15;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: normal;
   color: var(--color-navy-900);
 }
 
@@ -176,7 +185,7 @@ textarea {
   display: inline-block;
   margin-bottom: var(--space-3);
   font-size: 0.8125rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--link-accent);
@@ -195,17 +204,18 @@ textarea {
   padding: 0.75rem 1.25rem;
   border: 0;
   border-radius: 999px;
-  background: var(--link-accent);
+  background: #1a557c;
   color: var(--text-on-dark);
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
   transition:
     background-color 180ms ease,
     box-shadow 180ms ease;
 }
 
-.button:hover {
-  background: var(--link-accent-hover);
+.button:hover,
+.button:focus-visible {
+  background: #15466a;
 }
 
 .button:focus-visible {
@@ -224,9 +234,39 @@ textarea {
   color: var(--color-navy-900);
 }
 
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 550ms ease-out,
+    transform 550ms ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal][data-inview] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 320px) {
+  [data-reveal] {
+    transform: translateY(0.75rem);
+  }
+
+  [data-reveal][data-inview] {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   *,

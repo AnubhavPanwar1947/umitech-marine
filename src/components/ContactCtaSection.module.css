@@ -1,31 +1,115 @@
 .section {
-  background: var(--bg-section-cta);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1920 / 862;
+  min-height: 22rem;
+  container-type: size;
   color: var(--text-on-dark);
 }
 
+.media {
+  position: absolute;
+  inset: 0;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/contact-cta.jpg");
+  background-size: cover;
+  background-position: 50% 80%;
+  background-repeat: no-repeat;
+  filter: saturate(1.15) contrast(1.1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 41, 82, 0.08);
+}
+
 .inner {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: var(--space-4);
-  justify-items: start;
-  max-width: 42rem;
+  gap: clamp(0.5rem, 2cqh, 1rem);
+  align-content: start;
+  justify-items: center;
+  width: 100%;
+  min-width: 0;
+  max-height: 40cqh;
+  padding-block-start: clamp(0.75rem, 7cqh, 3.5rem);
+  text-align: center;
 }
 
 .title {
   margin: 0;
+  min-width: 0;
+  max-width: 100%;
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 5vw, 2.75rem);
-  line-height: 1.15;
-  color: var(--text-on-dark);
+  font-size: clamp(1.35rem, 9cqh, 3.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: var(--color-navy-900);
+  overflow-wrap: anywhere;
 }
 
 .lead {
-  margin: 0 0 var(--space-4);
-  max-width: 36rem;
-  color: var(--text-on-dark-muted);
-  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  margin: 0;
+  max-width: 100%;
+  font-family: var(--font-sans);
+  font-size: clamp(0.8125rem, 3cqh, 1.25rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+  text-align: center;
   overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: clamp(2.25rem, 7cqh, 3rem);
+  padding: clamp(0.5rem, 1.5cqh, 0.75rem) clamp(0.75rem, 3cqh, 1.25rem);
+  border: 0;
+  border-radius: 999px;
+  background: #1a557c;
+  color: var(--text-on-dark);
+  font-family: var(--font-sans);
+  font-size: clamp(0.8125rem, 3cqh, 1.25rem);
+  font-weight: 500;
+  transition: background-color 180ms ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background: #15466a;
+  color: var(--text-on-dark);
+}
+
+.cta:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
 .section .eyebrow {
   color: var(--color-blue-400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    background-attachment: scroll;
+  }
 }

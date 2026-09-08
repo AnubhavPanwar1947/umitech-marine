@@ -4,20 +4,22 @@
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  background: var(--color-white);
-  color: var(--color-navy-900);
+  background: transparent;
+  color: var(--text-on-nav);
   cursor: pointer;
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .button:hover,
 .button:focus-visible {
-  background: var(--color-sand-100);
-  border-color: var(--link-accent);
-  color: var(--link-accent-hover);
+  background: transparent;
+  border-color: transparent;
+  color: var(--header-chrome-accent, #8fb4cc);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }

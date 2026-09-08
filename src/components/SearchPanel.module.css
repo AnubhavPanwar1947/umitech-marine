@@ -1,0 +1,142 @@
+.panel {
+  position: fixed;
+  left: auto;
+  z-index: 45;
+  display: grid;
+  gap: var(--space-2);
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-brand-white);
+  box-shadow:
+    0 16px 48px rgba(24, 41, 82, 0.14),
+    0 4px 16px rgba(24, 41, 82, 0.08);
+}
+
+.inputWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-brand-blue);
+  color: var(--color-navy-900);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.input:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.popular {
+  display: grid;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.popularEyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+  overflow-wrap: anywhere;
+}
+
+.popularHint {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}
+
+.chips {
+  display: grid;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.chip,
+.result {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  color: var(--color-navy-900);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.chip:hover,
+.chip:focus-visible,
+.result:hover,
+.result:focus-visible {
+  border-color: #1a557c;
+  background: var(--color-brand-blue);
+  color: #1a557c;
+}
+
+.chip:focus-visible,
+.result:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.message {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.results {
+  display: grid;
+  gap: 0.375rem;
+  max-height: 12rem;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+}

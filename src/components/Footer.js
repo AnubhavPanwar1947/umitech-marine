@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { footer } from "@/lib/site-data";
 import styles from "./Footer.module.css";
 
@@ -8,8 +9,16 @@ export function Footer() {
       <div className={`container ${styles.inner}`}>
         <div className={styles.columns}>
           <div className={styles.brand}>
-            <p className={styles.brandPrimary}>{footer.brand.primary}</p>
-            <p className={styles.brandSecondary}>{footer.brand.secondary}</p>
+            <Link href="#home" className={styles.brandLink}>
+              <Image
+                src="/images/logo.png"
+                alt="UMITECH MARINE"
+                width={1024}
+                height={297}
+                className={styles.logo}
+                sizes="(max-width: 480px) 42vw, 160px"
+              />
+            </Link>
           </div>
 
           <nav className={styles.column} aria-label="Footer information">

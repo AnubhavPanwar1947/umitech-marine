@@ -1,9 +1,113 @@
 .header {
+  --header-chrome-accent: #8fb4cc;
+  --header-cta-bg: #1a557c;
+  --header-cta-bg-hover: #15466a;
+  --header-surface-bg: var(--color-brand-white);
+  --header-surface-hover-bg: var(--color-sand-200);
+  --header-surface-border: rgba(16, 28, 51, 0.12);
+  --header-surface-ink: #182952;
+  --header-surface-ink-hover: #1a557c;
+  --header-logo-invert: brightness(0) saturate(100%) invert(14%) sepia(10%)
+    saturate(3100%) hue-rotate(186deg) brightness(125%) contrast(105%);
+
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--bg-nav);
-  border-bottom: 1px solid var(--color-border);
+  box-sizing: border-box;
+  height: var(--header-height);
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.header[data-scrolled="true"],
+.header[data-menu-open="true"],
+.header[data-search-open="true"] {
+  background: var(--header-surface-bg);
+  border-bottom-color: var(--header-surface-border);
+}
+
+.header[data-scrolled="true"] .logo,
+.header[data-menu-open="true"] .logo,
+.header[data-search-open="true"] .logo {
+  filter: var(--header-logo-invert);
+}
+
+.header[data-scrolled="true"] .navLink,
+.header[data-menu-open="true"] .navLink,
+.header[data-search-open="true"] .navLink {
+  color: var(--header-surface-ink);
+}
+
+.header[data-scrolled="true"] .navLink:hover,
+.header[data-scrolled="true"] .navLink:focus-visible,
+.header[data-menu-open="true"] .navLink:hover,
+.header[data-menu-open="true"] .navLink:focus-visible,
+.header[data-search-open="true"] .navLink:hover,
+.header[data-search-open="true"] .navLink:focus-visible {
+  color: var(--header-surface-ink-hover);
+}
+
+.header[data-scrolled="true"] .actions .search,
+.header[data-menu-open="true"] .actions .search,
+.header[data-search-open="true"] .actions .search,
+.header[data-scrolled="true"] .mobileActions .mobileControl,
+.header[data-menu-open="true"] .mobileActions .mobileControl,
+.header[data-search-open="true"] .mobileActions .mobileControl {
+  border-color: transparent;
+  background: transparent;
+  color: var(--header-surface-ink);
+}
+
+.header[data-scrolled="true"] .actions .search:hover,
+.header[data-scrolled="true"] .actions .search:focus-visible,
+.header[data-menu-open="true"] .actions .search:hover,
+.header[data-menu-open="true"] .actions .search:focus-visible,
+.header[data-search-open="true"] .actions .search:hover,
+.header[data-search-open="true"] .actions .search:focus-visible,
+.header[data-scrolled="true"] .mobileActions .mobileControl:hover,
+.header[data-scrolled="true"] .mobileActions .mobileControl:focus-visible,
+.header[data-menu-open="true"] .mobileActions .mobileControl:hover,
+.header[data-menu-open="true"] .mobileActions .mobileControl:focus-visible,
+.header[data-search-open="true"] .mobileActions .mobileControl:hover,
+.header[data-search-open="true"] .mobileActions .mobileControl:focus-visible {
+  border-color: transparent;
+  background: transparent;
+  color: var(--header-surface-ink-hover);
+}
+
+.header[data-scrolled="true"] .menuButton,
+.header[data-menu-open="true"] .menuButton,
+.header[data-search-open="true"] .menuButton {
+  border-color: transparent;
+  background: transparent;
+}
+
+.header[data-scrolled="true"] .menuButton:hover,
+.header[data-scrolled="true"] .menuButton:focus-visible,
+.header[data-menu-open="true"] .menuButton:hover,
+.header[data-menu-open="true"] .menuButton:focus-visible,
+.header[data-search-open="true"] .menuButton:hover,
+.header[data-search-open="true"] .menuButton:focus-visible {
+  border-color: transparent;
+  background: transparent;
+}
+
+.header[data-scrolled="true"] .menuButton:hover .menuIcon,
+.header[data-scrolled="true"] .menuButton:focus-visible .menuIcon,
+.header[data-menu-open="true"] .menuButton:hover .menuIcon,
+.header[data-menu-open="true"] .menuButton:focus-visible .menuIcon,
+.header[data-search-open="true"] .menuButton:hover .menuIcon,
+.header[data-search-open="true"] .menuButton:focus-visible .menuIcon {
+  --menu-bar-color: var(--header-surface-ink-hover);
+}
+
+.header[data-scrolled="true"] .menuIcon,
+.header[data-menu-open="true"] .menuIcon,
+.header[data-search-open="true"] .menuIcon {
+  --menu-bar-color: var(--header-surface-ink);
 }
 
 .inner {
@@ -11,7 +115,8 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--space-3);
-  min-height: var(--header-height);
+  height: 100%;
+  min-height: 0;
 }
 
 .brand {
@@ -21,10 +126,14 @@
 }
 
 .logo {
+  display: block;
+  flex-shrink: 0;
   width: auto;
   height: clamp(2rem, 8vw, 2.75rem);
   max-width: min(10rem, 42vw);
+  min-width: 0;
   object-fit: contain;
+  transition: filter 180ms ease;
 }
 
 .desktopNav,
@@ -43,14 +152,14 @@
 
 .navLink {
   font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-navy-900);
+  font-weight: 500;
+  color: var(--text-on-nav);
   transition: color 160ms ease;
 }
 
 .navLink:hover,
 .navLink:focus-visible {
-  color: var(--link-accent);
+  color: var(--header-chrome-accent);
 }
 
 .actions {
@@ -58,8 +167,21 @@
   gap: var(--space-3);
 }
 
-.cta {
+.actions .cta {
   white-space: nowrap;
+  background: var(--header-cta-bg);
+}
+
+.actions .cta:hover,
+.actions .cta:focus-visible {
+  background: var(--header-cta-bg-hover);
+}
+
+.actions .search:hover,
+.actions .search:focus-visible,
+.mobileActions .mobileControl:hover,
+.mobileActions .mobileControl:focus-visible {
+  color: var(--header-chrome-accent);
 }
 
 .mobileActions {
@@ -75,16 +197,21 @@
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  background: var(--color-white);
+  background: transparent;
   cursor: pointer;
 }
 
 .menuButton:hover,
 .menuButton:focus-visible {
-  border-color: var(--link-accent);
-  background: var(--color-sand-100);
+  border-color: transparent;
+  background: transparent;
+}
+
+.menuButton:hover .menuIcon,
+.menuButton:focus-visible .menuIcon {
+  --menu-bar-color: var(--header-chrome-accent);
 }
 
 .menuButton:focus-visible {
@@ -92,21 +219,19 @@
   outline-offset: 2px;
 }
 
-.menuIcon,
-.menuIcon::before,
-.menuIcon::after {
+.menuIcon {
+  --menu-bar-color: var(--text-on-nav);
+  position: relative;
   display: block;
   width: 1.1rem;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--color-navy-900);
-  transition:
-    transform 180ms ease,
-    opacity 180ms ease;
-}
-
-.menuIcon {
-  position: relative;
+  height: 1.1rem;
+  flex-shrink: 0;
+  background: linear-gradient(
+      var(--menu-bar-color),
+      var(--menu-bar-color)
+    )
+    center / 100% 2px no-repeat;
+  transition: opacity 180ms ease;
 }
 
 .menuIcon::before,
@@ -114,28 +239,101 @@
   content: "";
   position: absolute;
   left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--menu-bar-color);
+  transform-origin: center;
+  transition:
+    transform 180ms ease,
+    top 180ms ease,
+    bottom 180ms ease;
 }
 
 .menuIcon::before {
-  top: -0.35rem;
+  top: 0;
 }
 
 .menuIcon::after {
-  top: 0.35rem;
+  bottom: 0;
 }
 
 .menuIcon[data-open="true"] {
-  background: transparent;
+  background: none;
+}
+
+.menuIcon[data-open="true"]::before,
+.menuIcon[data-open="true"]::after {
+  top: 50%;
+  bottom: auto;
+  margin-top: -1px;
 }
 
 .menuIcon[data-open="true"]::before {
-  top: 0;
   transform: rotate(45deg);
 }
 
 .menuIcon[data-open="true"]::after {
-  top: 0;
   transform: rotate(-45deg);
+}
+
+.mobileControl,
+.menuButton {
+  flex-shrink: 0;
+}
+
+@media (max-width: 360px) {
+  .inner:global(.container) {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: 0;
+    padding-inline: clamp(0.125rem, 1.5vw, 0.75rem);
+    gap: clamp(0.125rem, 1.5vw, 0.75rem);
+  }
+
+  .mobileActions {
+    gap: clamp(0.125rem, 1vw, 0.5rem);
+  }
+
+  .mobileActions .mobileControl,
+  .menuButton {
+    width: clamp(1.75rem, 9vw, 2.75rem);
+    height: clamp(1.75rem, 9vw, 2.75rem);
+  }
+
+  .mobileActions .mobileControl svg {
+    width: clamp(0.875rem, 4.5vw, 1.25rem);
+    height: clamp(0.875rem, 4.5vw, 1.25rem);
+  }
+
+  .menuIcon {
+    width: clamp(0.75rem, 4vw, 1.1rem);
+    height: clamp(0.75rem, 4vw, 1.1rem);
+  }
+}
+
+@media (max-width: 240px) {
+  .mobileActions .mobileControl,
+  .menuButton {
+    width: clamp(1.125rem, 14vw, 1.75rem);
+    height: clamp(1.125rem, 14vw, 1.75rem);
+  }
+
+  .brand {
+    overflow: hidden;
+  }
+
+  .logo {
+    height: clamp(1.125rem, 10vw, 2rem);
+    max-width: min(
+      10rem,
+      42vw,
+      calc(
+        100vw - 2 * clamp(1.125rem, 14vw, 1.75rem) -
+          clamp(0.375rem, 3vw, 0.75rem)
+      )
+    );
+  }
 }
 
 @media (min-width: 960px) {
