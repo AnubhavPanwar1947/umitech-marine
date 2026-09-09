@@ -4,7 +4,7 @@
 }
 
 .heading {
-  color: var(--link-accent);
+  color: var(--color-heading-on-light);
   overflow-wrap: anywhere;
 }
 

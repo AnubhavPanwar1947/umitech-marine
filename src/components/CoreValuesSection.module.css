@@ -13,7 +13,7 @@
 
 .heading {
   margin-bottom: var(--space-5);
-  color: var(--color-navy-900);
+  color: var(--color-heading-on-light);
   text-align: center;
   overflow-wrap: anywhere;
 }

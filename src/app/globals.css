@@ -39,6 +39,7 @@
   --text-on-dark: var(--color-white);
   --text-on-dark-muted: rgba(255, 255, 255, 0.88);
   --text-on-nav: var(--text-on-dark);
+  --color-heading-on-light: #1a557c;
 
   /* Interactive */
   --link-accent: var(--color-blue-500);
@@ -167,7 +168,7 @@ textarea {
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: normal;
-  color: var(--color-navy-900);
+  color: var(--color-heading-on-light);
 }
 
 .section-heading--on-dark {

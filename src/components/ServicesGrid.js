@@ -28,6 +28,11 @@ export function ServicesGrid() {
                         quality={100}
                         sizes="(max-width: 639px) 100vw, (max-width: 959px) 50vw, 25vw"
                         className={styles.image}
+                        style={
+                          service.imagePosition
+                            ? { objectPosition: service.imagePosition }
+                            : undefined
+                        }
                       />
                       <div className={styles.overlay} aria-hidden />
                     </div>

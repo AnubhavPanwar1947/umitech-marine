@@ -11,11 +11,13 @@ import styles from "./Header.module.css";
 import { MobileNav } from "./MobileNav";
 import { SearchButton } from "./SearchButton";
 import { SearchPanel } from "./SearchPanel";
+import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const menuId = useId();
   const searchPanelId = useId();
@@ -74,19 +76,24 @@ export function Header() {
         return;
       }
 
+      if (servicesDropdownOpen) {
+        setServicesDropdownOpen(false);
+        return;
+      }
+
       if (menuOpen) {
         setMenuOpen(false);
       }
     };
 
-    if (menuOpen || searchOpen) {
+    if (menuOpen || searchOpen || servicesDropdownOpen) {
       document.addEventListener("keydown", handleEscape);
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [menuOpen, searchOpen]);
+  }, [menuOpen, searchOpen, servicesDropdownOpen]);
 
   useEffect(() => {
     if (!searchOpen) {
@@ -150,6 +157,7 @@ export function Header() {
 
   const closeMenu = () => setMenuOpen(false);
   const closeSearch = () => setSearchOpen(false);
+  const closeServicesDropdown = () => setServicesDropdownOpen(false);
 
   const toggleSearch = () => {
     if (searchOpen) {
@@ -161,6 +169,7 @@ export function Header() {
       closeMenu();
     }
 
+    closeServicesDropdown();
     setSearchOpen(true);
   };
 
@@ -174,12 +183,14 @@ export function Header() {
       closeSearch();
     }
 
+    closeServicesDropdown();
     setMenuOpen(true);
   };
 
   const handleSearchNavigate = () => {
     closeMenu();
     closeSearch();
+    closeServicesDropdown();
   };
 
   const solidHeader = isSolidHeaderPage || pastHero;
@@ -192,6 +203,7 @@ export function Header() {
       data-about-page={isSolidHeaderPage ? "true" : undefined}
       data-menu-open={menuOpen ? "true" : undefined}
       data-search-open={searchOpen ? "true" : undefined}
+      data-services-dropdown-open={servicesDropdownOpen ? "true" : undefined}
     >
       <div className={`container ${styles.inner}`}>
         <Link
@@ -200,6 +212,7 @@ export function Header() {
           onClick={() => {
             closeMenu();
             closeSearch();
+            closeServicesDropdown();
           }}
         >
           <Image
@@ -215,19 +228,37 @@ export function Header() {
 
         <nav className={styles.desktopNav} aria-label="Primary">
           <ul className={styles.navList}>
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={styles.navLink}
-                  aria-current={
-                    isNavItemCurrent(pathname, item.href) ? "page" : undefined
-                  }
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navigation.map((item) => {
+              if (item.href === "/services") {
+                return (
+                  <ServicesNavDropdown
+                    key={item.href}
+                    pathname={pathname}
+                    open={servicesDropdownOpen}
+                    onOpenChange={setServicesDropdownOpen}
+                    onCloseSearch={closeSearch}
+                    linkClassName={styles.navLink}
+                    itemClassName={styles.servicesNavItem}
+                    chevronClassName={styles.servicesChevron}
+                  />
+                );
+              }
+
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={styles.navLink}
+                    aria-current={
+                      isNavItemCurrent(pathname, item.href) ? "page" : undefined
+                    }
+                    onClick={closeServicesDropdown}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -273,7 +304,13 @@ export function Header() {
         onClose={closeSearch}
         onNavigate={handleSearchNavigate}
       />
-      <MobileNav id={menuId} open={menuOpen} onNavigate={closeMenu} pathname={pathname} />
+      <MobileNav
+        key={menuOpen ? "menu-open" : "menu-closed"}
+        id={menuId}
+        open={menuOpen}
+        onNavigate={closeMenu}
+        pathname={pathname}
+      />
     </header>
   );
 }

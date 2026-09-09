@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import styles from "./ServicePracticeSection.module.css";
 
@@ -9,6 +10,7 @@ export function ServicePracticeSection({
   items,
   image,
   imageAlt,
+  imagePosition,
   variant = "default",
   compactTop = false,
   delay = 0,
@@ -30,7 +32,18 @@ export function ServicePracticeSection({
     >
       <div className="container">
         <Reveal className={styles.cardLayout} delay={delay}>
-          <div className={styles.copyColumn}>
+          <div className={styles.headerBlock}>
+            <h2
+              id={`${id}-title`}
+              className={`section-heading ${styles.heading}`}
+            >
+              {heading}
+            </h2>
+            <p className={styles.lead}>{lead}</p>
+          </div>
+
+          <div className={styles.contentRow}>
+            <div className={styles.mediaColumn}>
               <div className={styles.media}>
                 <Image
                   src={image}
@@ -39,17 +52,13 @@ export function ServicePracticeSection({
                   quality={100}
                   sizes="(max-width: 959px) 100vw, 42vw"
                   className={styles.image}
+                  style={
+                    imagePosition
+                      ? { objectPosition: imagePosition }
+                      : undefined
+                  }
                 />
               </div>
-
-              <h2
-                id={`${id}-title`}
-                className={`section-heading ${styles.heading}`}
-              >
-                {heading}
-              </h2>
-
-              <p className={styles.lead}>{lead}</p>
             </div>
 
             <div className={styles.topicsColumn}>
@@ -57,6 +66,25 @@ export function ServicePracticeSection({
                 {items.map((item, index) => {
                   const spanFull =
                     items.length % 2 === 1 && index === items.length - 1;
+
+                  if (item.slug) {
+                    return (
+                      <li
+                        key={item.title}
+                        className={spanFull ? styles.topicChipSpan : undefined}
+                      >
+                        <Link
+                          href={`/services/${id}/${item.slug}`}
+                          className={styles.topicChip}
+                        >
+                          <h3 className={styles.itemTitle}>{item.title}</h3>
+                          {item.body ? (
+                            <p className={styles.itemBody}>{item.body}</p>
+                          ) : null}
+                        </Link>
+                      </li>
+                    );
+                  }
 
                   return (
                     <li
@@ -78,6 +106,7 @@ export function ServicePracticeSection({
                 })}
               </ul>
             </div>
+          </div>
         </Reveal>
       </div>
     </section>

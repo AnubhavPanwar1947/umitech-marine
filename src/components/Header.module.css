@@ -185,6 +185,43 @@
   text-underline-offset: 0.2em;
 }
 
+.servicesNavItem {
+  color: var(--text-on-nav);
+}
+
+.servicesChevron {
+  color: var(--text-on-nav);
+}
+
+.header[data-scrolled="true"] .servicesNavItem,
+.header[data-about-page="true"] .servicesNavItem,
+.header[data-menu-open="true"] .servicesNavItem,
+.header[data-search-open="true"] .servicesNavItem,
+.header[data-services-dropdown-open="true"] .servicesNavItem {
+  color: var(--header-surface-ink);
+}
+
+.header[data-scrolled="true"] .servicesChevron,
+.header[data-about-page="true"] .servicesChevron,
+.header[data-menu-open="true"] .servicesChevron,
+.header[data-search-open="true"] .servicesChevron,
+.header[data-services-dropdown-open="true"] .servicesChevron {
+  color: var(--header-surface-ink);
+}
+
+.header[data-scrolled="true"] .servicesChevron:hover,
+.header[data-scrolled="true"] .servicesChevron:focus-visible,
+.header[data-about-page="true"] .servicesChevron:hover,
+.header[data-about-page="true"] .servicesChevron:focus-visible,
+.header[data-menu-open="true"] .servicesChevron:hover,
+.header[data-menu-open="true"] .servicesChevron:focus-visible,
+.header[data-search-open="true"] .servicesChevron:hover,
+.header[data-search-open="true"] .servicesChevron:focus-visible,
+.header[data-services-dropdown-open="true"] .servicesChevron:hover,
+.header[data-services-dropdown-open="true"] .servicesChevron:focus-visible {
+  color: var(--header-surface-ink-hover);
+}
+
 .header[data-scrolled="true"] .navLink[aria-current="page"],
 .header[data-about-page="true"] .navLink[aria-current="page"],
 .header[data-menu-open="true"] .navLink[aria-current="page"],

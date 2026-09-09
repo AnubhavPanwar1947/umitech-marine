@@ -1,0 +1,126 @@
+.item {
+  position: relative;
+}
+
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.servicesLink {
+  display: inline-block;
+}
+
+.chevronButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.chevronButton:hover,
+.chevronButton:focus-visible {
+  color: var(--header-chrome-accent, #8fb4cc);
+}
+
+.chevronButton:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chevron {
+  display: block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 180ms ease;
+}
+
+.chevron[data-open="true"] {
+  transform: rotate(-135deg) translateY(1px);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 60;
+  min-width: min(18rem, calc(100vw - 1rem));
+  max-width: min(22rem, calc(100vw - 1rem));
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 150ms ease,
+    visibility 150ms ease;
+}
+
+.menu[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menuLink,
+.menuLinkAll {
+  display: block;
+  min-width: 0;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-navy-900);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.menuLink:hover,
+.menuLink:focus-visible,
+.menuLinkAll:hover,
+.menuLinkAll:focus-visible {
+  background: var(--color-brand-blue);
+  color: #1a557c;
+}
+
+.menuLink:focus-visible,
+.menuLinkAll:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.menuFooter {
+  margin-top: var(--space-1);
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--color-border);
+}
+
+.menuLinkAll {
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .chevron {
+    transition: none;
+  }
+}

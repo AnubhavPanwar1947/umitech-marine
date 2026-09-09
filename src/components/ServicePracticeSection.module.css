@@ -1,5 +1,6 @@
 .section {
   padding-block: clamp(1.75rem, 4vw, 2.5rem);
+  scroll-margin-top: calc(var(--header-height) + 0.5rem);
 }
 
 .sectionDefault {
@@ -19,18 +20,25 @@
 .cardLayout {
   display: grid;
   gap: clamp(1.25rem, 3vw, 1.75rem);
+  min-width: 0;
+}
+
+.headerBlock {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.contentRow {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
   align-items: start;
   min-width: 0;
 }
 
-.copyColumn,
+.mediaColumn,
 .topicsColumn {
   min-width: 0;
-}
-
-.copyColumn {
-  display: grid;
-  gap: var(--space-5);
 }
 
 .media {
@@ -50,12 +58,13 @@
 
 .heading {
   margin: 0;
-  color: var(--link-accent);
+  color: var(--color-heading-on-light);
   overflow-wrap: anywhere;
 }
 
 .lead {
   margin: 0;
+  max-width: 42rem;
   color: var(--text-on-light-muted);
   font-size: clamp(1rem, 2.3vw, 1.08rem);
   line-height: 1.65;
@@ -84,6 +93,12 @@
     border-color 180ms ease,
     box-shadow 180ms ease,
     transform 180ms ease;
+}
+
+a.topicChip {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .topicChipSpan {
@@ -149,21 +164,20 @@
   overflow-wrap: anywhere;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 480px) and (max-width: 959px) {
   .topicsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
   }
 }
 
 @media (min-width: 960px) {
-  .cardLayout {
+  .contentRow {
     grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
     gap: 0;
-    align-items: stretch;
+    align-items: start;
   }
 
-  .copyColumn {
+  .mediaColumn {
     padding-right: clamp(1.25rem, 2.5vw, 1.75rem);
     border-right: 1px solid var(--color-sand-200);
   }
@@ -174,7 +188,38 @@
 
   .topicsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    height: 100%;
     align-content: start;
+  }
+}
+
+@media (max-width: 319px) {
+  .section {
+    padding-block: clamp(1.25rem, 6vw, 1.75rem);
+  }
+
+  .cardLayout,
+  .contentRow {
+    gap: clamp(0.875rem, 4vw, 1.25rem);
+  }
+
+  .heading {
+    font-size: clamp(1.1rem, 6.5vw, 1.35rem);
+  }
+
+  .lead {
+    font-size: clamp(0.875rem, 3.8vw, 0.95rem);
+  }
+
+  .topicChip {
+    min-height: 2.5rem;
+    padding: 0.625rem 0.75rem;
+  }
+
+  .itemTitle {
+    font-size: clamp(0.85rem, 3.6vw, 0.9rem);
+  }
+
+  .itemBody {
+    font-size: clamp(0.78rem, 3.2vw, 0.82rem);
   }
 }

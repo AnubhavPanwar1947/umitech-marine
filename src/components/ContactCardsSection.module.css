@@ -10,7 +10,7 @@
   line-height: 1.15;
   letter-spacing: normal;
   text-transform: none;
-  color: var(--color-navy-900);
+  color: var(--color-heading-on-light);
   overflow-wrap: anywhere;
 }
 
