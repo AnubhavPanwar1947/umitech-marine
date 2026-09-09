@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { navigation } from "@/lib/site-data";
-import { isNavItemCurrent } from "@/lib/nav-current";
+import { isNavItemCurrent, isSolidHeaderPage } from "@/lib/nav-current";
 import { getSearchPanelStyle } from "@/lib/search-panel-position";
 import styles from "./Header.module.css";
 import { MobileNav } from "./MobileNav";
@@ -34,20 +34,11 @@ export function Header() {
     };
   }, [menuOpen]);
 
-  const isSolidHeaderPage =
-    pathname === "/about" ||
-    pathname === "/contact" ||
-    pathname === "/services" ||
-    pathname === "/team";
+  const solidHeaderPage = isSolidHeaderPage(pathname);
 
   useEffect(() => {
-    if (isSolidHeaderPage) {
-      return;
-    }
-
-    const hero = document.getElementById("home");
-    if (!hero) {
-      setPastHero(true);
+    if (solidHeaderPage) {
+      setPastHero(false);
       return;
     }
 
@@ -63,7 +54,7 @@ export function Header() {
     return () => {
       window.removeEventListener("scroll", updateScrolled);
     };
-  }, [isSolidHeaderPage]);
+  }, [solidHeaderPage, pathname]);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -193,14 +184,16 @@ export function Header() {
     closeServicesDropdown();
   };
 
-  const solidHeader = isSolidHeaderPage || pastHero;
+  const solidHeader = solidHeaderPage || pastHero;
+  const showBrandLogo =
+    solidHeader || menuOpen || searchOpen || servicesDropdownOpen;
 
   return (
     <header
       ref={headerRef}
       className={styles.header}
       data-scrolled={solidHeader ? "true" : undefined}
-      data-about-page={isSolidHeaderPage ? "true" : undefined}
+      data-about-page={solidHeaderPage ? "true" : undefined}
       data-menu-open={menuOpen ? "true" : undefined}
       data-search-open={searchOpen ? "true" : undefined}
       data-services-dropdown-open={servicesDropdownOpen ? "true" : undefined}
@@ -215,15 +208,23 @@ export function Header() {
             closeServicesDropdown();
           }}
         >
-          <Image
-            src="/images/logo.png"
-            alt="UMITECH MARINE"
-            width={1024}
-            height={297}
-            className={styles.logo}
-            priority
-            sizes="(max-width: 480px) 42vw, 160px"
-          />
+          {showBrandLogo ? (
+            <span
+              className={styles.logoBrand}
+              role="img"
+              aria-label="UMITECH MARINE"
+            />
+          ) : (
+            <Image
+              src="/images/logo.png"
+              alt="UMITECH MARINE"
+              width={1024}
+              height={297}
+              className={styles.logo}
+              priority
+              sizes="(max-width: 480px) 42vw, 160px"
+            />
+          )}
         </Link>
 
         <nav className={styles.desktopNav} aria-label="Primary">

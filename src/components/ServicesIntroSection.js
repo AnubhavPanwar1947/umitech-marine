@@ -18,6 +18,15 @@ export function ServicesIntroSection() {
         <Reveal as="p" className={styles.lead} delay={60}>
           {intro.lead}
         </Reveal>
+        {intro.bullets?.length ? (
+          <Reveal as="ul" className={styles.bulletList} delay={100}>
+            {intro.bullets.map((item) => (
+              <li key={item} className={styles.bulletItem}>
+                {item}
+              </li>
+            ))}
+          </Reveal>
+        ) : null}
       </div>
     </section>
   );

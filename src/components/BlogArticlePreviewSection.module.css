@@ -1,0 +1,77 @@
+.section {
+  background: var(--bg-section-alt);
+  border-block: 1px solid var(--color-sand-200);
+  padding-block: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.card {
+  min-width: 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--color-sand-200);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.layout {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+  align-items: start;
+  min-width: 0;
+}
+
+.mediaColumn,
+.contentColumn {
+  min-width: 0;
+}
+
+.media {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-sand-100);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-heading-on-light);
+  overflow-wrap: anywhere;
+}
+
+.excerpt {
+  margin: 0 0 var(--space-5);
+  color: var(--text-on-light-muted);
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.cta {
+  min-height: 2.75rem;
+}
+
+@media (min-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+}
+
+@media (max-width: 319px) {
+  .cta {
+    min-height: 2.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -20,6 +20,7 @@ export default function ServicesPage() {
           id={practice.id}
           heading={practice.heading}
           lead={practice.lead}
+          leadInTopicsColumn={practice.leadInTopicsColumn}
           items={practice.items}
           image={practice.image}
           imageAlt={practice.imageAlt}

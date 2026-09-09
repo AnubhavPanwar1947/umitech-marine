@@ -7,6 +7,7 @@ export function ServicePracticeSection({
   id,
   heading,
   lead,
+  leadInTopicsColumn = false,
   items,
   image,
   imageAlt,
@@ -24,6 +25,9 @@ export function ServicePracticeSection({
     .filter(Boolean)
     .join(" ");
 
+  const showLeadUnderHeading = lead && !leadInTopicsColumn;
+  const showLeadInTopics = lead && leadInTopicsColumn;
+
   return (
     <section
       id={id}
@@ -39,7 +43,9 @@ export function ServicePracticeSection({
             >
               {heading}
             </h2>
-            <p className={styles.lead}>{lead}</p>
+            {showLeadUnderHeading ? (
+              <p className={styles.lead}>{lead}</p>
+            ) : null}
           </div>
 
           <div className={styles.contentRow}>
@@ -62,49 +68,50 @@ export function ServicePracticeSection({
             </div>
 
             <div className={styles.topicsColumn}>
-              <ul className={styles.topicsGrid}>
-                {items.map((item, index) => {
-                  const spanFull =
-                    items.length % 2 === 1 && index === items.length - 1;
+              {showLeadInTopics ? (
+                <p className={styles.lead}>{lead}</p>
+              ) : null}
+              {items.length > 0 ? (
+                <ul className={styles.topicsGrid}>
+                  {items.map((item, index) => {
+                    const spanFull =
+                      items.length % 2 === 1 && index === items.length - 1;
 
-                  if (item.slug) {
+                    if (item.slug) {
+                      return (
+                        <li
+                          key={item.title}
+                          className={
+                            spanFull ? styles.topicChipSpan : undefined
+                          }
+                        >
+                          <Link
+                            href={`/services/${id}/${item.slug}`}
+                            className={styles.topicChip}
+                          >
+                            <h3 className={styles.itemTitle}>{item.title}</h3>
+                          </Link>
+                        </li>
+                      );
+                    }
+
                     return (
                       <li
                         key={item.title}
-                        className={spanFull ? styles.topicChipSpan : undefined}
+                        tabIndex={0}
+                        className={[
+                          styles.topicChip,
+                          spanFull ? styles.topicChipSpan : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
                       >
-                        <Link
-                          href={`/services/${id}/${item.slug}`}
-                          className={styles.topicChip}
-                        >
-                          <h3 className={styles.itemTitle}>{item.title}</h3>
-                          {item.body ? (
-                            <p className={styles.itemBody}>{item.body}</p>
-                          ) : null}
-                        </Link>
+                        <h3 className={styles.itemTitle}>{item.title}</h3>
                       </li>
                     );
-                  }
-
-                  return (
-                    <li
-                      key={item.title}
-                      tabIndex={0}
-                      className={[
-                        styles.topicChip,
-                        spanFull ? styles.topicChipSpan : "",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                    >
-                      <h3 className={styles.itemTitle}>{item.title}</h3>
-                      {item.body ? (
-                        <p className={styles.itemBody}>{item.body}</p>
-                      ) : null}
-                    </li>
-                  );
-                })}
-              </ul>
+                  })}
+                </ul>
+              ) : null}
             </div>
           </div>
         </Reveal>

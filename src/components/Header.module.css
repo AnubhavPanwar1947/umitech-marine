@@ -7,8 +7,7 @@
   --header-surface-border: rgba(16, 28, 51, 0.12);
   --header-surface-ink: #182952;
   --header-surface-ink-hover: #1a557c;
-  --header-logo-invert: brightness(0) saturate(100%) invert(14%) sepia(10%)
-    saturate(3100%) hue-rotate(186deg) brightness(125%) contrast(105%);
+  --header-logo-brand: #1a557c;
 
   position: sticky;
   top: 0;
@@ -25,22 +24,17 @@
 .header[data-scrolled="true"],
 .header[data-about-page="true"],
 .header[data-menu-open="true"],
-.header[data-search-open="true"] {
+.header[data-search-open="true"],
+.header[data-services-dropdown-open="true"] {
   background: var(--header-surface-bg);
   border-bottom-color: var(--header-surface-border);
-}
-
-.header[data-scrolled="true"] .logo,
-.header[data-about-page="true"] .logo,
-.header[data-menu-open="true"] .logo,
-.header[data-search-open="true"] .logo {
-  filter: var(--header-logo-invert);
 }
 
 .header[data-scrolled="true"] .navLink,
 .header[data-about-page="true"] .navLink,
 .header[data-menu-open="true"] .navLink,
-.header[data-search-open="true"] .navLink {
+.header[data-search-open="true"] .navLink,
+.header[data-services-dropdown-open="true"] .navLink {
   color: var(--header-surface-ink);
 }
 
@@ -51,7 +45,9 @@
 .header[data-menu-open="true"] .navLink:hover,
 .header[data-menu-open="true"] .navLink:focus-visible,
 .header[data-search-open="true"] .navLink:hover,
-.header[data-search-open="true"] .navLink:focus-visible {
+.header[data-search-open="true"] .navLink:focus-visible,
+.header[data-services-dropdown-open="true"] .navLink:hover,
+.header[data-services-dropdown-open="true"] .navLink:focus-visible {
   color: var(--header-surface-ink-hover);
 }
 
@@ -59,10 +55,12 @@
 .header[data-about-page="true"] .actions .search,
 .header[data-menu-open="true"] .actions .search,
 .header[data-search-open="true"] .actions .search,
+.header[data-services-dropdown-open="true"] .actions .search,
 .header[data-scrolled="true"] .mobileActions .mobileControl,
 .header[data-about-page="true"] .mobileActions .mobileControl,
 .header[data-menu-open="true"] .mobileActions .mobileControl,
-.header[data-search-open="true"] .mobileActions .mobileControl {
+.header[data-search-open="true"] .mobileActions .mobileControl,
+.header[data-services-dropdown-open="true"] .mobileActions .mobileControl {
   border-color: transparent;
   background: transparent;
   color: var(--header-surface-ink);
@@ -76,6 +74,8 @@
 .header[data-menu-open="true"] .actions .search:focus-visible,
 .header[data-search-open="true"] .actions .search:hover,
 .header[data-search-open="true"] .actions .search:focus-visible,
+.header[data-services-dropdown-open="true"] .actions .search:hover,
+.header[data-services-dropdown-open="true"] .actions .search:focus-visible,
 .header[data-scrolled="true"] .mobileActions .mobileControl:hover,
 .header[data-scrolled="true"] .mobileActions .mobileControl:focus-visible,
 .header[data-about-page="true"] .mobileActions .mobileControl:hover,
@@ -83,7 +83,9 @@
 .header[data-menu-open="true"] .mobileActions .mobileControl:hover,
 .header[data-menu-open="true"] .mobileActions .mobileControl:focus-visible,
 .header[data-search-open="true"] .mobileActions .mobileControl:hover,
-.header[data-search-open="true"] .mobileActions .mobileControl:focus-visible {
+.header[data-search-open="true"] .mobileActions .mobileControl:focus-visible,
+.header[data-services-dropdown-open="true"] .mobileActions .mobileControl:hover,
+.header[data-services-dropdown-open="true"] .mobileActions .mobileControl:focus-visible {
   border-color: transparent;
   background: transparent;
   color: var(--header-surface-ink-hover);
@@ -92,7 +94,8 @@
 .header[data-scrolled="true"] .menuButton,
 .header[data-about-page="true"] .menuButton,
 .header[data-menu-open="true"] .menuButton,
-.header[data-search-open="true"] .menuButton {
+.header[data-search-open="true"] .menuButton,
+.header[data-services-dropdown-open="true"] .menuButton {
   border-color: transparent;
   background: transparent;
 }
@@ -104,7 +107,9 @@
 .header[data-menu-open="true"] .menuButton:hover,
 .header[data-menu-open="true"] .menuButton:focus-visible,
 .header[data-search-open="true"] .menuButton:hover,
-.header[data-search-open="true"] .menuButton:focus-visible {
+.header[data-search-open="true"] .menuButton:focus-visible,
+.header[data-services-dropdown-open="true"] .menuButton:hover,
+.header[data-services-dropdown-open="true"] .menuButton:focus-visible {
   border-color: transparent;
   background: transparent;
 }
@@ -116,14 +121,17 @@
 .header[data-menu-open="true"] .menuButton:hover .menuIcon,
 .header[data-menu-open="true"] .menuButton:focus-visible .menuIcon,
 .header[data-search-open="true"] .menuButton:hover .menuIcon,
-.header[data-search-open="true"] .menuButton:focus-visible .menuIcon {
+.header[data-search-open="true"] .menuButton:focus-visible .menuIcon,
+.header[data-services-dropdown-open="true"] .menuButton:hover .menuIcon,
+.header[data-services-dropdown-open="true"] .menuButton:focus-visible .menuIcon {
   --menu-bar-color: var(--header-surface-ink-hover);
 }
 
 .header[data-scrolled="true"] .menuIcon,
 .header[data-about-page="true"] .menuIcon,
 .header[data-menu-open="true"] .menuIcon,
-.header[data-search-open="true"] .menuIcon {
+.header[data-search-open="true"] .menuIcon,
+.header[data-services-dropdown-open="true"] .menuIcon {
   --menu-bar-color: var(--header-surface-ink);
 }
 
@@ -150,7 +158,25 @@
   max-width: min(10rem, 42vw);
   min-width: 0;
   object-fit: contain;
-  transition: filter 180ms ease;
+}
+
+.logoBrand {
+  display: block;
+  flex-shrink: 0;
+  width: auto;
+  height: clamp(2rem, 8vw, 2.75rem);
+  max-width: min(10rem, 42vw);
+  min-width: 0;
+  aspect-ratio: 1024 / 297;
+  background-color: var(--header-logo-brand);
+  -webkit-mask-image: url("/images/logo.png");
+  mask-image: url("/images/logo.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .desktopNav,
@@ -225,7 +251,8 @@
 .header[data-scrolled="true"] .navLink[aria-current="page"],
 .header[data-about-page="true"] .navLink[aria-current="page"],
 .header[data-menu-open="true"] .navLink[aria-current="page"],
-.header[data-search-open="true"] .navLink[aria-current="page"] {
+.header[data-search-open="true"] .navLink[aria-current="page"],
+.header[data-services-dropdown-open="true"] .navLink[aria-current="page"] {
   color: var(--header-surface-ink-hover);
 }
 
@@ -390,7 +417,8 @@
     overflow: hidden;
   }
 
-  .logo {
+  .logo,
+  .logoBrand {
     height: clamp(1.125rem, 10vw, 2rem);
     max-width: min(
       10rem,

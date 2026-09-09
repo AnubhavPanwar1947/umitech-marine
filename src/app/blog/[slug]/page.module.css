@@ -1,0 +1,150 @@
+.section {
+  background: var(--bg-section);
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.inner {
+  min-width: 0;
+  max-width: 42rem;
+}
+
+.title {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 8vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: var(--color-heading-on-light);
+  overflow-wrap: anywhere;
+}
+
+.hero {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-sand-100);
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.contentSection {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.sectionHeading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-heading-on-light);
+  overflow-wrap: anywhere;
+}
+
+.paragraph {
+  margin: 0;
+  color: var(--text-on-light-muted);
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  min-width: 0;
+}
+
+.listItem {
+  color: var(--text-on-light-muted);
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.listItem + .listItem {
+  margin-top: var(--space-2);
+}
+
+.ctaBlock {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-sand-200);
+  min-width: 0;
+}
+
+.ctaHeading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-heading-on-light);
+  overflow-wrap: anywhere;
+}
+
+.ctaLead {
+  margin: var(--space-3) 0 var(--space-4);
+  color: var(--text-on-light-muted);
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.cta {
+  min-height: 2.75rem;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: var(--space-6);
+  min-width: 0;
+  color: var(--link-accent);
+  font-size: clamp(0.875rem, 2vw, 0.95rem);
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--link-accent-hover);
+  text-decoration: underline;
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (max-width: 17.499rem) {
+  .section {
+    padding-block: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .paragraph,
+  .listItem {
+    font-size: 0.875rem;
+  }
+
+  .cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

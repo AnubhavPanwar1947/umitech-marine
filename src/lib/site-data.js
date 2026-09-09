@@ -7,7 +7,7 @@ export const navigation = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Team", href: "/team" },
-  { label: "Blog", href: "/#blog" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export const hero = {
@@ -62,11 +62,15 @@ export const servicesPage = {
     title: "Our Services",
     lead:
       "Four practices delivering technical excellence across naval architecture, engineering, surveying, and legal consultancy.",
+    bullets: [
+      "Our team consists of accredited Sire inspectors, Flag state inspectors and experienced marine surveyors, each having previously served management roles while sailing onboard. We collectively bring together decades of experience in varied fields ranging from conventional shipping to oil and gas offshore industry and marine engineering.",
+      "We believe that with our collective experience we can bring added value to our customers and help them enhance their services by taking the path of sustainable growth. Our core value lies in providing our clients with innovative ways to fulfil their requirements.",
+    ],
   },
   practices: [
     {
       id: "naval",
-      heading: "Naval Architecture & Design",
+      heading: "Naval Architecture",
       lead: "Hull form, structure and the analysis behind every design decision.",
       image: "/images/Naval-Architecture-Services.jpg",
       imageAlt:
@@ -75,8 +79,7 @@ export const servicesPage = {
       variant: "alt",
       items: [
         {
-          title: "Design & Analysis",
-          body: "Concept to detailed design.",
+          title: "Design and Analysis",
           slug: "design-and-analysis",
           detail: [
             "At the core of our services is a passion for innovation in marine and offshore engineering. We design a wide variety of vessels and offshore structures—fixed, floating, or mobile—catering to the Oil & Gas, Marine, and Renewable Energy industries.",
@@ -92,28 +95,7 @@ export const servicesPage = {
           ],
         },
         {
-          title: "FEED — Front-End Engineering Design",
-          body: "De-risk before commitment.",
-          slug: "feed-front-end-engineering-design",
-          detail: [
-            "Front-End Engineering Design (FEED) is the essential bridge between conceptual design and full-scale project execution. Conducted after the feasibility phase and before Engineering, Procurement, and Construction (EPC) begins, FEED lays the groundwork for a successful project.",
-            "At this stage, our experienced team of naval architects and engineers carries out in-depth technical studies to identify potential design and operational challenges. We also provide preliminary cost estimates to give clients a clearer picture of project viability and investment requirements.",
-            "Our FEED studies help clients make confident, informed decisions—reducing risk, refining project scope, and setting the foundation for cost-effective execution.",
-          ],
-        },
-        {
-          title: "Finite Element Analysis (FEA)",
-          body: "Stress, buckling, fatigue, ultimate strength.",
-          slug: "finite-element-analysis-fea",
-          detail: [
-            "Finite Element Analysis (FEA) is a powerful computational method used to simulate and predict the structural and thermal behaviour of components and systems under real-world physical conditions such as mechanical loading, vibration, thermal gradients, and fluid interaction. While termed “analysis,” FEA is an integral part of the design and verification process, allowing engineers to anticipate structural performance, identify critical stress areas, and optimize designs before fabrication or physical testing.",
-            "In the offshore and marine industry, FEA is extensively utilized to address complex engineering problems associated with floating and fixed structures. Applications include evaluating global structural integrity, local stress concentrations, fatigue life estimation, buckling assessments, and dynamic response to environmental loads.",
-            "Our engineering team employs ANSYS, a leading FEA platform, to carry out high-fidelity simulations that support the structural design and assessment of offshore platforms, subsea equipment, riser systems, and hull structures. All analyses are performed in accordance with relevant industry codes and class society requirements, ensuring both safety and performance across the asset lifecycle.",
-          ],
-        },
-        {
           title: "Engineering Analysis",
-          body: "Load cases, response, verification.",
           slug: "engineering-analysis",
           detail: [
             "Our experienced engineering and design team provides reliable analysis services across all key phases of an asset’s lifecycle. We support projects through:",
@@ -129,9 +111,17 @@ export const servicesPage = {
           ],
         },
         {
-          title: "Global & Local Strength",
-          body: "Where structure governs.",
-          slug: "global-and-local-strength",
+          title: "Front-End Engineering Design Study",
+          slug: "front-end-engineering-design-study",
+          detail: [
+            "Front-End Engineering Design (FEED) is the essential bridge between conceptual design and full-scale project execution. Conducted after the feasibility phase and before Engineering, Procurement, and Construction (EPC) begins, FEED lays the groundwork for a successful project.",
+            "At this stage, our experienced team of naval architects and engineers carries out in-depth technical studies to identify potential design and operational challenges. We also provide preliminary cost estimates to give clients a clearer picture of project viability and investment requirements.",
+            "Our FEED studies help clients make confident, informed decisions—reducing risk, refining project scope, and setting the foundation for cost-effective execution.",
+          ],
+        },
+        {
+          title: "Global and Local Strength Analysis",
+          slug: "global-and-local-strength-analysis",
           detail: [
             "Our team conducts Global and Local Strength Analysis (GLSA) to evaluate the structural response of marine and offshore structures under extreme environmental loading. The analysis is grounded in first-principles methodologies, ensuring a physics-based, high-fidelity representation of structural behaviour.",
             "Extreme load assessments are performed across a range of dominant load cases, which are identified based on vessel or structure type. For each load case, an Equivalent Design Wave (EDW) is derived to represent the most critical sea state in a simplified regular wave format. This approach enables detailed yet computationally efficient structural simulations.",
@@ -139,9 +129,24 @@ export const servicesPage = {
           ],
         },
         {
-          title: "Ship Plans & Drawings",
-          body: "Class- and statutory-standard drawings.",
-          slug: "ship-plans-and-drawings",
+          title: "Finite Element Analysis",
+          slug: "finite-element-analysis",
+          detail: [
+            "Finite Element Analysis (FEA) is a powerful computational method used to simulate and predict the structural and thermal behaviour of components and systems under real-world physical conditions such as mechanical loading, vibration, thermal gradients, and fluid interaction. While termed “analysis,” FEA is an integral part of the design and verification process, allowing engineers to anticipate structural performance, identify critical stress areas, and optimize designs before fabrication or physical testing.",
+            "In the offshore and marine industry, FEA is extensively utilized to address complex engineering problems associated with floating and fixed structures. Applications include evaluating global structural integrity, local stress concentrations, fatigue life estimation, buckling assessments, and dynamic response to environmental loads.",
+            "Our engineering team employs ANSYS, a leading FEA platform, to carry out high-fidelity simulations that support the structural design and assessment of offshore platforms, subsea equipment, riser systems, and hull structures. All analyses are performed in accordance with relevant industry codes and class society requirements, ensuring both safety and performance across the asset lifecycle.",
+          ],
+        },
+        {
+          title: "Vessel and Berth Mooring Compatibility Assessment",
+          slug: "vessel-and-berth-mooring-compatibility-assessment",
+          detail: [
+            "Our team of experienced naval architects and engineers provides detailed mooring analysis for Ship To Ship (STS), Ship To Berth (STB) and other operations in both sheltered waters and open sea condition. Services include LNG carrier–shore interface compatibility studies, Single Buoy Mooring (SBM) and Floating Production Storage and Offloading (FPSO) system assessments, and comprehensive evaluations of mooring loads, line tensions, and structural integrity. All analyses are conducted in accordance with international standards and best practices to ensure the safety and operational efficiency of berthing and mooring systems.",
+          ],
+        },
+        {
+          title: "Ship Plans and Drawing",
+          slug: "ship-plans-and-drawing",
           detail: [
             "Our team of experienced Naval Architects provides a full suite of plans and technical drawings essential throughout the lifecycle of a marine asset. We ensure all documentation is prepared in accordance with the requirements of the relevant flag state and tailored for approval by leading classification societies. Our deliverables include, but are not limited to:",
           ],
@@ -165,14 +170,6 @@ export const servicesPage = {
             "Our goal is to support vessel compliance, safety, and operational efficiency from concept to completion.",
           ],
         },
-        {
-          title: "Vessel and Berth Mooring Compatibility Assessment",
-          body: "STS, STB and berth mooring analysis.",
-          slug: "vessel-and-berth-mooring-compatibility-assessment",
-          detail: [
-            "Our team of experienced naval architects and engineers provides detailed mooring analysis for Ship To Ship (STS), Ship To Berth (STB) and other operations in both sheltered waters and open sea condition. Services include LNG carrier–shore interface compatibility studies, Single Buoy Mooring (SBM) and Floating Production Storage and Offloading (FPSO) system assessments, and comprehensive evaluations of mooring loads, line tensions, and structural integrity. All analyses are conducted in accordance with international standards and best practices to ensure the safety and operational efficiency of berthing and mooring systems.",
-          ],
-        },
       ],
     },
     {
@@ -187,8 +184,7 @@ export const servicesPage = {
       variant: "default",
       items: [
         {
-          title: "Conversion & Upgradation",
-          body: "Scope, class and yard-ready engineering.",
+          title: "Conversion and Upgradation",
           slug: "conversion-and-upgradation",
           detail: [
             "Lifecycle Engineering & Asset Upgrades",
@@ -196,47 +192,8 @@ export const servicesPage = {
           ],
         },
         {
-          title: "Hydrodynamic Calculations",
-          body: "Resistance, powering and seakeeping.",
-          slug: "hydrodynamic-calculations",
-          detail: [
-            "Marine environments are constantly changing—and so is vessel performance. Our expert team of naval architects and hydrodynamic engineers utilizes cutting-edge simulation tools and industry-leading software to accurately predict how marine assets will perform in real-world sea and weather conditions. From seakeeping and RAO calculations to resistance, motion response, multi-body dynamics, sloshing analysis, and propeller performance assessment—we provide end-to-end hydrodynamic solutions. Whether it’s during the design phase or in operational optimization, we help you enhance safety, efficiency, and reliability at sea.",
-          ],
-        },
-        {
-          title: "Computational Fluid Dynamics (CFD)",
-          body: "Flow, loads and performance modelling.",
-          slug: "computational-fluid-dynamics-cfd",
-          detail: [
-            "At the forefront of engineering innovation, Computational Fluid Dynamics (CFD) is a core tool we use to simulate and optimize fluid flow behavior in complex systems. Whether designing next-generation wind turbines, high-performance marine vessels, or energy-efficient HVAC systems, CFD allows us to deliver data-driven solutions with precision and reliability.",
-            "CFD involves the numerical analysis of fluid behavior based on physical parameters such as velocity, pressure, temperature, density, and viscosity. By replicating real-world fluid interactions within a virtual environment, we can accurately predict performance, identify inefficiencies, and refine designs long before any physical prototype is built.",
-            "As a digital fluid dynamics simulator, CFD plays a critical role in high-end design optimization, reducing development time and cost while enhancing safety and functionality. Our team leverages advanced CFD tools and deep domain expertise to deliver customized solutions tailored to your engineering challenges.",
-          ],
-        },
-        {
-          title: "Stability Calculation",
-          body: "Intact and damage stability solutions.",
-          slug: "stability-calculation",
-          detail: [
-            "At UMITECH Marine Solutions, we provide comprehensive stability calculations tailored to the needs of our offshore and main fleet clients. Our services encompass a wide range of stability-related tasks, ensuring the safe and efficient operation of vessels.",
-            "Our expertise includes:",
-          ],
-          detailList: [
-            "Loading Calculations: Accurate calculations to ensure proper weight distribution during loading.",
-            "Weight Estimation: Determining the weight of cargo and vessel components to assess stability.",
-            "Inclining Experiment: Performing inclining tests to verify the vessel’s stability characteristics.",
-            "Hydrostatic Particulars: Providing detailed hydrostatic data, essential for operational safety.",
-            "Intact and Damage Stability Calculations: Analyzing the vessel’s stability under intact and damage conditions to ensure compliance with international regulations.",
-            "Loading Plan Development: Creating loading plans based on detailed stability analysis.",
-          ],
-          detailAfter: [
-            "We are committed to delivering precise, reliable, and efficient stability solutions, supporting vessel safety and operational performance.",
-          ],
-        },
-        {
-          title: "Manuals & Procedures",
-          body: "Operational and technical documentation.",
-          slug: "manuals-and-procedures",
+          title: "Comprehensive Documentation and Manual Development Services",
+          slug: "comprehensive-documentation-and-manual-development-services",
           detail: [
             "Equipped with the right knowledge, skills, and hands-on experience, our team has successfully prepared and delivered a wide range of procedural and operational manuals tailored to the specific needs of our clients across the maritime and offshore sectors. Our portfolio includes, but is not limited to, the following:",
           ],
@@ -269,20 +226,53 @@ export const servicesPage = {
           ],
         },
         {
-          title: "Loadout & Sea Fastening",
-          body: "Heavy-lift and transport engineering.",
-          slug: "loadout-and-sea-fastening",
+          title: "Hydrodynamic Calculations",
+          slug: "hydrodynamic-calculations",
+          detail: [
+            "Marine environments are constantly changing—and so is vessel performance. Our expert team of naval architects and hydrodynamic engineers utilizes cutting-edge simulation tools and industry-leading software to accurately predict how marine assets will perform in real-world sea and weather conditions. From seakeeping and RAO calculations to resistance, motion response, multi-body dynamics, sloshing analysis, and propeller performance assessment—we provide end-to-end hydrodynamic solutions. Whether it’s during the design phase or in operational optimization, we help you enhance safety, efficiency, and reliability at sea.",
+          ],
+        },
+        {
+          title: "Loadout and Sea fastening calculations",
+          slug: "loadout-and-sea-fastening-calculations",
           detail: [
             "When transporting cargo by sea, it is essential to secure it in a way that prevents any movement which could potentially damage the cargo or the vessel. Improperly secured cargo can shift during transit, posing serious risks to vessel stability and endangering both the crew and the cargo. This is especially critical when handling valuable assets such as machinery, equipment, fabricated structures, and marine components of varying sizes and complexities. Insurers often mandate that cargo is properly fastened to mitigate these risks. Our team of experienced engineers and naval architects ensures that loadout and sea fastening are executed to the highest standards—optimized for safety, efficiency, and in full compliance with the requirements of clients, insurers, and all relevant stakeholders.",
           ],
         },
         {
+          title: "Computational Fluid Dynamics (CFD)",
+          slug: "computational-fluid-dynamics-cfd",
+          detail: [
+            "At the forefront of engineering innovation, Computational Fluid Dynamics (CFD) is a core tool we use to simulate and optimize fluid flow behavior in complex systems. Whether designing next-generation wind turbines, high-performance marine vessels, or energy-efficient HVAC systems, CFD allows us to deliver data-driven solutions with precision and reliability.",
+            "CFD involves the numerical analysis of fluid behavior based on physical parameters such as velocity, pressure, temperature, density, and viscosity. By replicating real-world fluid interactions within a virtual environment, we can accurately predict performance, identify inefficiencies, and refine designs long before any physical prototype is built.",
+            "As a digital fluid dynamics simulator, CFD plays a critical role in high-end design optimization, reducing development time and cost while enhancing safety and functionality. Our team leverages advanced CFD tools and deep domain expertise to deliver customized solutions tailored to your engineering challenges.",
+          ],
+        },
+        {
           title: "Heat Transfer Analysis",
-          body: "Thermal behaviour in marine systems.",
           slug: "heat-transfer-analysis",
           detail: [
             "Our engineering team delivers high-performance heat transfer analysis solutions tailored for the maritime industry. We provide precise evaluation of temperature distribution and heat flux in structural components exposed to thermal loads, supporting both steady-state and transient conditions, as well as linear and non-linear material behavior.",
             "With proven expertise in handling high-temperature cargo scenarios, we ensure optimal thermal management and insulation design for vessels operating beyond typical ambient marine conditions. Our solutions help enhance safety, maintain cargo integrity, and improve energy efficiency—meeting the rigorous demands of modern shipping operations.",
+          ],
+        },
+        {
+          title: "Stability Calculation",
+          slug: "stability-calculation",
+          detail: [
+            "At UMITECH Marine Solutions, we provide comprehensive stability calculations tailored to the needs of our offshore and main fleet clients. Our services encompass a wide range of stability-related tasks, ensuring the safe and efficient operation of vessels.",
+            "Our expertise includes:",
+          ],
+          detailList: [
+            "Loading Calculations: Accurate calculations to ensure proper weight distribution during loading.",
+            "Weight Estimation: Determining the weight of cargo and vessel components to assess stability.",
+            "Inclining Experiment: Performing inclining tests to verify the vessel’s stability characteristics.",
+            "Hydrostatic Particulars: Providing detailed hydrostatic data, essential for operational safety.",
+            "Intact and Damage Stability Calculations: Analyzing the vessel’s stability under intact and damage conditions to ensure compliance with international regulations.",
+            "Loading Plan Development: Creating loading plans based on detailed stability analysis.",
+          ],
+          detailAfter: [
+            "We are committed to delivering precise, reliable, and efficient stability solutions, supporting vessel safety and operational performance.",
           ],
         },
       ],
@@ -299,27 +289,61 @@ export const servicesPage = {
       variant: "alt",
       items: [
         {
-          title: "SIRE inspections",
-          slug: "sire-inspections",
-          detail: [
-            "We support SIRE vessel inspection programmes with preparation, attendance and follow-up on findings relevant to tanker and terminal operations.",
-            "Our inspectors work through the inspection scope systematically and help owners address observations with practical corrective actions.",
-          ],
-        },
-        {
-          title: "Flag state inspections",
-          slug: "flag-state-inspections",
-          detail: [
-            "Flag state inspection support covers statutory surveys, document review and preparation for port state and flag administration visits.",
-            "We assist owners and operators in demonstrating compliance with applicable conventions, certificates and onboard procedures.",
-          ],
-        },
-        {
-          title: "Marine surveys",
+          title: "Marine Surveys",
           slug: "marine-surveys",
           detail: [
-            "Marine surveys include condition, pre-purchase, damage and P&I claim surveys carried out by experienced master mariners and surveyors.",
-            "Reports document hull, machinery and cargo-related findings with clear conclusions for owners, underwriters and legal advisers.",
+            "At Umitech Marine Solutions, we leverage the expertise of our team, comprising Master Mariners and Marine Engineers, to deliver precise and comprehensive marine and technical surveys. Our services cater to a wide range of vessel types, providing in-depth assessments to ensure operational efficiency, safety, and compliance with industry standards.",
+            "Our clientele spans ship owners, operators, charterers, P&I clubs, insurers, financial institutions, flag states, and classification societies.",
+          ],
+          detailList: [
+            "Condition Surveys: Comprehensive assessments on behalf of P&I clubs, H&M insurers, and individual clients to evaluate the overall condition of the vessel and identify potential risks.",
+            "On-Hire/Off-Hire Condition Surveys: Detailed assessments to verify the condition of vessels at the time of charter hire, including equipment, machinery, and hull integrity.",
+            "On-Hire/Off-Hire Bunker Surveys: Verification of bunker fuel quantities at the start and end of the charter, including fuel quality analysis.",
+            "Pre-Loading Vessel Surveys: Technical inspections to ensure vessel readiness for cargo operations, focusing on structural integrity and load distribution.",
+            "Project Cargo Loading & Lashing Approvals: Certification of appropriate cargo securing methods and compliance with maritime safety standards for heavy and oversized cargoes.",
+            "Non-Exclusive Surveys: Independent, non-affiliated surveys to assess the condition and functionality of specific vessel systems or components.",
+            "Bollard Pull & Winch Testing: Performance testing of towing and mooring systems, including winch load testing and bollard pull capacity measurements.",
+            "Safety Attestations: Official certification for compliance with safety regulations from local authorities and flag state authorities.",
+            "Carving and Marking Note Attestations: Verification of compliance with specific maritime regulations regarding vessel markings, including classification and ownership details.",
+            "\"Fit for Purpose\" Approvals: Assessments and certifications for project-specific applications, ensuring that vessels and equipment meet operational requirements for particular tasks or cargo.",
+            "Project Cargo Loading/Unloading Attendance: On-site supervision and technical support during the loading and unloading of project cargo, ensuring compliance with safety and operational protocols.",
+            "Pre-Purchase Inspections: Detailed technical evaluations of vessels, focusing on mechanical, structural, and safety systems, to support the acquisition decision-making process.",
+            "Valuation Reports: Expert evaluations of vessel market value, based on condition, market trends, and technical specifications.",
+          ],
+          detailAfter: [
+            "With an unwavering focus on precision and adherence to international standards, Umitech Marine Solutions ensures the highest level of technical integrity and operational safety across all maritime operations.",
+          ],
+        },
+        {
+          title: "Audits and Inspections",
+          slug: "audits-and-inspections",
+          detail: [
+            "At Umitech Marine Solutions, we understand the critical importance of compliance, operational integrity, and continuous improvement in the maritime industry. We perform systematic evaluations of vessel operations, shipboard practices, safety management frameworks, and navigational protocols. Our services are aligned with the latest IMO conventions, flag state requirements, OCIMF standards, and classification society guidelines.",
+            "We conduct systematic examinations of vessel systems, onboard procedures, and management practices to verify that your Safety Management System (SMS) is properly implemented and adhered to by the crew. Each audit is meticulously carried out to support safety, efficiency, and compliance across all levels of maritime operations.",
+          ],
+          detailList: [
+            "ISM Audit: Verification of compliance with the International Safety Management (ISM) Code.",
+            "ISPS Audit: Evaluation of security measures under the International Ship and Port Facility Security (ISPS) Code.",
+            "MLC Audit: Inspection under the Maritime Labour Convention (MLC) to ensure crew welfare and rights.",
+            "Navigation Audit: Assessment of bridge team performance, passage planning, and navigational safety.",
+            "VDR Audit: Review and analysis of Voyage Data Recorder (VDR) data for operational and incident evaluation.",
+            "Operators Management Review: Systematic review of shore-based management systems and documentation.",
+            "Marine Terminal Inspection: Evaluation of terminal operations, safety protocols, and compatibility with vessel systems.",
+            "Flag State Inspection (Liberia): Authorized inspections under the Liberian Registry to ensure vessel compliance.",
+            "Pre-Vetting Inspection: Preparatory inspections to ensure readiness for SIRE and other vetting programs.",
+            "Pre-CDI Inspection: Comprehensive checks to meet Chemical Distribution Institute (CDI) audit standards.",
+            "Pre-OVID Inspection: Offshore Vessel Inspection Database (OVID) pre-inspection for offshore support vessels.",
+            "Third-Party Vetting & Clearance Assessments: Independent evaluations to meet charterer and stakeholder requirements.",
+            "Bulk Carrier Inspection & Hold Preparation: Thorough inspection and preparation of cargo holds for dry bulk operations.",
+          ],
+        },
+        {
+          title: "Marine Warranty Surveys",
+          slug: "marine-warranty-surveys",
+          detail: [
+            "We deliver independent third-party Marine Warranty Survey (MWS) services to support the safe, efficient, and compliant execution of high-value, high-risk marine projects.",
+            "Our expert surveyors provide comprehensive technical review and approval for the handling, sea transportation, and offshore installation of critical marine assets—including fixed platforms, offshore wind turbines, subsea facilities, pipelines, power cables, and mooring systems.",
+            "From initial planning to final execution, we ensure all operations meet international standards, satisfy insurance policy conditions, and fall within acceptable industry risk thresholds. Our mission is to protect your assets, reduce operational risk, and contribute to the successful, on-schedule delivery of offshore projects—safeguarding the interests of all stakeholders involved.",
           ],
         },
       ],
@@ -329,22 +353,41 @@ export const servicesPage = {
       heading: "Legal Consultancy",
       lead:
         "We specialize in drafting, reviewing, and analyzing contracts related to marine carriage, transportation, vessel sales, insurance, and international trade.",
+      leadInTopicsColumn: true,
       image: "/images/Law.jpg",
       imageAlt:
         "Gavel and scales of justice with a business handshake in the background",
       variant: "default",
       items: [
-        { title: "Marine carriage" },
-        { title: "Transportation" },
-        { title: "Vessel sales" },
-        { title: "Insurance" },
-        { title: "International trade" },
+        {
+          title: "Legal Consultancy",
+          slug: "legal-consultancy",
+          detail: [
+            "Our team of seasoned marine legal experts offers comprehensive legal support across the maritime sector. We specialize in drafting, reviewing, and analyzing contracts related to marine carriage, transportation, vessel sales, insurance, and international trade.",
+            "We also provide document validation services on behalf of our clients, including verification of official records, vessel registry, labor agreements, and administrative contracts. As certified sworn translators, we can prepare and process all required legal documents in English with precision and accuracy.",
+            "Our practicing maritime lawyers are equipped to negotiate on your behalf and safeguard your interests in both court proceedings and pre-litigation disputes. We represent clients across various jurisdictions—civil, criminal, labor, and administrative—and handle claims involving:",
+          ],
+          detailList: [
+            "Loss prevention and damage claims",
+            "Personal injury and liability cases",
+            "Maritime fines and sanctions",
+            "Preventive legal measures and ship arrests",
+          ],
+          detailAfter: [
+            "Whether you're navigating complex commercial transactions or facing legal challenges at sea or ashore, we are committed to delivering expert legal representation tailored to the maritime industry.",
+          ],
+        },
       ],
     },
   ],
 };
 
-const LINKED_SERVICE_PRACTICE_IDS = new Set(["naval", "engineering", "inspection"]);
+const LINKED_SERVICE_PRACTICE_IDS = new Set([
+  "naval",
+  "engineering",
+  "inspection",
+  "legal",
+]);
 
 export function getServiceTopicParams() {
   return servicesPage.practices
@@ -562,6 +605,91 @@ export const teamPage = {
   },
 };
 
+export const blogPage = {
+  intro: {
+    title: "Marine Insights",
+    lead:
+      "Articles on marine engineering, inspections, surveying, offshore operations, and maritime advisory topics.",
+  },
+  article: {
+    slug: "marine-surveys-explained",
+    title:
+      "Marine Surveys Explained: What Shipowners, Operators and Insurers Need to Know",
+    excerpt:
+      "An introduction to marine surveys, common use cases across shipping and insurance, and the value of independent technical assessment.",
+    image: "/images/Inspection.jpg",
+    imageAlt:
+      "Marine professionals in safety gear reviewing a laptop beside a vessel.",
+    ctaLabel: "Read article",
+    intro: [
+      "At Umitech Marine Solutions, we leverage the expertise of our team, comprising Master Mariners and Marine Engineers, to deliver precise and comprehensive marine and technical surveys. Our services cater to a wide range of vessel types, providing in-depth assessments to ensure operational efficiency, safety, and compliance with industry standards.",
+    ],
+    sections: [
+      {
+        heading: "What is a marine survey?",
+        paragraphs: [
+          "At Umitech Marine Solutions, we leverage the expertise of our team, comprising Master Mariners and Marine Engineers, to deliver precise and comprehensive marine and technical surveys. Our services cater to a wide range of vessel types, providing in-depth assessments to ensure operational efficiency, safety, and compliance with industry standards.",
+        ],
+      },
+      {
+        heading: "When are marine surveys used?",
+        paragraphs: [
+          "Our clientele spans ship owners, operators, charterers, P&I clubs, insurers, financial institutions, flag states, and classification societies.",
+        ],
+      },
+      {
+        heading: "Common marine survey types",
+        list: [
+          "Condition Surveys: Comprehensive assessments on behalf of P&I clubs, H&M insurers, and individual clients to evaluate the overall condition of the vessel and identify potential risks.",
+          "On-Hire/Off-Hire Condition Surveys: Detailed assessments to verify the condition of vessels at the time of charter hire, including equipment, machinery, and hull integrity.",
+          "On-Hire/Off-Hire Bunker Surveys: Verification of bunker fuel quantities at the start and end of the charter, including fuel quality analysis.",
+          "Pre-Loading Vessel Surveys: Technical inspections to ensure vessel readiness for cargo operations, focusing on structural integrity and load distribution.",
+          "Project Cargo Loading & Lashing Approvals: Certification of appropriate cargo securing methods and compliance with maritime safety standards for heavy and oversized cargoes.",
+          "Non-Exclusive Surveys: Independent, non-affiliated surveys to assess the condition and functionality of specific vessel systems or components.",
+          "Bollard Pull & Winch Testing: Performance testing of towing and mooring systems, including winch load testing and bollard pull capacity measurements.",
+          "Safety Attestations: Official certification for compliance with safety regulations from local authorities and flag state authorities.",
+          "Carving and Marking Note Attestations: Verification of compliance with specific maritime regulations regarding vessel markings, including classification and ownership details.",
+          "\"Fit for Purpose\" Approvals: Assessments and certifications for project-specific applications, ensuring that vessels and equipment meet operational requirements for particular tasks or cargo.",
+          "Project Cargo Loading/Unloading Attendance: On-site supervision and technical support during the loading and unloading of project cargo, ensuring compliance with safety and operational protocols.",
+          "Pre-Purchase Inspections: Detailed technical evaluations of vessels, focusing on mechanical, structural, and safety systems, to support the acquisition decision-making process.",
+          "Valuation Reports: Expert evaluations of vessel market value, based on condition, market trends, and technical specifications.",
+        ],
+      },
+      {
+        heading: "What a survey report should provide",
+        paragraphs: [
+          "Condition surveys evaluate the overall condition of the vessel and identify potential risks. Pre-purchase inspections provide detailed technical evaluations of vessels, focusing on mechanical, structural, and safety systems, to support the acquisition decision-making process. Valuation reports provide expert evaluations of vessel market value, based on condition, market trends, and technical specifications.",
+        ],
+      },
+      {
+        heading: "Why independent expertise matters",
+        paragraphs: [
+          "Non-exclusive surveys provide independent, non-affiliated assessment of specific vessel systems or components. With an unwavering focus on precision and adherence to international standards, Umitech Marine Solutions ensures the highest level of technical integrity and operational safety across all maritime operations.",
+        ],
+      },
+    ],
+    cta: {
+      heading: "Discuss a marine challenge",
+      lead:
+        "When you are ready to talk through a technical or operational question, our team is available to help.",
+      ctaLabel: "Contact us",
+      ctaHref: "/contact",
+    },
+  },
+};
+
+export function getBlogArticleParams() {
+  return [{ slug: blogPage.article.slug }];
+}
+
+export function getBlogArticle(slug) {
+  if (slug !== blogPage.article.slug) {
+    return null;
+  }
+
+  return blogPage.article;
+}
+
 export const footer = {
   information: {
     heading: "INFORMATION",
@@ -648,6 +776,11 @@ export const searchIndex = [
     label: "Team",
     href: "/team",
     keywords: ["team", "people", "staff"],
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+    keywords: ["blog", "insights", "articles", "marine insights"],
   },
 ];
 
