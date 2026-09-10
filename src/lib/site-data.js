@@ -350,9 +350,9 @@ export const servicesPage = {
     },
     {
       id: "legal",
-      heading: "Legal Consultancy",
+      heading: "Loadicator",
       lead:
-        "We specialize in drafting, reviewing, and analyzing contracts related to marine carriage, transportation, vessel sales, insurance, and international trade.",
+        "Class-approved loading and stability tools for crews and fleet technical teams.",
       leadInTopicsColumn: true,
       image: "/images/Law.jpg",
       imageAlt:
@@ -360,7 +360,7 @@ export const servicesPage = {
       variant: "default",
       items: [
         {
-          title: "Legal Consultancy",
+          title: "UMISTAB-X",
           slug: "legal-consultancy",
           detail: [
             "Our team of seasoned marine legal experts offers comprehensive legal support across the maritime sector. We specialize in drafting, reviewing, and analyzing contracts related to marine carriage, transportation, vessel sales, insurance, and international trade.",
@@ -564,37 +564,37 @@ export const teamPage = {
     },
     {
       name: "Bhanu Prabhakar",
-      role: "Co-Founder & Head of Engineering and Design",
+      role: "Associate Consultant – Naval Architecture",
       bio:
         "A Naval Architect with fifteen years across offshore structures and seagoing vessels, Bhanu leads Pelagic Marine's design and engineering practice. A graduate of IIT Kharagpur in Ocean Engineering and Naval Architecture, his core strengths lie in structural and finite-element analysis, intact and damage stability, hydrodynamics, mooring analysis and CFD.",
       image: "/images/bhanu.png",
       imageAlt:
-        "Portrait of Bhanu Prabhakar, Co-Founder & Head of Engineering and Design",
+        "Portrait of Bhanu Prabhakar, Associate Consultant – Naval Architecture",
     },
     {
       name: "Capt. Vipul Negi",
-      role: "General Manager",
+      role: "Associate General Manager",
       bio:
         "A Master Mariner and an expert in chemical cargo handling, Capt. Negi brings more than two decades across the marine and petrochemical industries. He leads the firm's inspection and survey work — including CDI inspections, condition and pre-purchase surveys, and damage and P&I claim surveys — together with ISM, ISPS and MLC audits.",
       image: "/images/vipul.png",
-      imageAlt: "Portrait of Capt. Vipul Negi, General Manager",
+      imageAlt: "Portrait of Capt. Vipul Negi, Associate General Manager",
     },
     {
       name: "Capt. Abhinav Upadhyay",
-      role: "Senior Marine Consultant | Clean Fuels",
+      role: "Associate Consultant – Clean Fuels",
       bio:
         "A Master Mariner with over twenty years in gas-carrier operations, Capt. Upadhyay is Pelagic Marine's specialist in clean and future fuels. He brings hands-on cargo experience across LNG, LPG, ethane, ethylene and ammonia, and advises on emerging fuels including methanol.",
       image: "/images/abhinav.png",
       imageAlt:
-        "Portrait of Capt. Abhinav Upadhyay, Senior Marine Consultant | Clean Fuels",
+        "Portrait of Capt. Abhinav Upadhyay, Associate Consultant – Clean Fuels",
     },
     {
       name: "Capt. Harjit Singh Sidhu",
-      role: "Operations Manager",
+      role: "Associate Consultant – Operations",
       bio:
         "Capt. Sidhu brings a container-shipping background and sea time with Maersk to his role managing Pelagic Marine's operations and day-to-day delivery. He advises on container-ship stability, cargo planning and load optimisation, and is a certified practitioner of remote magnetic compass adjustment.",
       image: "/images/harjit.png",
-      imageAlt: "Portrait of Capt. Harjit Singh Sidhu, Operations Manager",
+      imageAlt: "Portrait of Capt. Harjit Singh Sidhu, Associate Consultant – Operations",
     },
   ],
   cta: {
