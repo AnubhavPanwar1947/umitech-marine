@@ -354,9 +354,9 @@ export const servicesPage = {
       lead:
         "Class-approved loading and stability tools for crews and fleet technical teams.",
       leadInTopicsColumn: true,
-      image: "/images/Law.jpg",
+      image: "/images/Loadicator.jpg",
       imageAlt:
-        "Gavel and scales of justice with a business handshake in the background",
+        "Marine officer in a high-visibility vest reviewing a loading and stability program on a laptop, with a tanker at berth in the harbour behind.",
       variant: "default",
       items: [
         {

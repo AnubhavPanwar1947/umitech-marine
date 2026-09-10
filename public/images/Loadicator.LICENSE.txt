@@ -1,0 +1,57 @@
+LICENSE NOTICE — Loadicator.jpg
+================================
+
+File:        public/images/Loadicator.jpg
+Created:     10 September 2026
+Project:     umitech-marine-rebuild (UMITECH MARINE website)
+Origin:      AI-generated image, created in Cursor from a written prompt
+             for the Services page “Loadicator / UMISTAB-X” section.
+
+This is NOT a stock photograph.
+It was not downloaded from Unsplash, Pexels, Pixabay, Shutterstock,
+Adobe Stock, Getty Images, or any other stock library.
+There is no photographer, model-release number, or stock invoice.
+
+1. What this notice is
+----------------------
+This file records how Loadicator.jpg was made and grants the project
+owner permission to use it on the UMITECH MARINE website, to the
+extent Cursor’s terms for generated images allow that use.
+
+This notice does not replace Cursor’s Terms of Service.
+Those terms control what you may do with generated images.
+This notice does not create rights that Cursor did not grant.
+
+2. Grant (project use)
+----------------------
+The owner of this repository may:
+
+  - display the image on umitech.co.jp and related UMITECH MARINE sites
+  - include it in static exports, deploys, and backups of this project
+  - crop, compress, or resize it for web use
+  - replace Law.jpg with this file on the Services Loadicator section
+
+The owner may not:
+
+  - sell the image as a stock photo
+  - claim a third-party stock license (Unsplash, Getty, etc.)
+  - claim a real person sat for this portrait (the person is AI-generated)
+  - claim the on-screen “UMISTAB” UI is an official product screenshot
+
+3. Credit
+---------
+No photographer credit is required.
+Optional credit: “AI-generated image for UMITECH MARINE.”
+
+4. No warranty
+--------------
+The image is provided as-is. It may contain artefacts, invented
+interface text, or a likeness that resembles a real person by chance.
+The project owner is responsible for checking Cursor’s current terms
+and for any legal review before public use.
+
+5. Not legal advice
+-------------------
+This is a project record, not a certificate from a stock agency and
+not legal advice. For a licensed stock photo with an invoice, download
+from a stock library instead.
