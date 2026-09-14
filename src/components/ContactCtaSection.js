@@ -7,14 +7,9 @@ export function ContactCtaSection() {
   return (
     <section
       id="contact"
-      className={`section ${styles.section}`}
+      className={styles.section}
       aria-labelledby="contact-title"
     >
-      <div className={styles.media} aria-hidden="true">
-        <div className={styles.image} />
-        <div className={styles.overlay} />
-      </div>
-
       <div className={`container ${styles.inner}`}>
         <Reveal as="h2" id="contact-title" className={styles.title} delay={0}>
           {contactCta.title}

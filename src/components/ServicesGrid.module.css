@@ -4,6 +4,7 @@
 
 .grid {
   display: grid;
+  align-items: stretch;
   gap: var(--space-5);
   margin: var(--space-10) 0 0;
   padding: 0;
@@ -11,7 +12,19 @@
 }
 
 .grid > li {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  height: 100%;
+}
+
+.revealCell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
 }
 
 .item {
@@ -22,7 +35,12 @@
 }
 
 .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   min-width: 0;
+  height: 100%;
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
@@ -38,29 +56,214 @@
   box-shadow: var(--shadow-md);
 }
 
-.media {
+.cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: clamp(0.625rem, 3vw, 1.25rem);
+  background: var(--color-white);
+}
+
+.iconRegion {
   position: relative;
-  aspect-ratio: 4 / 5;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: clamp(4.25rem, 32vw, 11.5rem);
+  margin: 0 auto;
+  background: var(--color-white);
 }
 
 .image {
   object-fit: cover;
 }
 
-.overlay {
+.overlayLight {
   position: absolute;
   inset: 0;
   background: rgba(10, 34, 64, 0.1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlayPanel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  padding: clamp(0.5rem, 3vw, 1rem);
+  overflow: auto;
+  background: rgba(24, 41, 82, 0.82);
+  color: var(--text-on-dark);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 200ms ease,
+    visibility 200ms ease;
+}
+
+.overlayLead {
+  margin: 0;
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.6875rem, 2.2vw, 0.875rem);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 374px) {
+  .overlayLead {
+    display: none;
+  }
+}
+
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.25rem, 1.5vw, 0.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.chipList > li {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: clamp(2.25rem, 8vw, 2.5rem);
+  max-width: 100%;
+  padding: clamp(0.35rem, 1.5vw, 0.5rem) clamp(0.5rem, 2.5vw, 0.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-on-dark);
+  font-family: var(--font-sans);
+  font-size: clamp(0.625rem, 2vw, 0.8125rem);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.chip:hover,
+.chip:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  color: var(--text-on-dark);
+}
+
+.chip:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.explore {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  flex-shrink: 0;
+  min-height: clamp(2.25rem, 8vw, 2.5rem);
+  margin-top: auto;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+  color: var(--text-on-dark);
+  font-family: var(--font-sans);
+  font-size: clamp(0.6875rem, 2.2vw, 0.8125rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.explore:hover,
+.explore:focus-visible {
+  border-bottom-color: #fff;
+  color: var(--text-on-dark);
+}
+
+.explore:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.expandButton {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cardOpen .expandButton {
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cardOpen .overlayPanel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 960px) {
+  .card:hover .overlayPanel,
+  .card:focus-within .overlayPanel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .card:hover .overlayLight,
+  .card:focus-within .overlayLight {
+    opacity: 0;
+  }
 }
 
 .title {
-  margin: var(--space-4) 0 0;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: clamp(0.5rem, 2vw, 0.75rem) 0 0;
+  min-width: 0;
+  min-height: calc(3 * 1.25em);
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 3vw, 1.4rem);
+  font-size: clamp(0.9375rem, 2.8vw, 1.25rem);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: normal;
-  color: var(--color-heading-on-light);
+  color: #1a557c;
   text-align: center;
   overflow-wrap: anywhere;
 }

@@ -33,25 +33,29 @@ export const servicesSection = {
 
 export const services = [
   {
+    practiceId: "naval",
     title: "Naval Architecture",
     image: "/images/Naval.jpg",
     imageAlt:
-      "White patrol vessel bow at a harbour pier with mast and radar equipment.",
+      "Unmarked ship hull in dry dock with scaffolding, steel grey and red antifouling, no people.",
   },
   {
+    practiceId: "engineering",
     title: "Engineering",
     image: "/images/ENGINEERING.jpg",
     imageAlt:
-      "Engineer in safety gear reviewing data on a laptop beside industrial machinery.",
+      "Empty ship engine room with diesel machinery, lagged pipes and steel gratings, no people.",
   },
   {
+    practiceId: "inspection",
     title: "Inspection, Audits and Surveying",
     image: "/images/Inspection.jpg",
     imageAlt:
-      "Marine professionals in safety gear reviewing a laptop beside a vessel.",
+      "Unmarked vessel at berth with clipboard and closed tablet on the coaming, no people.",
   },
   {
-    title: "Legal Consultancy",
+    practiceId: "legal",
+    title: "Loadicator",
     image: "/images/Law.jpg",
     imageAlt: "Gavel and scales of justice with a business handshake in the background",
   },
@@ -74,7 +78,7 @@ export const servicesPage = {
       lead: "Hull form, structure and the analysis behind every design decision.",
       image: "/images/Naval-Architecture-Services.jpg",
       imageAlt:
-        "Ship bow in a shipyard with scaffolding, dry-dock supports, and a crane.",
+        "Unmarked ship hull in dry dock with scaffolding, steel grey and red antifouling, no people.",
       imagePosition: "center 35%",
       variant: "alt",
       items: [
@@ -179,7 +183,7 @@ export const servicesPage = {
         "The applied engineering that keeps assets designed, converted and operating safely.",
       image: "/images/Engineering-Services.jpg",
       imageAlt:
-        "Two engineers in safety gear reviewing technical drawings beside industrial machinery.",
+        "Empty ship engine room with diesel machinery, lagged pipes and steel gratings, no people.",
       imagePosition: "center 40%",
       variant: "default",
       items: [
@@ -284,7 +288,7 @@ export const servicesPage = {
         "Accredited SIRE, Flag state and marine survey expertise from experienced inspectors.",
       image: "/images/Inspection-Audits-and-Surveying-Services.jpg",
       imageAlt:
-        "Three marine inspectors in high-visibility vests reviewing plans beside a ship hull.",
+        "Unmarked vessel at berth with clipboard and closed tablet on the coaming, no people.",
       imagePosition: "center 30%",
       variant: "alt",
       items: [
@@ -438,7 +442,7 @@ export const about = {
   ctaHref: "/about",
   image: "/images/About.jpg",
   imageAlt:
-    "Container ship underway, looking forward over stacked containers toward the bow, with coastline and city skyline ahead",
+    "Empty marine technical studio with hull model and drawings on a table, harbour light in the window.",
 };
 
 export const aboutPage = {
@@ -450,7 +454,7 @@ export const aboutPage = {
     ],
     image: "/images/About.jpg",
     imageAlt:
-      "Container ship underway, looking forward over stacked containers toward the bow, with coastline and city skyline ahead",
+      "Empty marine technical studio with hull model and drawings on a table, harbour light in the window.",
   },
   mission: {
     heading: "Mission",
@@ -573,11 +577,11 @@ export const teamPage = {
     },
     {
       name: "Capt. Vipul Negi",
-      role: "Associate General Manager",
+      role: "Associate Consultant – Marine Operations",
       bio:
         "A Master Mariner and an expert in chemical cargo handling, Capt. Negi brings more than two decades across the marine and petrochemical industries. He leads the firm's inspection and survey work — including CDI inspections, condition and pre-purchase surveys, and damage and P&I claim surveys — together with ISM, ISPS and MLC audits.",
       image: "/images/vipul.png",
-      imageAlt: "Portrait of Capt. Vipul Negi, Associate General Manager",
+      imageAlt: "Portrait of Capt. Vipul Negi, Associate Consultant – Marine Operations",
     },
     {
       name: "Capt. Abhinav Upadhyay",
@@ -590,11 +594,11 @@ export const teamPage = {
     },
     {
       name: "Capt. Harjit Singh Sidhu",
-      role: "Associate Consultant – Operations",
+      role: "Associate Consultant – Marine Operations",
       bio:
         "Capt. Sidhu brings a container-shipping background and sea time with Maersk to his role managing Pelagic Marine's operations and day-to-day delivery. He advises on container-ship stability, cargo planning and load optimisation, and is a certified practitioner of remote magnetic compass adjustment.",
       image: "/images/harjit.png",
-      imageAlt: "Portrait of Capt. Harjit Singh Sidhu, Associate Consultant – Operations",
+      imageAlt: "Portrait of Capt. Harjit Singh Sidhu, Associate Consultant – Marine Operations",
     },
   ],
   cta: {
@@ -619,7 +623,7 @@ export const blogPage = {
       "An introduction to marine surveys, common use cases across shipping and insurance, and the value of independent technical assessment.",
     image: "/images/Inspection.jpg",
     imageAlt:
-      "Marine professionals in safety gear reviewing a laptop beside a vessel.",
+      "Unmarked vessel at berth with clipboard and closed tablet on the coaming, no people.",
     ctaLabel: "Read article",
     intro: [
       "At Umitech Marine Solutions, we leverage the expertise of our team, comprising Master Mariners and Marine Engineers, to deliver precise and comprehensive marine and technical surveys. Our services cater to a wide range of vessel types, providing in-depth assessments to ensure operational efficiency, safety, and compliance with industry standards.",

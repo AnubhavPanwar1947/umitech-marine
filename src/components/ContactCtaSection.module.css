@@ -1,45 +1,15 @@
 .section {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  aspect-ratio: 1920 / 862;
-  min-height: 22rem;
-  container-type: size;
-  color: var(--text-on-dark);
-}
-
-.media {
-  position: absolute;
-  inset: 0;
-}
-
-.image {
-  position: absolute;
-  inset: 0;
-  background-image: url("/images/contact-cta.jpg");
-  background-size: cover;
-  background-position: 50% 80%;
-  background-repeat: no-repeat;
-  filter: saturate(1.15) contrast(1.1);
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(24, 41, 82, 0.08);
+  background: var(--bg-section);
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .inner {
-  position: relative;
-  z-index: 1;
   display: grid;
-  gap: clamp(0.5rem, 2cqh, 1rem);
-  align-content: start;
+  gap: clamp(0.375rem, 1.5vw, 0.75rem);
   justify-items: center;
   width: 100%;
   min-width: 0;
-  max-height: 40cqh;
-  padding-block-start: clamp(0.75rem, 7cqh, 3.5rem);
+  margin-inline: auto;
   text-align: center;
 }
 
@@ -48,21 +18,21 @@
   min-width: 0;
   max-width: 100%;
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 9cqh, 3.75rem);
+  font-size: clamp(1.35rem, 4vw, 2.25rem);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: normal;
-  color: var(--color-navy-900);
+  color: var(--color-heading-on-light);
   overflow-wrap: anywhere;
 }
 
 .lead {
   margin: 0;
-  max-width: 100%;
+  max-width: min(100%, 36rem);
   font-family: var(--font-sans);
-  font-size: clamp(0.8125rem, 3cqh, 1.25rem);
+  font-size: clamp(0.8125rem, 2.3vw, 1.25rem);
   line-height: 1.5;
-  color: var(--color-ink);
+  color: var(--color-muted);
   text-align: center;
   overflow-wrap: anywhere;
 }
@@ -81,14 +51,14 @@
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
-  min-height: clamp(2.25rem, 7cqh, 3rem);
-  padding: clamp(0.5rem, 1.5cqh, 0.75rem) clamp(0.75rem, 3cqh, 1.25rem);
+  min-height: clamp(2.25rem, 8vw, 3rem);
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 4vw, 1.25rem);
   border: 0;
   border-radius: 999px;
   background: #1a557c;
   color: var(--text-on-dark);
   font-family: var(--font-sans);
-  font-size: clamp(0.8125rem, 3cqh, 1.25rem);
+  font-size: clamp(0.8125rem, 2.3vw, 1.25rem);
   font-weight: 500;
   transition: background-color 180ms ease;
 }
@@ -106,10 +76,4 @@
 
 .section .eyebrow {
   color: var(--color-blue-400);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .image {
-    background-attachment: scroll;
-  }
 }
