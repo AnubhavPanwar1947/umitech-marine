@@ -31,7 +31,10 @@
 
 .media {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--radius-xl);
@@ -39,7 +42,9 @@
 }
 
 .image {
-  object-fit: cover;
+  inset: clamp(0.5rem, 4vw, 1.25rem);
+  object-fit: contain;
+  object-position: center center;
 }
 
 .cardTitle {

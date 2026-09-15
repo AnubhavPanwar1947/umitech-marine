@@ -4,11 +4,40 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { services, servicesPage, servicesSection } from "@/lib/site-data";
 import { ServiceCardIcon } from "@/components/ServiceCardIcon";
+import { ReadMoreArrow } from "@/components/ReadMoreArrow";
 import { Reveal } from "@/components/Reveal";
 import styles from "./ServicesGrid.module.css";
 
-const MAX_CHIPS = 4;
 const MOBILE_MEDIA = "(max-width: 959px)";
+
+function useOverlayChipLimit() {
+  const [limit, setLimit] = useState(4);
+
+  useEffect(() => {
+    const narrow = window.matchMedia("(max-width: 479px)");
+    const medium = window.matchMedia("(min-width: 480px) and (max-width: 959px)");
+
+    const sync = () => {
+      if (narrow.matches) {
+        setLimit(2);
+      } else if (medium.matches) {
+        setLimit(3);
+      } else {
+        setLimit(4);
+      }
+    };
+
+    sync();
+    narrow.addEventListener("change", sync);
+    medium.addEventListener("change", sync);
+    return () => {
+      narrow.removeEventListener("change", sync);
+      medium.removeEventListener("change", sync);
+    };
+  }, []);
+
+  return limit;
+}
 
 function useNarrowViewport() {
   const [narrow, setNarrow] = useState(false);
@@ -30,6 +59,7 @@ export function ServicesGrid() {
     [],
   );
   const narrow = useNarrowViewport();
+  const chipLimit = useOverlayChipLimit();
   const [openIndex, setOpenIndex] = useState(null);
   const gridRef = useRef(null);
 
@@ -71,7 +101,7 @@ export function ServicesGrid() {
         <ul className={styles.grid} ref={gridRef}>
           {services.map((service, index) => {
             const practice = practicesById[service.practiceId];
-            const chips = (practice?.items ?? []).slice(0, MAX_CHIPS);
+            const chips = (practice?.items ?? []).slice(0, chipLimit);
             const isOpen = narrow && openIndex === index;
 
             return (
@@ -111,7 +141,8 @@ export function ServicesGrid() {
                           href={`/services#${service.practiceId}`}
                           className={styles.explore}
                         >
-                          Explore →
+                          Read more
+                          <ReadMoreArrow />
                         </Link>
                       </div>
 

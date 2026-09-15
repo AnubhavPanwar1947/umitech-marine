@@ -39,6 +39,11 @@ export default function TeamPage() {
                           fill
                           sizes="(max-width: 639px) 100vw, (max-width: 1023px) 100vw, 50vw"
                           className="team-members__image"
+                          style={
+                            member.imagePosition
+                              ? { objectPosition: member.imagePosition }
+                              : undefined
+                          }
                         />
                       </div>
 

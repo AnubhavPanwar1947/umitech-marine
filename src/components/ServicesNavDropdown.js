@@ -4,6 +4,7 @@ import { useEffect, useId, useRef } from "react";
 import Link from "next/link";
 import { servicesDropdownItems } from "@/lib/site-data";
 import { isNavItemCurrent } from "@/lib/nav-current";
+import { ReadMoreArrow } from "@/components/ReadMoreArrow";
 import styles from "./ServicesNavDropdown.module.css";
 
 export function ServicesNavDropdown({
@@ -156,6 +157,7 @@ export function ServicesNavDropdown({
             onClick={closeMenu}
           >
             View all services
+            <ReadMoreArrow />
           </Link>
         </li>
       </ul>

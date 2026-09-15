@@ -3,12 +3,14 @@ LICENSE NOTICE — Naval.jpg (and matching stills)
 
 Files:       public/images/Naval.jpg
              public/images/Naval-Architecture-Services.jpg
-             (same pixel data copied to both paths)
-Created:     11 September 2026
+             public/images/Naval-Architecture-Service-Page.jpg
+             public/images/Naval-Architecture-Design-Studio-4x3.jpg
+             (same pixel data copied to these paths; older stills may remain)
+Created:     15 September 2026 (design studio with hull plans and model)
 Project:     umitech-marine-rebuild (UMITECH MARINE website)
 Origin:      AI-generated image, created in Cursor from a written prompt
-             for the homepage Naval Architecture services card and the
-             Services page Naval Architecture practice section.
+             (drafting table, hull blueprints, cargo-vessel scale model,
+             shipyard through the window) for Naval Architecture paths.
 
 This is NOT a stock photograph.
 It was not downloaded from Unsplash, Pexels, Pixabay, Shutterstock,
@@ -40,9 +42,8 @@ The owner may not:
 
   - sell the image as a stock photo
   - claim a third-party stock license (Unsplash, Getty, etc.)
-  - claim real people or workers appear in the scene (there are none;
-    the scene is AI-generated)
-  - claim the hull depicts a specific named or classed vessel
+  - claim the plans are official class or shipyard drawings
+  - claim a real named vessel or shipyard is shown
 
 3. Credit
 ---------

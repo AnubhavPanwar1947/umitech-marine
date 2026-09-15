@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import Link from "next/link";
 import { navigation, servicesDropdownItems } from "@/lib/site-data";
 import { isNavItemCurrent } from "@/lib/nav-current";
+import { ReadMoreArrow } from "@/components/ReadMoreArrow";
 import styles from "./MobileNav.module.css";
 
 export function MobileNav({ id, open, onNavigate, pathname }) {
@@ -86,6 +87,7 @@ export function MobileNav({ id, open, onNavigate, pathname }) {
                       tabIndex={open && servicesExpanded ? 0 : -1}
                     >
                       View all services
+                      <ReadMoreArrow />
                     </Link>
                   </li>
                 </ul>

@@ -37,7 +37,7 @@ export const services = [
     title: "Naval Architecture",
     image: "/images/Naval.jpg",
     imageAlt:
-      "Unmarked ship hull in dry dock with scaffolding, steel grey and red antifouling, no people.",
+      "Naval architecture studio with hull blueprints and a cargo-ship scale model on a drafting table, shipyard visible through the window.",
   },
   {
     practiceId: "engineering",
@@ -78,8 +78,8 @@ export const servicesPage = {
       lead: "Hull form, structure and the analysis behind every design decision.",
       image: "/images/Naval-Architecture-Services.jpg",
       imageAlt:
-        "Unmarked ship hull in dry dock with scaffolding, steel grey and red antifouling, no people.",
-      imagePosition: "center 35%",
+        "Naval architecture studio with hull blueprints and a cargo-ship scale model on a drafting table, shipyard visible through the window.",
+      imagePosition: "center 58%",
       variant: "alt",
       items: [
         {
@@ -476,28 +476,28 @@ export const aboutPage = {
         title: "Sustainability",
         description:
           "We are committed to advancing eco-friendly practices in shipping, contributing to a cleaner and healthier ocean for future generations.",
-        image: "/images/value-sustainability.jpg",
+        image: "/images/Sustainability.svg",
         imageAlt: "Sustainability",
       },
       {
         title: "Customer Satisfaction",
         description:
           "Our clients are at the heart of everything we do. We strive to exceed expectations through reliable service, personalized solutions, and long-term partnerships.",
-        image: "/images/value-customer.jpg",
+        image: "/images/Customer Satisfaction.svg",
         imageAlt: "Customer Satisfaction",
       },
       {
         title: "Innovation",
         description:
           "We embrace forward-thinking solutions and continuously invest in new technologies to drive efficiency and excellence in maritime operations.",
-        image: "/images/value-innovation.jpg",
+        image: "/images/Innovation.svg",
         imageAlt: "Innovation",
       },
       {
         title: "Integrity",
         description:
           "We uphold the highest standards of ethics and professionalism, ensuring transparency, accountability, and trust in all our engagements.",
-        image: "/images/value-integrity.jpg",
+        image: "/images/Integrity.svg",
         imageAlt: "Integrity",
       },
     ],

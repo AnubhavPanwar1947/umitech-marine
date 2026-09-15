@@ -1,0 +1,8 @@
+.icon {
+  width: 1em;
+  height: 1em;
+  min-width: 1em;
+  flex-shrink: 0;
+  display: block;
+  overflow: visible;
+}
