@@ -483,7 +483,7 @@ export const aboutPage = {
         title: "Customer Satisfaction",
         description:
           "Our clients are at the heart of everything we do. We strive to exceed expectations through reliable service, personalized solutions, and long-term partnerships.",
-        image: "/images/Customer Satisfaction.svg",
+        image: "/images/Customer Satisfaction.png",
         imageAlt: "Customer Satisfaction",
       },
       {
@@ -518,22 +518,22 @@ export const contactPage = {
       title: "Visit Us",
       description:
         "4-54-6 UTSUKUSHIGAOKA, Aoba Ward, Yokohama City Postal Code- 225-0002",
-      image: "/images/Visit-Us.png",
+      image: "/images/visit-us.svg",
       imageAlt: "Visit Us",
     },
     {
       title: "Call Us",
       description: "+91 789 503 9068",
       href: "tel:+917895039068",
-      image: "/images/Call-Us.png",
+      image: "/images/contact-us.svg",
       imageAlt: "Call Us",
     },
     {
-      title: "Contact Us",
+      title: "Mail Us",
       description: "info@umitech.co.jp",
       href: "mailto:info@umitech.co.jp",
-      image: "/images/Contact-Us.png",
-      imageAlt: "Contact Us",
+      image: "/images/mail-us.svg",
+      imageAlt: "Mail Us",
     },
   ],
   form: {

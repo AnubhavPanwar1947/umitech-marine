@@ -24,6 +24,7 @@
 
 .grid > li {
   min-width: 0;
+  overflow: visible;
 }
 
 .card {
@@ -33,18 +34,30 @@
   min-width: 0;
   height: 100%;
   text-align: center;
+  overflow: visible;
 }
 
 .media {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 16rem;
-  aspect-ratio: 1 / 1;
-  background: transparent;
+  min-width: 0;
+  overflow: visible;
 }
 
-.image {
+.icon {
+  width: clamp(2.75rem, 18vw, 5.5rem);
+  height: clamp(2.75rem, 18vw, 5.5rem);
+  max-width: 100%;
   object-fit: contain;
+  object-position: center;
+  transform-origin: center center;
+}
+
+.iconCallMail {
+  width: clamp(3.25rem, 20vw, 6.25rem);
+  height: clamp(3.25rem, 20vw, 6.25rem);
 }
 
 .cardTitle {
@@ -60,10 +73,16 @@
 .cardBody {
   margin: 0;
   max-width: 22rem;
+  width: 100%;
   color: var(--text-on-light-muted);
   font-size: clamp(0.95rem, 2.2vw, 1rem);
   line-height: 1.6;
   overflow-wrap: anywhere;
+}
+
+a.cardBody {
+  display: inline-block;
+  padding-block: var(--space-1);
 }
 
 a.cardBody:hover,
@@ -74,5 +93,52 @@ a.cardBody:focus-visible {
 @media (min-width: 960px) {
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .media {
+    overflow: visible;
+    min-height: clamp(7.5rem, 9vw, 9.5rem);
+    padding-bottom: var(--space-5);
+  }
+
+  .icon {
+    width: clamp(7.5rem, 9vw, 9.5rem);
+    height: clamp(7.5rem, 9vw, 9.5rem);
+    transform: scale(1.2);
+  }
+
+  .mediaCallMail {
+    min-height: clamp(8.5rem, 10vw, 11rem);
+    padding-bottom: var(--space-6);
+  }
+
+  .iconCallMail {
+    width: clamp(8.5rem, 10vw, 11rem);
+    height: clamp(8.5rem, 10vw, 11rem);
+    transform: scale(1.55);
+  }
+
+  .iconMail {
+    transform: scale(1.65);
+  }
+}
+
+@media (min-width: 1280px) {
+  .media {
+    min-height: 9.5rem;
+  }
+
+  .mediaCallMail {
+    min-height: 11rem;
+  }
+
+  .icon {
+    width: 9.5rem;
+    height: 9.5rem;
+  }
+
+  .iconCallMail {
+    width: 11rem;
+    height: 11rem;
   }
 }

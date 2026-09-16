@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { contactPage } from "@/lib/site-data";
 import { Reveal } from "@/components/Reveal";
@@ -21,17 +20,26 @@ export function ContactCardsSection() {
         </Reveal>
 
         <ul className={styles.grid}>
-          {cards.map((card, index) => (
+          {cards.map((card, index) => {
+            const isCallOrMail =
+              card.title === "Call Us" || card.title === "Mail Us";
+
+            return (
             <li key={card.title}>
               <Reveal as="article" className={styles.card} delay={80 + index * 60}>
-                <div className={styles.media}>
-                  <Image
+                <div
+                  className={`${styles.media} ${
+                    isCallOrMail ? styles.mediaCallMail : ""
+                  }`.trim()}
+                >
+                  <img
                     src={card.image ?? cardImageFallback}
-                    alt={card.imageAlt ?? card.title}
-                    fill
-                    quality={100}
-                    sizes="(max-width: 959px) 100vw, 33vw"
-                    className={styles.image}
+                    alt=""
+                    aria-hidden="true"
+                    decoding="async"
+                    className={`${styles.icon} ${
+                      isCallOrMail ? styles.iconCallMail : ""
+                    } ${card.title === "Mail Us" ? styles.iconMail : ""}`.trim()}
                   />
                 </div>
                 <h3 className={styles.cardTitle}>{card.title}</h3>
@@ -44,7 +52,8 @@ export function ContactCardsSection() {
                 )}
               </Reveal>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>
