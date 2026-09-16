@@ -19,9 +19,11 @@
 
 .team-members__card {
   width: 100%;
-  max-width: 37rem;
+  max-width: none;
   min-width: 0;
-  margin-inline: auto;
+  height: auto;
+  min-height: 0;
+  margin-inline: 0;
   overflow: hidden;
   border: 1px solid var(--color-sand-200);
   border-radius: var(--radius-xl);
@@ -36,22 +38,37 @@
 .team-members__cardLayout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  width: 100%;
   min-width: 0;
+  height: auto;
 }
 
 .team-members__mediaColumn {
   position: relative;
   min-width: 0;
-  width: 100%;
-  aspect-ratio: 183.99 / 415.97;
+  width: calc(100% + 1px);
+  max-width: none;
+  margin-inline-start: -1px;
+  aspect-ratio: 4 / 9;
+  height: auto;
+  min-height: 0;
+  align-self: start;
   overflow: hidden;
   background: var(--color-sand-100);
+  line-height: 0;
 }
 
 .team-members__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
   object-fit: cover;
   object-position: center center;
-  transition: transform 180ms ease;
 }
 
 .team-members__contentColumn {
@@ -114,17 +131,21 @@
   .team-members__card {
     max-width: none;
     margin-inline: 0;
-    min-height: clamp(16rem, 42vw, 22rem);
+    height: auto;
+    min-height: 0;
   }
 
   .team-members__cardLayout {
-    grid-template-columns: minmax(0, 31.08%) minmax(0, 68.92%);
-    min-height: inherit;
+    grid-template-columns: minmax(9rem, 36%) minmax(0, 1fr);
+    height: auto;
+    min-height: 0;
   }
 
   .team-members__mediaColumn {
-    aspect-ratio: auto;
-    min-height: 100%;
+    aspect-ratio: 4 / 9;
+    height: auto;
+    min-height: 0;
+    align-self: start;
     border-radius: var(--radius-xl) 0 0 var(--radius-xl);
   }
 
@@ -142,25 +163,32 @@
     width: 100%;
     max-width: none;
     margin-inline: 0;
-    min-height: 26.125rem;
-    aspect-ratio: 592 / 418;
+    min-height: 0;
+    aspect-ratio: auto;
     height: auto;
   }
 
   .team-members__cardLayout {
-    height: 100%;
+    grid-template-columns: minmax(9rem, 36%) minmax(0, 1fr);
+    height: auto;
     min-height: 0;
   }
 
   .team-members__mediaColumn {
-    height: 100%;
+    aspect-ratio: 4 / 9;
+    height: auto;
+    min-height: 0;
+    width: calc(100% + 1px);
+    max-width: none;
+    margin-inline-start: -1px;
+    align-self: start;
   }
 
   .team-members__contentColumn {
     gap: var(--space-2);
-    height: 100%;
+    height: auto;
     min-height: 0;
-    overflow: auto;
+    overflow: visible;
   }
 }
 
@@ -177,10 +205,6 @@
       transform: none;
     }
 
-    .team-members__card:hover .team-members__image,
-    .team-members__card:focus-visible .team-members__image {
-      transform: none;
-    }
   }
 
   @media (min-width: 17.5rem) {
@@ -188,11 +212,11 @@
     .team-members__card:focus-visible {
       transform: translateY(-3px);
     }
+  }
 
-    .team-members__card:hover .team-members__image,
-    .team-members__card:focus-visible .team-members__image {
-      transform: scale(1.04);
-    }
+  .team-members__card:hover .team-members__image,
+  .team-members__card:focus-visible .team-members__image {
+    transform: none;
   }
 }
 
@@ -202,8 +226,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .team-members__card,
-  .team-members__image {
+  .team-members__card {
     transition:
       border-color 180ms ease,
       box-shadow 180ms ease;
@@ -212,11 +235,6 @@
   @media (hover: hover) {
     .team-members__card:hover,
     .team-members__card:focus-visible {
-      transform: none;
-    }
-
-    .team-members__card:hover .team-members__image,
-    .team-members__card:focus-visible .team-members__image {
       transform: none;
     }
   }

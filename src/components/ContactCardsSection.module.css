@@ -97,48 +97,28 @@ a.cardBody:focus-visible {
 
   .media {
     overflow: visible;
-    min-height: clamp(7.5rem, 9vw, 9.5rem);
+    min-height: 120px;
     padding-bottom: var(--space-5);
   }
 
   .icon {
-    width: clamp(7.5rem, 9vw, 9.5rem);
-    height: clamp(7.5rem, 9vw, 9.5rem);
-    transform: scale(1.2);
+    width: 120px;
+    height: 120px;
+    transform: scale(1);
   }
 
   .mediaCallMail {
-    min-height: clamp(8.5rem, 10vw, 11rem);
-    padding-bottom: var(--space-6);
+    min-height: 120px;
+    padding-bottom: var(--space-5);
   }
 
   .iconCallMail {
-    width: clamp(8.5rem, 10vw, 11rem);
-    height: clamp(8.5rem, 10vw, 11rem);
-    transform: scale(1.55);
+    width: 120px;
+    height: 120px;
+    transform: scale(1);
   }
 
   .iconMail {
-    transform: scale(1.65);
-  }
-}
-
-@media (min-width: 1280px) {
-  .media {
-    min-height: 9.5rem;
-  }
-
-  .mediaCallMail {
-    min-height: 11rem;
-  }
-
-  .icon {
-    width: 9.5rem;
-    height: 9.5rem;
-  }
-
-  .iconCallMail {
-    width: 11rem;
-    height: 11rem;
+    transform: scale(1);
   }
 }
