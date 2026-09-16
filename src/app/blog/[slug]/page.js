@@ -2,6 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogArticle, getBlogArticleParams } from "@/lib/site-data";
+import { getBlogDocxHtml } from "@/lib/blog-docx";
+import {
+  getCfdDocxDisplayTitle,
+  parseCfdDocxHeadings,
+} from "@/lib/blog-cfd-structure";
+import { CfdWireframeArticle } from "@/components/CfdWireframeArticle";
 import styles from "./page.module.css";
 
 export function generateStaticParams() {
@@ -27,6 +33,52 @@ export default async function BlogArticlePage({ params }) {
 
   if (!article) {
     notFound();
+  }
+
+  if (
+    article.format === "docxHtml" &&
+    slug === "computational-fluid-dynamics"
+  ) {
+    const docxHtml = getBlogDocxHtml(article.docxHtmlFile);
+    const headings = parseCfdDocxHeadings(docxHtml);
+    const title = article.cardTitle || "Computational Fluid Dynamics";
+    const articleTitle = getCfdDocxDisplayTitle(article.title);
+
+    return (
+      <main>
+        <CfdWireframeArticle
+          title={title}
+          articleTitle={articleTitle}
+          headings={headings}
+          bodyHtml={docxHtml}
+          heroImage={article.image}
+          heroImageAlt={article.imageAlt}
+        />
+      </main>
+    );
+  }
+
+  if (article.format === "docxHtml") {
+    const docxHtml = getBlogDocxHtml(article.docxHtmlFile);
+
+    return (
+      <main>
+        <section
+          className={`section ${styles.section}`}
+          aria-label={article.title}
+        >
+          <div className={`container ${styles.inner} ${styles.innerDocx}`}>
+            <div
+              className={styles.docxBody}
+              dangerouslySetInnerHTML={{ __html: docxHtml }}
+            />
+            <Link href="/blog" className={styles.backLink}>
+              Back to Marine Insights
+            </Link>
+          </div>
+        </section>
+      </main>
+    );
   }
 
   return (

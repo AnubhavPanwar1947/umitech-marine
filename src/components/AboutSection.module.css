@@ -1,6 +1,6 @@
 .section {
   background: var(--color-brand-blue);
-  border-block: 1px solid var(--color-sand-200);
+  border-block: 1px solid #ffffff;
 }
 
 .layout {

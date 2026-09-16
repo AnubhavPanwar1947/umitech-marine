@@ -25,6 +25,8 @@ export default function ServicesPage() {
           image={practice.image}
           imageAlt={practice.imageAlt}
           imagePosition={practice.imagePosition}
+          imageFit={practice.imageFit}
+          imageAspectRatio={practice.imageAspectRatio}
           variant={practice.variant}
           compactTop={index === 0}
           delay={80 + index * 40}

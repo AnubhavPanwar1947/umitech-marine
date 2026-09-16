@@ -78,7 +78,7 @@ export const servicesPage = {
       lead: "Hull form, structure and the analysis behind every design decision.",
       image: "/images/Naval-Architecture-Services.jpg",
       imageAlt:
-        "Naval architecture studio with hull blueprints and a cargo-ship scale model on a drafting table, shipyard visible through the window.",
+        "Naval architecture studio with hull blueprints and drafting tools on a table, shipyard visible through the window.",
       imagePosition: "center 58%",
       variant: "alt",
       items: [
@@ -181,10 +181,10 @@ export const servicesPage = {
       heading: "Engineering",
       lead:
         "The applied engineering that keeps assets designed, converted and operating safely.",
-      image: "/images/Engineering-Services.jpg",
+      image: "/images/Marine-Engine-Room-Thermal.jpg",
       imageAlt:
-        "Empty ship engine room with diesel machinery, lagged pipes and steel gratings, no people.",
-      imagePosition: "center 40%",
+        "Marine engineer in boiler suit and ear defenders reviewing a marine diesel engine with red and orange exhaust paths and cyan cooling-water overlay on piping.",
+      imagePosition: "72% 48%",
       variant: "default",
       items: [
         {
@@ -286,10 +286,10 @@ export const servicesPage = {
       heading: "Inspection, Audits and Surveying",
       lead:
         "Accredited SIRE, Flag state and marine survey expertise from experienced inspectors.",
-      image: "/images/Inspection-Audits-and-Surveying-Services.jpg",
+      image: "/images/Inspections-Audits-Surveying-Team.jpg",
       imageAlt:
-        "Unmarked vessel at berth with clipboard and closed tablet on the coaming, no people.",
-      imagePosition: "center 30%",
+        "Three marine surveyors and engineers in protective workwear reviewing a tablet and engineering blueprint at a commercial shipyard, with a cargo ship behind.",
+      imagePosition: "center center",
       variant: "alt",
       items: [
         {
@@ -358,9 +358,11 @@ export const servicesPage = {
       lead:
         "Class-approved loading and stability tools for crews and fleet technical teams.",
       leadInTopicsColumn: true,
-      image: "/images/Loadicator.jpg",
+      image: "/images/loadicator.png",
       imageAlt:
-        "Marine officer in a high-visibility vest reviewing a loading and stability program on a laptop, with a tanker at berth in the harbour behind.",
+        "UMISTAB-X loadicator software screenshot showing stability validation table, shear-force and bending-moment plot, and vessel arrangement diagrams.",
+      imageFit: "contain",
+      imageAspectRatio: "1919 / 1033",
       variant: "default",
       items: [
         {
@@ -615,83 +617,30 @@ export const blogPage = {
     lead:
       "Articles on marine engineering, inspections, surveying, offshore operations, and maritime advisory topics.",
   },
-  article: {
-    slug: "marine-surveys-explained",
-    title:
-      "Marine Surveys Explained: What Shipowners, Operators and Insurers Need to Know",
-    excerpt:
-      "An introduction to marine surveys, common use cases across shipping and insurance, and the value of independent technical assessment.",
-    image: "/images/Inspection.jpg",
-    imageAlt:
-      "Unmarked vessel at berth with clipboard and closed tablet on the coaming, no people.",
-    ctaLabel: "Read article",
-    intro: [
-      "At Umitech Marine Solutions, we leverage the expertise of our team, comprising Master Mariners and Marine Engineers, to deliver precise and comprehensive marine and technical surveys. Our services cater to a wide range of vessel types, providing in-depth assessments to ensure operational efficiency, safety, and compliance with industry standards.",
-    ],
-    sections: [
-      {
-        heading: "What is a marine survey?",
-        paragraphs: [
-          "At Umitech Marine Solutions, we leverage the expertise of our team, comprising Master Mariners and Marine Engineers, to deliver precise and comprehensive marine and technical surveys. Our services cater to a wide range of vessel types, providing in-depth assessments to ensure operational efficiency, safety, and compliance with industry standards.",
-        ],
-      },
-      {
-        heading: "When are marine surveys used?",
-        paragraphs: [
-          "Our clientele spans ship owners, operators, charterers, P&I clubs, insurers, financial institutions, flag states, and classification societies.",
-        ],
-      },
-      {
-        heading: "Common marine survey types",
-        list: [
-          "Condition Surveys: Comprehensive assessments on behalf of P&I clubs, H&M insurers, and individual clients to evaluate the overall condition of the vessel and identify potential risks.",
-          "On-Hire/Off-Hire Condition Surveys: Detailed assessments to verify the condition of vessels at the time of charter hire, including equipment, machinery, and hull integrity.",
-          "On-Hire/Off-Hire Bunker Surveys: Verification of bunker fuel quantities at the start and end of the charter, including fuel quality analysis.",
-          "Pre-Loading Vessel Surveys: Technical inspections to ensure vessel readiness for cargo operations, focusing on structural integrity and load distribution.",
-          "Project Cargo Loading & Lashing Approvals: Certification of appropriate cargo securing methods and compliance with maritime safety standards for heavy and oversized cargoes.",
-          "Non-Exclusive Surveys: Independent, non-affiliated surveys to assess the condition and functionality of specific vessel systems or components.",
-          "Bollard Pull & Winch Testing: Performance testing of towing and mooring systems, including winch load testing and bollard pull capacity measurements.",
-          "Safety Attestations: Official certification for compliance with safety regulations from local authorities and flag state authorities.",
-          "Carving and Marking Note Attestations: Verification of compliance with specific maritime regulations regarding vessel markings, including classification and ownership details.",
-          "\"Fit for Purpose\" Approvals: Assessments and certifications for project-specific applications, ensuring that vessels and equipment meet operational requirements for particular tasks or cargo.",
-          "Project Cargo Loading/Unloading Attendance: On-site supervision and technical support during the loading and unloading of project cargo, ensuring compliance with safety and operational protocols.",
-          "Pre-Purchase Inspections: Detailed technical evaluations of vessels, focusing on mechanical, structural, and safety systems, to support the acquisition decision-making process.",
-          "Valuation Reports: Expert evaluations of vessel market value, based on condition, market trends, and technical specifications.",
-        ],
-      },
-      {
-        heading: "What a survey report should provide",
-        paragraphs: [
-          "Condition surveys evaluate the overall condition of the vessel and identify potential risks. Pre-purchase inspections provide detailed technical evaluations of vessels, focusing on mechanical, structural, and safety systems, to support the acquisition decision-making process. Valuation reports provide expert evaluations of vessel market value, based on condition, market trends, and technical specifications.",
-        ],
-      },
-      {
-        heading: "Why independent expertise matters",
-        paragraphs: [
-          "Non-exclusive surveys provide independent, non-affiliated assessment of specific vessel systems or components. With an unwavering focus on precision and adherence to international standards, Umitech Marine Solutions ensures the highest level of technical integrity and operational safety across all maritime operations.",
-        ],
-      },
-    ],
-    cta: {
-      heading: "Discuss a marine challenge",
-      lead:
-        "When you are ready to talk through a technical or operational question, our team is available to help.",
-      ctaLabel: "Contact us",
-      ctaHref: "/contact",
+  articles: [
+    {
+      slug: "computational-fluid-dynamics",
+      format: "docxHtml",
+      title: "3% Resistance Reduction = 6-Figure Annual Savings",
+      cardTitle: "Computational Fluid Dynamics",
+      docxHtmlFile: "computational-fluid-dynamics.docx.html",
+      excerpt: "That’s not theory. That’s operational mathematics.",
+      summary:
+        "CFD reveals how vessel-flow analysis can guide resistance reduction, fuel-efficiency improvements, and retrofit decisions before capital is committed.",
+      image:
+        "/blog/computational-fluid-dynamics/CFD-Laboratory-Simulation.jpg",
+      imageAlt: "CFD laboratory simulation of marine vessel flow",
+      ctaLabel: "Read article",
     },
-  },
+  ],
 };
 
 export function getBlogArticleParams() {
-  return [{ slug: blogPage.article.slug }];
+  return blogPage.articles.map((article) => ({ slug: article.slug }));
 }
 
 export function getBlogArticle(slug) {
-  if (slug !== blogPage.article.slug) {
-    return null;
-  }
-
-  return blogPage.article;
+  return blogPage.articles.find((article) => article.slug === slug) ?? null;
 }
 
 export const standardTermsPage = {
@@ -886,7 +835,7 @@ export const standardTermsPage = {
         {
           id: "6.1",
           text:
-            "The Company’s total aggregate liability, whether in contract, tort, or otherwise, shall not exceed the amount of the Fees paid for the Services giving rise to the claim, subject to a maximum liability cap of USD 500,000.",
+            "The Company’s total aggregate liability, whether in contract, tort, or otherwise, shall not exceed the amount of the Fees paid for the Services giving rise to the claim, subject to a maximum liability cap of USD 100,000.",
         },
         {
           id: "6.2",
@@ -1262,71 +1211,6 @@ export const footer = {
     },
   ],
 };
-
-export const searchIndex = [
-  { label: "Home", href: "/", keywords: ["home"] },
-  { label: "About", href: "/about", keywords: ["about", "about us"] },
-  {
-    label: "Services",
-    href: "/services",
-    keywords: ["services", "our services"],
-  },
-  {
-    label: "Naval Architecture",
-    href: "/services#naval",
-    keywords: ["naval", "architecture", "naval architecture"],
-  },
-  {
-    label: "Engineering",
-    href: "/services#engineering",
-    keywords: ["engineering"],
-  },
-  {
-    label: "Inspection, Audits and Surveying",
-    href: "/services#inspection",
-    keywords: ["inspection", "audits", "surveying", "survey"],
-  },
-  {
-    label: "Legal Consultancy",
-    href: "/services#legal",
-    keywords: ["legal", "consultancy", "law"],
-  },
-  {
-    label: "Mission",
-    href: "/about#mission",
-    keywords: ["mission"],
-  },
-  {
-    label: "Vision",
-    href: "/about#vision",
-    keywords: ["vision"],
-  },
-  {
-    label: "Values",
-    href: "/about#values",
-    keywords: ["values", "core values", "sustainability", "integrity"],
-  },
-  {
-    label: "Let's Talk",
-    href: "/contact",
-    keywords: ["lets talk", "let's talk", "talk"],
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    keywords: ["contact", "connect"],
-  },
-  {
-    label: "Team",
-    href: "/team",
-    keywords: ["team", "people", "staff"],
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-    keywords: ["blog", "insights", "articles", "marine insights"],
-  },
-];
 
 export const searchPopular = [
   "Naval Architecture",

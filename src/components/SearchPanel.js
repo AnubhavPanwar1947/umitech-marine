@@ -2,39 +2,9 @@
 
 import { forwardRef, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { searchIndex, searchPopular } from "@/lib/site-data";
+import { searchPopular } from "@/lib/site-data";
+import { searchSite } from "@/lib/site-search";
 import styles from "./SearchPanel.module.css";
-
-function filterSearchIndex(query) {
-  const normalized = query.trim().toLowerCase();
-  if (!normalized) {
-    return { type: "hint" };
-  }
-
-  const matches = searchIndex.filter((item) => {
-    if (item.label.toLowerCase().includes(normalized)) {
-      return true;
-    }
-
-    return item.keywords.some(
-      (keyword) => keyword.includes(normalized) || normalized.includes(keyword)
-    );
-  });
-
-  const seen = new Set();
-
-  return {
-    type: "results",
-    items: matches.filter((item) => {
-      const key = `${item.href}-${item.label}`;
-      if (seen.has(key)) {
-        return false;
-      }
-      seen.add(key);
-      return true;
-    }),
-  };
-}
 
 function SearchGlyph() {
   return (
@@ -79,7 +49,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
     return () => cancelAnimationFrame(frame);
   }, [open]);
 
-  const filtered = useMemo(() => filterSearchIndex(query), [query]);
+  const filtered = useMemo(() => searchSite(query), [query]);
 
   if (!open) {
     return null;
@@ -110,7 +80,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
           className={styles.input}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search services and sections…"
+          placeholder="Search the site…"
           autoComplete="off"
           enterKeyHint="search"
         />
@@ -119,7 +89,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
       {filtered.type === "hint" ? (
         <div className={styles.popular}>
           <p className={styles.popularEyebrow}>Popular searches</p>
-          <p className={styles.popularHint}>Start with a service or section.</p>
+          <p className={styles.popularHint}>Start with a service, team member, or topic.</p>
           <div className={styles.chips} role="group" aria-label="Popular searches">
             {searchPopular.map((suggestion) => (
               <button
@@ -138,13 +108,19 @@ export const SearchPanel = forwardRef(function SearchPanel(
       ) : (
         <ul className={styles.results}>
           {filtered.items.map((item) => (
-            <li key={`${item.href}-${item.label}`}>
+            <li key={`${item.href}-${item.title}`}>
               <Link
                 href={item.href}
                 className={styles.result}
                 onClick={handleResultClick}
               >
-                {item.label}
+                <span className={styles.resultTitle}>{item.title}</span>
+                {item.category ? (
+                  <span className={styles.resultCategory}>{item.category}</span>
+                ) : null}
+                {item.snippet ? (
+                  <span className={styles.resultSnippet}>{item.snippet}</span>
+                ) : null}
               </Link>
             </li>
           ))}

@@ -12,6 +12,8 @@ export function ServicePracticeSection({
   image,
   imageAlt,
   imagePosition,
+  imageFit = "cover",
+  imageAspectRatio,
   variant = "default",
   compactTop = false,
   delay = 0,
@@ -50,14 +52,31 @@ export function ServicePracticeSection({
 
           <div className={styles.contentRow}>
             <div className={styles.mediaColumn}>
-              <div className={styles.media}>
+              <div
+                className={[
+                  styles.media,
+                  imageFit === "contain" ? styles.mediaContain : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={
+                  imageAspectRatio
+                    ? { aspectRatio: imageAspectRatio }
+                    : undefined
+                }
+              >
                 <Image
                   src={image}
                   alt={imageAlt}
                   fill
                   quality={100}
                   sizes="(max-width: 959px) 100vw, 42vw"
-                  className={styles.image}
+                  className={[
+                    styles.image,
+                    imageFit === "contain" ? styles.imageContain : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   style={
                     imagePosition
                       ? { objectPosition: imagePosition }
