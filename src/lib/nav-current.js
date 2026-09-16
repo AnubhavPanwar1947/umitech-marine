@@ -16,7 +16,11 @@ export function isSolidHeaderPage(pathname) {
     path === "/team" ||
     path === "/contact" ||
     path === "/blog" ||
-    path.startsWith("/blog/")
+    path.startsWith("/blog/") ||
+    path === "/standard-terms-conditions" ||
+    path === "/terms-conditions" ||
+    path === "/cookies-policy" ||
+    path === "/privacy-policy"
   );
 }
 

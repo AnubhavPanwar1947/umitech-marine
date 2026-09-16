@@ -694,6 +694,543 @@ export function getBlogArticle(slug) {
   return blogPage.article;
 }
 
+export const standardTermsPage = {
+  title: "Standard Terms & Conditions of Engagement",
+  description:
+    "Standard Terms and Conditions of Engagement for UMITECH MARINE consultancy services, including scope, fees, liability, and governing law.",
+  sections: [
+    {
+      number: "1",
+      heading: "Interpretation",
+      intro: "In these Conditions, the following definitions apply:",
+      definitions: [
+        {
+          term: "Agreement",
+          text:
+            "means the contract between Umitech Marine Solutions and the Client for the provision of professional consultancy Services, in accordance with the Engagement Letter and these Conditions.",
+        },
+        {
+          term: "Client",
+          text:
+            "means the individual, company, firm, organization, or other legal entity identified in the Engagement Letter which has engaged the Company to provide Services.",
+        },
+        {
+          term: "Client Group",
+          text:
+            "means the Client, its affiliates, subsidiaries, or holding company from time to time, and their respective officers, representatives, employees, agents, consultants, and subcontractors.",
+        },
+        {
+          term: "Company",
+          text:
+            "means Umitech Marine Solutions, a company incorporated and operating under the laws of Japan, with its registered office in Yokohama, Japan, and where applicable, its representatives, employees, agents, consultants, and subcontractors.",
+        },
+        {
+          term: "Company Group",
+          text:
+            "means the Company, its affiliates, subsidiaries, or holding company, and their respective officers, representatives, employees, agents, consultants, and subcontractors.",
+        },
+        {
+          term: "Conditions",
+          text:
+            "means these Terms and Conditions of Engagement, as may be amended from time to time in writing.",
+        },
+        {
+          term: "Engagement Letter",
+          text:
+            "means the Company’s written confirmation or proposal outlining the Services to be performed and the terms under which such Services are provided.",
+        },
+        {
+          term: "Fee or Fees",
+          text: "means the amount payable by the Client to the Company as remuneration for the Services.",
+        },
+        {
+          term: "Services",
+          text:
+            "means the consultancy, technical, advisory, design, or project management services provided by the Company to the Client, as detailed in the Engagement Letter.",
+        },
+        {
+          term: "Third Party",
+          text:
+            "means any person, company, or other legal entity which is not a member of either the Company Group or the Client Group.",
+        },
+      ],
+    },
+    {
+      number: "2",
+      heading: "Basis of Contract",
+      clauses: [
+        {
+          id: "2.1",
+          text:
+            "These Conditions constitute the entire agreement between the Parties and supersede all prior discussions or representations. The Client acknowledges that it has not relied on any statement, promise, or representation not expressly set out in this Agreement.",
+        },
+        {
+          id: "2.2",
+          text:
+            "These Conditions shall apply to all engagements between the Company and the Client to the exclusion of any terms proposed by the Client, whether implied by statute, trade, custom, or prior dealings.",
+        },
+        {
+          id: "2.3",
+          text:
+            "The Agreement shall take effect on the earlier of (i) the Client’s written acceptance of the Engagement Letter or (ii) the commencement of performance by the Company, unless the Client objects in writing within forty-eight (48) hours.",
+        },
+        {
+          id: "2.4",
+          text:
+            "The Company reserves the right to decline or suspend commencement of the Services until the Engagement Letter has been duly signed and any agreed deposit received.",
+        },
+      ],
+    },
+    {
+      number: "3",
+      heading: "Provision of Services",
+      clauses: [
+        {
+          id: "3.1",
+          text:
+            "The Company shall perform the Services with reasonable care, diligence, skill, and in accordance with professional standards applicable to marine and engineering consultancy.",
+        },
+        {
+          id: "3.2",
+          text:
+            "Any timeline or deliverable date provided by the Company is indicative only unless expressly agreed in writing. Time shall not be of the essence.",
+        },
+        {
+          id: "3.3",
+          text:
+            "The Company may make changes to the Services to comply with applicable law, regulatory requirements, or to maintain safety or quality, provided such changes do not materially affect the nature or scope of the Services.",
+        },
+        {
+          id: "3.4",
+          text:
+            "Unless otherwise agreed, the Company shall have no liability or duty of care toward any Third Party in connection with the Services.",
+        },
+        {
+          id: "3.5",
+          text:
+            "Where the Services involve advice, analysis, recommendations, or interpretative data, such information represents professional opinion and judgment. The Client shall be solely responsible for decisions made based on such advice.",
+        },
+        {
+          id: "3.6",
+          text:
+            "The Company shall not be required to act in contravention of any sanction, prohibition, or regulation imposed by any competent authority.",
+        },
+      ],
+    },
+    {
+      number: "4",
+      heading: "Client’s Obligations",
+      clauses: [
+        {
+          id: "4.1",
+          text: "The Client shall:",
+          subItems: [
+            "Provide the Company with all information, documentation, and access reasonably required to perform the Services effectively;",
+            "Ensure that all information supplied is accurate and complete;",
+            "Cooperate with the Company in all matters relating to the Services;",
+            "Ensure safe access to premises, facilities, or vessels as may be necessary for performance; and",
+            "Comply fully with its payment obligations.",
+          ],
+        },
+        {
+          id: "4.2",
+          text:
+            "If the Client’s failure or delay prevents or delays the Company’s performance, the Company shall be entitled to suspend performance and recover all additional costs incurred.",
+        },
+        {
+          id: "4.3",
+          text:
+            "The Client agrees to indemnify the Company for any loss, cost, or liability arising directly or indirectly from the Client’s failure to fulfill its obligations or from reliance on inaccurate or incomplete information provided by the Client.",
+        },
+      ],
+    },
+    {
+      number: "5",
+      heading: "Fees and Payment",
+      clauses: [
+        {
+          id: "5.1",
+          text: "Fees shall be calculated in accordance with the terms set out in the Engagement Letter.",
+        },
+        {
+          id: "5.2",
+          text:
+            "The Company is entitled to reimbursement of all reasonable expenses, including travel, accommodation, third-party costs, and other incidental expenses incurred in connection with the Services.",
+        },
+        {
+          id: "5.3",
+          text:
+            "Unless otherwise stated, invoices are due within thirty (30) days of issuance. Delayed payments shall accrue interest at 3% per month, compounded quarterly, until settlement.",
+        },
+        {
+          id: "5.4",
+          text:
+            "Fees are exclusive of any applicable taxes, including VAT, GST, or service tax, which shall be payable in addition.",
+        },
+        {
+          id: "5.5",
+          text:
+            "Any dispute regarding an invoice must be notified within seven (7) days of receipt; undisputed portions shall remain payable within the stipulated timeframe.",
+        },
+        {
+          id: "5.6",
+          text:
+            "The Company reserves the right to suspend work if payments are overdue or if requested funds on account are not received.",
+        },
+      ],
+    },
+    {
+      number: "6",
+      heading: "Limitation of Liability",
+      clauses: [
+        {
+          id: "6.1",
+          text:
+            "The Company’s total aggregate liability, whether in contract, tort, or otherwise, shall not exceed the amount of the Fees paid for the Services giving rise to the claim, subject to a maximum liability cap of USD 500,000.",
+        },
+        {
+          id: "6.2",
+          text:
+            "The Company shall not be liable for any indirect, consequential, or special loss, including but not limited to loss of profit, business interruption, loss of goodwill, or data.",
+        },
+        {
+          id: "6.3",
+          text:
+            "The Client acknowledges that professional consultancy advice inherently carries an element of judgment and interpretation, and that absolute outcomes cannot be guaranteed.",
+        },
+      ],
+    },
+    {
+      number: "7",
+      heading: "Intellectual Property",
+      clauses: [
+        {
+          text:
+            "All intellectual property rights arising from the Services shall remain the exclusive property of the Company. The Client shall have a non-transferable, non-exclusive license to use deliverables solely for the purpose defined in the Engagement Letter, upon full payment of Fees.",
+        },
+      ],
+    },
+    {
+      number: "8",
+      heading: "Confidentiality",
+      clauses: [
+        {
+          text:
+            "Both Parties agree to maintain strict confidentiality regarding all proprietary or sensitive information exchanged in connection with the Services. This obligation shall survive termination for a period of five (5) years.",
+        },
+      ],
+    },
+    {
+      number: "9",
+      heading: "Termination",
+      clauses: [
+        {
+          id: "9.1",
+          text: "Either Party may terminate the Agreement with written notice if the other:",
+          subItems: [
+            "Commits a material breach and fails to remedy it within thirty (30) days; or",
+            "Becomes insolvent, bankrupt, or ceases trading.",
+          ],
+        },
+        {
+          id: "9.2",
+          text:
+            "Upon termination, the Client shall immediately pay all outstanding Fees and expenses.",
+        },
+        {
+          id: "9.3",
+          text:
+            "The Company may retain any deposit or advance payment to offset costs incurred.",
+        },
+      ],
+    },
+    {
+      number: "10",
+      heading: "Force Majeure",
+      clauses: [
+        {
+          text:
+            "Neither Party shall be liable for failure or delay in performance due to events beyond its reasonable control, including natural disasters, war, strikes, or governmental actions. If such circumstances persist for more than fourteen (14) days, either Party may terminate the Agreement with written notice.",
+        },
+      ],
+    },
+    {
+      number: "11",
+      heading: "Governing Law and Jurisdiction",
+      clauses: [
+        {
+          text:
+            "This Agreement shall be governed by and construed in accordance with the laws of Japan, and where applicable, Indian law.",
+        },
+        {
+          text:
+            "Any disputes shall be subject to the exclusive jurisdiction of the competent courts of Japan.",
+        },
+      ],
+    },
+    {
+      number: "12",
+      heading: "Contact",
+      contact: true,
+      intro:
+        "For any contractual queries, notices, or communication, please contact:",
+      email: "info@umitech.co.jp",
+      location: "Yokohama, Japan",
+    },
+  ],
+};
+
+export const termsPage = {
+  title: "Terms & Conditions",
+  description:
+    "Website Terms and Conditions for UMITECH MARINE — use of www.umitech.co.jp, content ownership, liability, and governing law.",
+  sections: [
+    {
+      number: "1",
+      heading: "Acceptance of Terms",
+      paragraphs: [
+        "By accessing and using www.umitech.co.jp (“the Website”), you agree to be bound by these Terms and Conditions. If you do not agree, please discontinue use immediately.",
+      ],
+    },
+    {
+      number: "2",
+      heading: "Ownership and Copyright",
+      paragraphs: [
+        "All content, including text, images, logos, graphics, and materials on this Website, is the property of Umitech Marine Solutions unless otherwise stated. Unauthorized use, reproduction, or redistribution is prohibited.",
+      ],
+    },
+    {
+      number: "3",
+      heading: "Use of the Website",
+      paragraphs: [
+        "You agree to use the Website lawfully and refrain from activities that:",
+      ],
+      listItems: [
+        "Violate any applicable laws or regulations.",
+        "Infringe upon the rights of others.",
+        "Interfere with Website functionality or security.",
+      ],
+    },
+    {
+      number: "4",
+      heading: "Accuracy of Information",
+      paragraphs: [
+        "We strive to maintain accurate and up-to-date information; however, Umitech Marine Solutions makes no warranties regarding completeness, accuracy, or reliability of content. The Website’s information is provided for general guidance only.",
+      ],
+    },
+    {
+      number: "5",
+      heading: "Limitation of Liability",
+      paragraphs: [
+        "To the fullest extent permitted by law, Umitech Marine Solutions shall not be liable for any direct, indirect, incidental, or consequential damages resulting from use or inability to use this Website.",
+      ],
+    },
+    {
+      number: "6",
+      heading: "Third-Party Links",
+      paragraphs: [
+        "This Website may contain links to external sites. We are not responsible for the content, policies, or practices of such third-party websites.",
+      ],
+    },
+    {
+      number: "7",
+      heading: "Indemnity",
+      paragraphs: [
+        "Users agree to indemnify and hold harmless Umitech Marine Solutions, its officers, and employees from any claims arising from misuse of the Website or violation of these Terms.",
+      ],
+    },
+    {
+      number: "8",
+      heading: "Governing Law and Jurisdiction",
+      paragraphs: [
+        "These Terms are governed by and construed in accordance with the laws of Japan, and where applicable, Indian law. Any disputes shall be subject to the exclusive jurisdiction of courts in Japan.",
+      ],
+    },
+    {
+      number: "9",
+      heading: "Amendments",
+      paragraphs: [
+        "We may revise these Terms periodically. Continued use of the Website signifies acceptance of the updated Terms.",
+      ],
+    },
+    {
+      number: "10",
+      heading: "Contact",
+      contact: true,
+      intro: "For any queries, please contact:",
+      email: "info@umitech.co.jp",
+    },
+  ],
+};
+
+export const cookiesPolicyPage = {
+  title: "Cookies Policy",
+  description:
+    "How UMITECH MARINE uses cookies and similar technologies on its website, including essential, performance, and functional cookies.",
+  sections: [
+    {
+      number: "1",
+      heading: "Introduction",
+      paragraphs: [
+        "This Cookies Policy explains how Umitech Marine Solutions (“we,” “our,” or “us”) uses cookies and similar technologies on our Website.",
+      ],
+    },
+    {
+      number: "2",
+      heading: "What Are Cookies",
+      paragraphs: [
+        "Cookies are small text files stored on your device when you visit a website. They help us understand user preferences, improve site functionality, and enhance performance.",
+      ],
+    },
+    {
+      number: "3",
+      heading: "Types of Cookies We Use",
+      listItems: [
+        "Essential cookies: Required for basic site operation and security.",
+        "Performance cookies: Collect anonymous data on how visitors use our Website (e.g., Google Analytics).",
+        "Functional cookies: Remember user preferences such as language and location.",
+      ],
+      paragraphsAfterList: [
+        "We do not use cookies for marketing, advertising, or behavioural tracking.",
+      ],
+    },
+    {
+      number: "4",
+      heading: "Managing Cookies",
+      paragraphs: [
+        "You can control and delete cookies through your browser settings. Disabling cookies may affect certain Website features.",
+      ],
+    },
+    {
+      number: "5",
+      heading: "Consent",
+      paragraphs: [
+        "By continuing to use our Website, you consent to our use of cookies as outlined in this policy.",
+      ],
+    },
+    {
+      number: "6",
+      heading: "Changes to this Policy",
+      paragraphs: [
+        "We may amend this Cookies Policy periodically. Updates will be posted on this page.",
+      ],
+    },
+    {
+      number: "7",
+      heading: "Contact",
+      contact: true,
+      intro: "For cookie-related queries, contact:",
+      email: "info@umitech.co.jp",
+    },
+  ],
+};
+
+export const privacyPolicyPage = {
+  title: "Privacy Policy",
+  description:
+    "How UMITECH MARINE collects, uses, stores, and protects personal information on www.umitech.co.jp, and your privacy rights.",
+  sections: [
+    {
+      number: "1",
+      heading: "Introduction",
+      paragraphs: [
+        "Umitech Marine Solutions (“the Company,” “we,” “our,” or “us”) respects the privacy of all visitors to our website, www.umitech.co.jp (“the Website”). This Privacy Policy explains how we collect, use, store, and protect personal information obtained through the Website.",
+        "By using our Website, you consent to the practices described in this policy.",
+      ],
+    },
+    {
+      number: "2",
+      heading: "Information We Collect",
+      intro: "We may collect the following types of information:",
+      listItems: [
+        "Personal information: Name, email address, phone number, company name, and any details voluntarily provided through our contact form or communications.",
+        "Non-personal information: Browser type, device type, IP address, and usage statistics gathered through standard analytics tools.",
+      ],
+    },
+    {
+      number: "3",
+      heading: "Purpose of Collection",
+      intro: "We collect and process personal data for the following purposes:",
+      listItems: [
+        "To respond to inquiries or service requests.",
+        "To provide information related to our services.",
+        "To improve the Website’s performance and functionality.",
+        "To comply with legal obligations.",
+      ],
+    },
+    {
+      number: "4",
+      heading: "Legal Basis for Processing",
+      intro: "Our legal bases for processing data include:",
+      listItems: [
+        "Consent – where you voluntarily provide data through our forms.",
+        "Legitimate interest – to enhance user experience and ensure Website functionality.",
+        "Legal compliance – where applicable under Japanese (APPI) and Indian IT laws.",
+      ],
+    },
+    {
+      number: "5",
+      heading: "Data Retention",
+      paragraphs: [
+        "We retain personal information only as long as necessary to fulfil the purposes for which it was collected or to comply with legal requirements.",
+      ],
+    },
+    {
+      number: "6",
+      heading: "Data Protection & Security",
+      paragraphs: [
+        "We employ appropriate administrative, technical, and organizational measures to protect personal data from unauthorized access, alteration, disclosure, or destruction.",
+      ],
+    },
+    {
+      number: "7",
+      heading: "Third-Party Disclosure",
+      intro:
+        "We do not sell, rent, or share personal data with third parties, except where:",
+      listItems: [
+        "Required by law or court order.",
+        "Necessary to protect our rights, property, or safety.",
+        "Shared with trusted service providers who process data on our behalf under strict confidentiality.",
+      ],
+    },
+    {
+      number: "8",
+      heading: "International Data Transfers",
+      paragraphs: [
+        "As Umitech Marine Solutions operates internationally, your data may be transferred and processed outside Japan, including in India. All such transfers comply with applicable data protection laws.",
+      ],
+    },
+    {
+      number: "9",
+      heading: "Your Rights",
+      intro: "Depending on your jurisdiction, you may have the right to:",
+      listItems: [
+        "Access, correct, or delete your personal information.",
+        "Withdraw consent at any time.",
+        "Lodge a complaint with a relevant supervisory authority.",
+      ],
+      paragraphsAfterList: ["Requests can be sent to info@umitech.co.jp."],
+    },
+    {
+      number: "10",
+      heading: "Updates to this Policy",
+      paragraphs: [
+        "We may update this Privacy Policy periodically. Updates will be posted on this page with the effective date.",
+      ],
+    },
+    {
+      number: "11",
+      heading: "Contact Us",
+      contact: true,
+      intro:
+        "If you have any questions about this Privacy Policy, please contact:",
+      organization: "Umitech Marine Solutions",
+      location: "Yokohama, Japan",
+      email: "info@umitech.co.jp",
+    },
+  ],
+};
+
 export const footer = {
   information: {
     heading: "INFORMATION",
@@ -715,11 +1252,14 @@ export const footer = {
   },
   legalLinks: [
     // TODO: Replace placeholder hrefs with real policy pages.
-    { label: "PRIVACY POLICY", href: "#" },
+    { label: "PRIVACY POLICY", href: "/privacy-policy" },
     { label: "DISCLAIMER", href: "#" },
-    { label: "COOKIES POLICY", href: "#" },
-    { label: "TERMS & CONDITIONS", href: "#" },
-    { label: "STANDARD T&C OF ENGAGEMENT", href: "#" },
+    { label: "COOKIES POLICY", href: "/cookies-policy" },
+    { label: "TERMS & CONDITIONS", href: "/terms-conditions" },
+    {
+      label: "STANDARD T&C OF ENGAGEMENT",
+      href: "/standard-terms-conditions",
+    },
   ],
 };
 
