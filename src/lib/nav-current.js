@@ -20,7 +20,8 @@ export function isSolidHeaderPage(pathname) {
     path === "/standard-terms-conditions" ||
     path === "/terms-conditions" ||
     path === "/cookies-policy" ||
-    path === "/privacy-policy"
+    path === "/privacy-policy" ||
+    path === "/disclaimer"
   );
 }
 

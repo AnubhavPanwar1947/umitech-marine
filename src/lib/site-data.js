@@ -943,82 +943,148 @@ export const standardTermsPage = {
 export const termsPage = {
   title: "Terms & Conditions",
   description:
-    "Website Terms and Conditions for UMITECH MARINE — use of www.umitech.co.jp, content ownership, liability, and governing law.",
+    "Terms and Conditions for Umitech Marine Solutions — use of www.umitech.co.jp, acceptable use, liability, governing law, and contact information.",
+  lead:
+    "Please read these Terms and Conditions carefully before using Our Services.",
   sections: [
     {
       number: "1",
-      heading: "Acceptance of Terms",
-        paragraphs: [
-        "By accessing and using www.umitech.co.jp (“the Website”), you agree to be bound by these Terms and Conditions. If you do not agree, please discontinue use immediately.",
-        ],
-      },
-      {
-      number: "2",
-      heading: "Ownership and Copyright",
-        paragraphs: [
-        "All content, including text, images, logos, graphics, and materials on this Website, is the property of Umitech Marine Solutions unless otherwise stated. Unauthorized use, reproduction, or redistribution is prohibited.",
-        ],
-      },
-      {
-      number: "3",
-      heading: "Use of the Website",
+      heading: "Interpretation and Definitions",
       paragraphs: [
-        "You agree to use the Website lawfully and refrain from activities that:",
+        "The words of which the initial letter is capitalised have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.",
+        "“Company” means Umitech Marine Solutions (referred to as “the Company”, “We”, “Us” or “Our”), having its office at 4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002, Japan.",
+        "“Country” means Japan.",
+        "“Device” means any device that can access the Service, such as a computer, a mobile phone or a digital tablet.",
+        "“Service” means the Website and the information, content, materials, features and functionalities made available through the Website.",
+        "“Terms and Conditions” means (also referred to as “Terms”) these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.",
+        "“Website” means the website operated by Umitech Marine Solutions, accessible from https://www.umitech.co.jp",
+        "“You” means the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service.",
       ],
-      listItems: [
-        "Violate any applicable laws or regulations.",
-        "Infringe upon the rights of others.",
-        "Interfere with Website functionality or security.",
-        ],
-      },
-      {
+    },
+    {
+      number: "2",
+      heading: "Acknowledgment",
+      paragraphs: [
+        "These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms. These Terms apply to all visitors and users who access or use the Service. By accessing or using the Service, You agree to be bound by these Terms. If You disagree with any part of these Terms, then You may not access or use the Service.",
+        "Where You access or use the Service on behalf of a company or other legal entity, You represent that You are authorised to bind such entity to these Terms.",
+        "You represent that You are over the age of 18. The Company does not permit those under 18 to use the Service.",
+        "Your access to and use of the Service is also subject to the Privacy Policy and Cookies Policy of the Company, which describes Our policies and procedures on the collection, use and disclosure of Your personal information and tells You about Your privacy rights. Please read the Privacy Policy carefully before using the Service.",
+      ],
+    },
+    {
+      number: "3",
+      heading: "The Service",
+      paragraphs: [
+        "The Service is an informational website describing the Company and the marine engineering, design, analysis, surveying and consultancy services it provides. Information, content and materials made available through the Service are provided for general informational purposes and to provide an overview of the Company and its services.",
+        "The Website does not offer user accounts, registration or online purchasing. Where You choose to contact the Company through an enquiry or contact form, You agree to provide accurate and complete information.",
+        "Nothing made available through the Service constitutes professional engineering, surveying, legal or other professional advice, or a technical report, survey, assessment, certification, calculation, analysis, recommendation or other professional deliverable of the Company in relation to any specific matter. You should not rely upon Website content as a substitute for a formal professional engagement with the Company.",
+        "Any professional services provided by the Company shall be subject to a separate engagement and the Company’s Standard Terms and Conditions of Engagement. Any reports, assessments, calculations, analyses, recommendations or other professional deliverables issued pursuant to such engagement shall be subject to the terms, qualifications, limitations and disclaimers applicable to that engagement.",
+      ],
+    },
+    {
       number: "4",
-      heading: "Accuracy of Information",
-        paragraphs: [
-        "We strive to maintain accurate and up-to-date information; however, Umitech Marine Solutions makes no warranties regarding completeness, accuracy, or reliability of content. The Website’s information is provided for general guidance only.",
-        ],
-      },
-      {
+      heading: "Links to Other Websites",
+      paragraphs: [
+        "Our Service may contain links to third-party websites or services that are not owned or controlled by the Company. The Company has no control over, and assumes no responsibility for, the content, availability, security, privacy policies or practices of any third-party websites or services. We recommend that You read the terms and conditions and privacy policies of any third-party websites or services that You visit. Your access to and use of such third-party websites or services is subject to their respective terms and policies.",
+      ],
+    },
+    {
       number: "5",
-      heading: "Limitation of Liability",
-        paragraphs: [
-        "To the fullest extent permitted by law, Umitech Marine Solutions shall not be liable for any direct, indirect, incidental, or consequential damages resulting from use or inability to use this Website.",
+      heading: "Intellectual Property",
+      paragraphs: [
+        "The Service and its original content, features and functionality (including text, drawings, images, analyses and branding) are and will remain the exclusive property of the Company and/or its licensors as applicable. The content of the Service may not be copied, reproduced, modified, distributed, published, transmitted, commercially exploited or otherwise used for any commercial purpose without the prior written consent of the Company.",
+        "Nothing in these Terms grants You any licence or right to use any intellectual property of the Company except for the limited right to access and use the Website for its intended purpose.",
       ],
     },
     {
       number: "6",
-      heading: "Third-Party Links",
+      heading: "Acceptable Use",
       paragraphs: [
-        "This Website may contain links to external sites. We are not responsible for the content, policies, or practices of such third-party websites.",
+        "You shall not misuse the Website or use the Service for any unlawful, fraudulent or unauthorised purpose, interfere with or disrupt the operation or security of the Website, attempt to gain unauthorised access to the Website or its systems, introduce viruses or other harmful material, or use the Website in any manner that may damage the Company or impair the use of the Website by others.",
       ],
     },
     {
       number: "7",
-      heading: "Indemnity",
+      heading: "Termination",
       paragraphs: [
-        "Users agree to indemnify and hold harmless Umitech Marine Solutions, its officers, and employees from any claims arising from misuse of the Website or violation of these Terms.",
+        "We may terminate or suspend Your access immediately, without prior notice or liability, where We reasonably consider that You have breached these Terms, misused the Service, created a security or legal risk, or where suspension or termination is otherwise necessary to protect the Website, the Company or other users. Your right to use the Service will cease immediately.",
       ],
     },
     {
       number: "8",
-      heading: "Governing Law and Jurisdiction",
+      heading: "Limitation of Liability",
       paragraphs: [
-        "These Terms are governed by and construed in accordance with the laws of Japan, and where applicable, Indian law. Any disputes shall be subject to the exclusive jurisdiction of courts in Japan.",
+        "To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect or consequential loss or damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, business interruption, personal injury or loss of privacy) arising out of or in any way related to the use of, reliance on or inability to use the Service, even if the Company or any supplier has been advised of the possibility of such damages.",
+        "The Company shall not be responsible for any decision made or action taken in reliance upon information or content made available through the Service.",
+        "Nothing in these Terms excludes or limits any liability of the Company that cannot be excluded or limited under applicable law.",
       ],
     },
     {
       number: "9",
-      heading: "Amendments",
+      heading: "Disclaimer of Warranties",
       paragraphs: [
-        "We may revise these Terms periodically. Continued use of the Website signifies acceptance of the updated Terms.",
+        "The Service is provided to You “AS IS” and “AS AVAILABLE” to the maximum extent permitted by applicable law. While the Company uses reasonable efforts to maintain the Website and provide accurate and up-to-date information, the Company does not warrant or guarantee the completeness, accuracy, reliability, availability or suitability of the Service or its content.",
+        "To the maximum extent permitted under applicable law, the Company expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including any applicable implied warranties of merchantability, fitness for a particular purpose, title and non-infringement. The Company makes no representation that the Service will meet Your requirements, be uninterrupted or error-free, or that any errors or defects can or will be corrected.",
+        "The Company reserves the right to modify, update, suspend or discontinue any part of the Website or its content at any time without prior notice.",
       ],
     },
     {
       number: "10",
-      heading: "Contact",
+      heading: "Sanctions and Export Compliance",
+      paragraphs: [
+        "You represent and warrant that You are not located in, and are not a national or resident of, any country or territory subject to comprehensive trade sanctions, and that You are not listed on any applicable list of prohibited or restricted parties maintained by any competent national, supranational or international authority.",
+        "You shall not use the Service in any manner that would cause the Company to breach any applicable sanctions, export control or trade-restriction laws or regulations.",
+      ],
+    },
+    {
+      number: "11",
+      heading: "Governing Law",
+      paragraphs: [
+        "The laws of Japan shall govern these Terms and Your use of the Service. Any disputes arising under or in connection with these Terms or the Website shall be subject to the exclusive jurisdiction of the Courts of Japan.",
+      ],
+    },
+    {
+      number: "12",
+      heading: "Dispute Resolution",
+      paragraphs: [
+        "If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.",
+      ],
+    },
+    {
+      number: "13",
+      heading: "Severability and Waiver",
+      paragraphs: [
+        "If any provision of these Terms is held to be unenforceable or invalid, such provision will be interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law, and the remaining provisions will continue in full force and effect. The failure to exercise a right or to require performance of an obligation under these Terms shall not affect a party’s ability to exercise such right or require such performance at any time thereafter, nor shall the waiver of a breach constitute a waiver of any subsequent breach.",
+      ],
+    },
+    {
+      number: "14",
+      heading: "Translation Interpretation",
+      paragraphs: [
+        "These Terms and Conditions may be translated into other languages where We have made them available to You through Our Service. In the event of any inconsistency between a translated version and the English version, the English version shall prevail, subject to applicable law.",
+      ],
+    },
+    {
+      number: "15",
+      heading: "Changes to These Terms and Conditions",
+      paragraphs: [
+        "We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. Any revised Terms will be posted on the Website and the “Last updated” date will be revised accordingly.",
+        "By continuing to access or use Our Service after any revisions become effective, You agree to be bound by the revised Terms. If You do not agree to the new Terms, in whole or in part, please stop using the Website and the Service.",
+      ],
+    },
+    {
+      number: "16",
+      heading: "Contact Us",
       contact: true,
-      intro: "For any queries, please contact:",
+      intro:
+        "If You have any questions about these Terms and Conditions, You can contact Us:",
       email: "info@umitech.co.jp",
+      contactPageHref: "/contact/",
+      contactPageLabel: "https://www.umitech.co.jp/contact/",
+      phone: "+91 789 503 9068",
+      phoneHref: "tel:+917895039068",
+      location:
+        "4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002, Japan",
     },
   ],
 };
@@ -1191,6 +1257,82 @@ export const privacyPolicyPage = {
   ],
 };
 
+export const disclaimerPage = {
+  title: "Disclaimer",
+  description:
+    "Disclaimer for Umitech Marine Solutions — general website information, liability limits, external links, and professional advice.",
+  sections: [
+    {
+      number: "1",
+      heading: "Interpretation and Definitions",
+      paragraphs: [
+        "“Company” means Umitech Marine Solutions (also referred to as “the Company”, “Umitech”, “We”, “Us” or “Our”), having its office at 4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002.",
+        "“Service” means the Website and the information, content, materials, features and functionalities made available through the Website, and the services provided by Umitech.",
+        "“Website” means the website operated by Umitech Marine Solutions, accessible from https://www.umitech.co.jp",
+        "“You” means the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service.",
+      ],
+    },
+    {
+      number: "2",
+      heading: "Disclaimer",
+      paragraphs: [
+        "The information, content and materials made available through the Service are provided for general information purposes and to provide an overview of the Company and its service offerings only. Such information is not intended to constitute, and should not be relied upon as, professional advice, a technical assessment or a recommendation in relation to any specific matter.",
+        "While the Company uses reasonable efforts to provide accurate and up-to-date information, the Company does not warrant or guarantee the completeness, accuracy, reliability or suitability of the Service. The Company assumes no responsibility for errors or omissions in the contents of the Service.",
+        "In no event shall the Company be liable for any special, direct, indirect, consequential or incidental loss or damages, or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of or reliance on the Service or the contents of the Service. The Company reserves the right to make additions, deletions or modifications to the contents of the Service at any time without prior notice. While the Company takes reasonable measures to maintain the security of the Website, the Company does not warrant that the Service is free of viruses or other harmful components.",
+      ],
+    },
+    {
+      number: "3",
+      heading: "External Links Disclaimer",
+      paragraphs: [
+        "The Service may contain links to external third-party websites or services that are not provided or maintained by, or in any way affiliated with, the Company. The Company does not control and is not responsible for the content, availability, security, privacy policies or practices of such third-party websites or services and does not guarantee the accuracy, relevance, timeliness or completeness of any information contained on those external websites or services. Access to and use of any such third-party websites or services is subject to their respective terms and policies.",
+      ],
+    },
+    {
+      number: "4",
+      heading: "Professional Advice Disclaimer",
+      paragraphs: [
+        "The information on the Service is provided on the understanding that the Company is not, through the Website, rendering professional engineering, surveying, legal, accounting, tax or other professional advice in respect of any specific matter. General information published on the Website should not be used as a substitute for a formal engagement with the Company or for consultation with a suitably qualified professional. No information made available through the Website constitutes a technical report, survey, assessment, certification, calculation, recommendation or other professional deliverable of the Company.",
+        "Any professional services are provided only under, and subject to, a separate written engagement and the Company’s Standard Terms and Conditions of Engagement. Any reports, assessments, calculations, analyses, recommendations or other professional deliverables issued by the Company shall be subject to the terms, assumptions, qualifications, limitations and disclaimers applicable to the relevant engagement.",
+      ],
+    },
+    {
+      number: "5",
+      heading: "Errors and Omissions Disclaimer",
+      paragraphs: [
+        "The information given by the Service is for general guidance on matters of interest only. Even though the Company takes reasonable care to ensure that the content of the Service is both current and accurate, errors can occur. In addition, given the changing nature of laws, rules and regulations, technical standards, industry practices and other information, there may be delays, omissions or inaccuracies in the information contained on the Service. To the fullest extent permitted by applicable laws, the Company shall not be liable for any errors or omissions in such information, or for any loss arising from reliance on or the results obtained from the use of such information.",
+      ],
+    },
+    {
+      number: "6",
+      heading: "Views Expressed Disclaimer",
+      paragraphs: [
+        "The Service may contain views and opinions which are those of the respective authors and do not necessarily reflect the official policy or position of the Company or any other author, agency or organisation unless expressly stated otherwise.",
+      ],
+    },
+    {
+      number: "7",
+      heading:
+        'Website Information — Disclaimer and Limitation of Liability (“Use at Your Own Risk”)',
+      paragraphs: [
+        'All information on the Service is provided “as is”, with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information, and without warranty of any kind, express or implied, including but not limited to warranties of performance, merchantability and fitness for a particular purpose. To the fullest extent permitted by applicable laws, the Company shall not be liable to You or anyone else for any decision made or action taken in reliance on the information provided through the Service, or for any consequential, special or similar damages, even if advised of the possibility of such damages.',
+      ],
+    },
+    {
+      number: "8",
+      heading: "Contact Us",
+      contact: true,
+      intro:
+        "If You have any questions about this Disclaimer, You can contact Us:",
+      email: "info@umitech.co.jp",
+      phone: "+91 789 503 9068",
+      phoneHref: "tel:+917895039068",
+      location:
+        "4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002",
+    },
+  ],
+};
+
 export const footer = {
   information: {
     heading: "INFORMATION",
@@ -1213,7 +1355,7 @@ export const footer = {
   legalLinks: [
     // TODO: Replace placeholder hrefs with real policy pages.
     { label: "PRIVACY POLICY", href: "/privacy-policy" },
-    { label: "DISCLAIMER", href: "#" },
+    { label: "DISCLAIMER", href: "/disclaimer" },
     { label: "COOKIES POLICY", href: "/cookies-policy" },
     { label: "TERMS & CONDITIONS", href: "/terms-conditions" },
     {

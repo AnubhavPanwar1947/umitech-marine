@@ -6,6 +6,7 @@ import {
   contactCta,
   contactPage,
   cookiesPolicyPage,
+  disclaimerPage,
   footer,
   hero,
   navigation,
@@ -62,6 +63,7 @@ export function getRecordGroup(record) {
     category.includes("terms") ||
     category.includes("cookies") ||
     category.includes("privacy") ||
+    category.includes("disclaimer") ||
     category.includes("standard")
   ) {
     return "legal";
@@ -158,6 +160,8 @@ function buildLegalPageRecords(page, href, categoryPrefix, records, seen) {
       section.email,
       section.location,
       section.organization,
+      section.phone,
+      section.contactPageLabel,
     ];
 
     for (const definition of section.definitions ?? []) {
@@ -477,6 +481,13 @@ export function buildSiteSearchIndex() {
     privacyPolicyPage,
     "/privacy-policy",
     "Privacy",
+    records,
+    seen,
+  );
+  buildLegalPageRecords(
+    disclaimerPage,
+    "/disclaimer",
+    "Disclaimer",
     records,
     seen,
   );

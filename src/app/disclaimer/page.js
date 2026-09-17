@@ -1,38 +1,36 @@
 import Link from "next/link";
-import { termsPage } from "@/lib/site-data";
+import { disclaimerPage } from "@/lib/site-data";
 import styles from "./page.module.css";
 
-const { title, description, lead, sections } = termsPage;
+const { title, description, sections } = disclaimerPage;
 
 export const metadata = {
   title,
   description,
 };
 
-export default function TermsConditionsPage() {
+export default function DisclaimerPage() {
   return (
     <main>
       <section
         className={`section ${styles.section}`}
-        aria-labelledby="terms-title"
+        aria-labelledby="disclaimer-title"
       >
         <div className={`container ${styles.inner}`}>
           <article className={styles.article}>
-            <h1 id="terms-title" className={styles.title}>
+            <h1 id="disclaimer-title" className={styles.title}>
               {title}
             </h1>
-
-            {lead ? <p className={styles.lead}>{lead}</p> : null}
 
             <div className={styles.body}>
               {sections.map((section) => (
                 <section
                   key={section.number}
                   className={styles.contentSection}
-                  aria-labelledby={`terms-section-${section.number}`}
+                  aria-labelledby={`disclaimer-section-${section.number}`}
                 >
                   <h2
-                    id={`terms-section-${section.number}`}
+                    id={`disclaimer-section-${section.number}`}
                     className={styles.sectionHeading}
                   >
                     {section.number}. {section.heading}
@@ -82,24 +80,6 @@ export default function TermsConditionsPage() {
                           {section.email}
                         </Link>
                       </p>
-                      {section.contactPageHref ? (
-                        <p className={styles.contactLine}>
-                          <img
-                            src="/images/contact-us.svg"
-                            alt=""
-                            aria-hidden="true"
-                            decoding="async"
-                            className={styles.contactIcon}
-                          />
-                          <Link
-                            href={section.contactPageHref}
-                            className={styles.contactLink}
-                          >
-                            {section.contactPageLabel ??
-                              section.contactPageHref}
-                          </Link>
-                        </p>
-                      ) : null}
                       {section.phone ? (
                         <p className={styles.contactLine}>
                           <img
