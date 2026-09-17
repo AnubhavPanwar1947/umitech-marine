@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { teamPage } from "@/lib/site-data";
+import { teamMemberAnchor } from "@/lib/search-anchors";
 import { TeamCtaSection } from "@/components/TeamCtaSection";
 import { TeamIntroSection } from "@/components/TeamIntroSection";
 import { Reveal } from "@/components/Reveal";
@@ -30,7 +31,11 @@ export default function TeamPage() {
             {members.map((member, index) => (
               <li key={member.name} className="team-members__item">
                 <Reveal delay={80 + index * 60}>
-                  <article className="team-members__card" tabIndex={0}>
+                  <article
+                    id={teamMemberAnchor(member.name)}
+                    className="team-members__card"
+                    tabIndex={0}
+                  >
                     <div className="team-members__cardLayout">
                       <div className="team-members__mediaColumn">
                         <div className="team-members__mediaBleed">

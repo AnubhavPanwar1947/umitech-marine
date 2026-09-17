@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { standardTermsPage } from "@/lib/site-data";
+import { LegalContactBlock } from "@/components/LegalContactBlock";
+import { legalClauseAnchor } from "@/lib/search-anchors";
 import styles from "./page.module.css";
+
+const PAGE_PREFIX = "standard-terms";
 
 const { title, description, sections } = standardTermsPage;
 
@@ -27,6 +31,7 @@ export default function StandardTermsConditionsPage() {
                 <section
                   key={section.number}
                   className={styles.contentSection}
+                  data-search-highlight-scope="legal-section"
                   aria-labelledby={`standard-terms-section-${section.number}`}
                 >
                   <h2
@@ -58,7 +63,13 @@ export default function StandardTermsConditionsPage() {
                   {section.clauses?.map((clause, clauseIndex) => (
                     <div
                       key={clause.id ?? `${section.number}-clause-${clauseIndex}`}
+                      id={
+                        clause.id
+                          ? legalClauseAnchor(PAGE_PREFIX, clause.id)
+                          : undefined
+                      }
                       className={styles.clause}
+                      data-search-highlight-scope="legal-clause"
                     >
                       <p className={styles.paragraph}>
                         {clause.id ? (
@@ -78,38 +89,7 @@ export default function StandardTermsConditionsPage() {
                     </div>
                   ))}
 
-                  {section.contact ? (
-                    <div className={styles.contactBlock}>
-                      <p className={styles.paragraph}>{section.intro}</p>
-                      <p className={styles.contactLine}>
-                        <img
-                          src="/images/mail-us.svg"
-                          alt=""
-                          aria-hidden="true"
-                          decoding="async"
-                          className={styles.contactIcon}
-                        />
-                        <Link
-                          href={`mailto:${section.email}`}
-                          className={styles.contactLink}
-                        >
-                          {section.email}
-                        </Link>
-                      </p>
-                      <p className={styles.contactLine}>
-                        <img
-                          src="/images/visit-us.svg"
-                          alt=""
-                          aria-hidden="true"
-                          decoding="async"
-                          className={styles.contactIcon}
-                        />
-                        <span className={styles.contactText}>
-                          {section.location}
-                        </span>
-                      </p>
-                    </div>
-                  ) : null}
+                  <LegalContactBlock section={section} styles={styles} />
                 </section>
               ))}
             </div>

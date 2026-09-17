@@ -8,6 +8,7 @@ import {
   parseCfdDocxHeadings,
 } from "@/lib/blog-cfd-structure";
 import { CfdWireframeArticle } from "@/components/CfdWireframeArticle";
+import { blogSectionAnchor } from "@/lib/search-anchors";
 import styles from "./page.module.css";
 
 export function generateStaticParams() {
@@ -112,14 +113,16 @@ export default async function BlogArticlePage({ params }) {
               </p>
             ))}
 
-            {article.sections.map((section) => (
+            {article.sections.map((section) => {
+              const sectionId = blogSectionAnchor(section.heading);
+              return (
               <section
                 key={section.heading}
                 className={styles.contentSection}
-                aria-labelledby={`section-${section.heading}`}
+                aria-labelledby={sectionId}
               >
                 <h2
-                  id={`section-${section.heading}`}
+                  id={sectionId}
                   className={styles.sectionHeading}
                 >
                   {section.heading}
@@ -139,7 +142,8 @@ export default async function BlogArticlePage({ params }) {
                   </ul>
                 ) : null}
               </section>
-            ))}
+            );
+            })}
           </div>
 
           <div className={styles.ctaBlock}>

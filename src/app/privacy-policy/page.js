@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { privacyPolicyPage } from "@/lib/site-data";
+import { LegalContactBlock } from "@/components/LegalContactBlock";
 import styles from "./page.module.css";
 
 const { title, description, sections } = privacyPolicyPage;
@@ -62,45 +63,7 @@ export default function PrivacyPolicyPage() {
                     </p>
                   ))}
 
-                  {section.contact ? (
-                    <div className={styles.contactBlock}>
-                      <p className={styles.paragraph}>{section.intro}</p>
-                      {section.organization ? (
-                        <p className={styles.paragraph}>
-                          {section.organization}
-                        </p>
-                      ) : null}
-                      {section.location ? (
-                        <p className={styles.contactLine}>
-                          <img
-                            src="/images/visit-us.svg"
-                            alt=""
-                            aria-hidden="true"
-                            decoding="async"
-                            className={styles.contactIcon}
-                          />
-                          <span className={styles.contactText}>
-                            {section.location}
-                          </span>
-                        </p>
-                      ) : null}
-                      <p className={styles.contactLine}>
-                        <img
-                          src="/images/mail-us.svg"
-                          alt=""
-                          aria-hidden="true"
-                          decoding="async"
-                          className={styles.contactIcon}
-                        />
-                        <Link
-                          href={`mailto:${section.email}`}
-                          className={styles.contactLink}
-                        >
-                          {section.email}
-                        </Link>
-                      </p>
-                    </div>
-                  ) : null}
+                  <LegalContactBlock section={section} styles={styles} />
                 </section>
               ))}
             </div>

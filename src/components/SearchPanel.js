@@ -11,7 +11,9 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { splitTextByHighlights } from "@/lib/search-highlight";
-import { addRecentSearch } from "@/lib/search-recent";
+import { setSearchNavHighlight } from "@/lib/search-nav-highlight";
+import { addRecentSearch, readRecentSearches } from "@/lib/search-recent";
+import { searchPopular } from "@/lib/site-data";
 import {
   getAlternativeSearchSuggestions,
   getAutocompleteSuggestions,
@@ -140,6 +142,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
   const inputRef = useRef(null);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [recentSearches, setRecentSearches] = useState([]);
 
   useEffect(() => {
     if (!open) {
@@ -148,6 +151,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
 
     setQuery("");
     setActiveIndex(-1);
+    setRecentSearches(readRecentSearches());
 
     const frame = requestAnimationFrame(() => {
       inputRef.current?.focus();
@@ -228,7 +232,20 @@ export const SearchPanel = forwardRef(function SearchPanel(
         ? `No matches for “${trimmedQuery}”.`
         : `${totalCount} result${totalCount === 1 ? "" : "s"} found`;
 
-  const handleResultClick = (searchTerm) => {
+  const navigateToSearchResult = (href, searchTerm) => {
+    const term = String(searchTerm ?? trimmedQuery).trim();
+    if (term) {
+      setSearchNavHighlight(term, href);
+      addRecentSearch(term);
+    }
+    onNavigate();
+    onClose();
+  };
+
+  const handleResultClick = (searchTerm, href) => {
+    if (href && searchTerm?.trim()) {
+      setSearchNavHighlight(searchTerm.trim(), href);
+    }
     if (searchTerm) {
       addRecentSearch(searchTerm);
     }
@@ -252,9 +269,8 @@ export const SearchPanel = forwardRef(function SearchPanel(
       return;
     }
 
-    addRecentSearch(trimmedQuery);
+    navigateToSearchResult(entry.item.href, trimmedQuery);
     router.push(entry.item.href);
-    handleResultClick(trimmedQuery);
   };
 
   const handleInputKeyDown = (event) => {
@@ -288,9 +304,8 @@ export const SearchPanel = forwardRef(function SearchPanel(
       }
       if (filteredItems[0]) {
         event.preventDefault();
-        addRecentSearch(trimmedQuery);
+        navigateToSearchResult(filteredItems[0].href, trimmedQuery);
         router.push(filteredItems[0].href);
-        handleResultClick(trimmedQuery);
       }
     }
   };
@@ -363,6 +378,44 @@ export const SearchPanel = forwardRef(function SearchPanel(
         </p>
       ) : null}
 
+      {searchResult.type === "hint" && !hasQuery ? (
+        <div className={styles.idleState}>
+          {recentSearches.length > 0 ? (
+            <div className={styles.suggestionGroup}>
+              <p className={styles.popularEyebrow}>Recent searches</p>
+              <div className={styles.chips} role="group" aria-label="Recent searches">
+                {recentSearches.map((term) => (
+                  <button
+                    key={term}
+                    type="button"
+                    className={styles.chip}
+                    onClick={() => setQuery(term)}
+                  >
+                    {term}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          <div className={styles.suggestionGroup}>
+            <p className={styles.popularEyebrow}>Popular searches</p>
+            <p className={styles.popularHint}>Try a service, team member, or topic.</p>
+            <div className={styles.chips} role="group" aria-label="Popular searches">
+              {searchPopular.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  type="button"
+                  className={styles.chip}
+                  onClick={() => setQuery(suggestion)}
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {showAutocomplete ? (
         <div className={styles.autocomplete}>
           <p className={styles.popularEyebrow}>Suggestions</p>
@@ -417,7 +470,9 @@ export const SearchPanel = forwardRef(function SearchPanel(
                     <Link
                       href={item.href}
                       className={styles.result}
-                      onClick={() => handleResultClick(trimmedQuery)}
+                      onClick={() =>
+                        handleResultClick(trimmedQuery, item.href)
+                      }
                     >
                       <span className={styles.resultMeta}>
                         <GroupIcon group={item.group} />
@@ -441,7 +496,9 @@ export const SearchPanel = forwardRef(function SearchPanel(
                     <Link
                       href={item.href}
                       className={styles.result}
-                      onClick={() => handleResultClick(trimmedQuery)}
+                      onClick={() =>
+                        handleResultClick(trimmedQuery, item.href)
+                      }
                     >
                       <span className={styles.resultMeta}>
                         <GroupIcon group={item.group} />
@@ -482,7 +539,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
                   href={item.href}
                   className={styles.result}
                   data-active={isActive ? "true" : undefined}
-                  onClick={() => handleResultClick(trimmedQuery)}
+                  onClick={() => handleResultClick(trimmedQuery, item.href)}
                 >
                   <span className={styles.resultMeta}>
                     <GroupIcon group={item.group} />

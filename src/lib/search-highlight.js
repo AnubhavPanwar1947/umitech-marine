@@ -4,18 +4,26 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-export function splitTextByHighlights(text, query) {
-  const source = String(text ?? "");
+export function buildHighlightRegExp(query) {
   const tokens = getSearchTokensForQuery(query);
-  if (!source || !tokens.length) {
-    return [{ text: source, highlight: false }];
+  if (!tokens.length) {
+    return null;
   }
 
   const pattern = tokens
     .map((token) => escapeRegExp(token))
     .sort((a, b) => b.length - a.length)
     .join("|");
-  const regex = new RegExp(`(${pattern})`, "gi");
+
+  return new RegExp(`(${pattern})`, "gi");
+}
+
+export function splitTextByHighlights(text, query) {
+  const source = String(text ?? "");
+  const regex = buildHighlightRegExp(query);
+  if (!source || !regex) {
+    return [{ text: source, highlight: false }];
+  }
   const parts = [];
   let lastIndex = 0;
   let match;

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { cookiesPolicyPage } from "@/lib/site-data";
+import { LegalContactBlock } from "@/components/LegalContactBlock";
 import styles from "./page.module.css";
 
 const { title, description, sections } = cookiesPolicyPage;
@@ -58,26 +58,7 @@ export default function CookiesPolicyPage() {
                     </p>
                   ))}
 
-                  {section.contact ? (
-                    <div className={styles.contactBlock}>
-                      <p className={styles.paragraph}>{section.intro}</p>
-                      <p className={styles.contactLine}>
-                        <img
-                          src="/images/mail-us.svg"
-                          alt=""
-                          aria-hidden="true"
-                          decoding="async"
-                          className={styles.contactIcon}
-                        />
-                        <Link
-                          href={`mailto:${section.email}`}
-                          className={styles.contactLink}
-                        >
-                          {section.email}
-                        </Link>
-                      </p>
-                    </div>
-                  ) : null}
+                  <LegalContactBlock section={section} styles={styles} />
                 </section>
               ))}
             </div>

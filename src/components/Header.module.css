@@ -1,3 +1,31 @@
+.searchBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(24, 41, 82, 0.28);
+  cursor: default;
+  animation: headerSearchBackdropIn 180ms ease;
+}
+
+@keyframes headerSearchBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .searchBackdrop {
+    animation: none;
+  }
+}
+
 .header {
   --header-chrome-accent: #8fb4cc;
   --header-cta-bg: #1a557c;

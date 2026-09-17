@@ -1,41 +1,46 @@
-const TARGET_PANEL_WIDTH_PX = 144;
-
-function getEdgeInsetPx(viewportWidth) {
-  const preferred = viewportWidth * 0.02;
-  const min = 2;
-  const max = 8;
-  return Math.min(max, Math.max(min, preferred));
-}
+const DESKTOP_BREAKPOINT_PX = 960;
+const DESKTOP_PANEL_WIDTH_PX = 400;
+const VIEWPORT_EDGE_PX = 12;
+const MOBILE_EDGE_PX = 16;
+const NARROW_EDGE_PX = 8;
 
 export function getSearchPanelStyle(anchor) {
   const viewportWidth = window.innerWidth;
-  const edgeInset = getEdgeInsetPx(viewportWidth);
-  const horizontalMargin = Math.max(edgeInset, Math.min(6, viewportWidth * 0.04));
-  const availableWidth = Math.max(0, viewportWidth - horizontalMargin * 2);
-  const panelWidth = Math.min(TARGET_PANEL_WIDTH_PX, availableWidth);
   const rect = anchor.getBoundingClientRect();
+  const top = rect.bottom + 8;
+  const isDesktop = viewportWidth >= DESKTOP_BREAKPOINT_PX;
 
-  if (viewportWidth < 180 || availableWidth < TARGET_PANEL_WIDTH_PX) {
+  if (!isDesktop || viewportWidth < 180) {
+    const edge =
+      viewportWidth < 180
+        ? NARROW_EDGE_PX
+        : Math.min(MOBILE_EDGE_PX, Math.max(8, viewportWidth * 0.04));
+
     return {
-      top: `${rect.bottom + 6}px`,
-      left: `${horizontalMargin}px`,
-      right: `${horizontalMargin}px`,
+      top: `${top}px`,
+      left: `${edge}px`,
+      right: `${edge}px`,
       width: "auto",
-      maxWidth: `calc(100vw - ${horizontalMargin * 2}px)`,
+      maxWidth: `calc(100vw - ${edge * 2}px)`,
     };
   }
 
-  let right = viewportWidth - rect.right;
-  const leftEdge = viewportWidth - right - panelWidth;
+  const panelWidth = Math.min(
+    DESKTOP_PANEL_WIDTH_PX,
+    Math.max(280, viewportWidth - VIEWPORT_EDGE_PX * 2),
+  );
 
-  if (leftEdge < horizontalMargin) {
-    right = viewportWidth - panelWidth - horizontalMargin;
+  let right = viewportWidth - rect.right;
+  const leftIfRightAligned = viewportWidth - right - panelWidth;
+
+  if (leftIfRightAligned < VIEWPORT_EDGE_PX) {
+    right = viewportWidth - panelWidth - VIEWPORT_EDGE_PX;
   }
 
-  right = Math.max(horizontalMargin, right);
+  right = Math.max(VIEWPORT_EDGE_PX, right);
 
   return {
-    top: `${rect.bottom + 6}px`,
+    top: `${top}px`,
     right: `${right}px`,
     width: `${panelWidth}px`,
     maxWidth: `${panelWidth}px`,

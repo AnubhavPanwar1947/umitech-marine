@@ -1,0 +1,16 @@
+mark.search-destination-highlight {
+  padding: 0 0.12em;
+  border-radius: 0.15em;
+  background: rgba(26, 85, 124, 0.22);
+  color: inherit;
+  font-weight: 700;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  scroll-margin-top: calc(var(--header-height) + 0.75rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  mark.search-destination-highlight {
+    transition: none;
+  }
+}

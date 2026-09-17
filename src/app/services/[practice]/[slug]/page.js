@@ -35,7 +35,11 @@ export default async function ServiceTopicPage({ params }) {
 
   return (
     <main>
-      <section className={`section ${styles.section}`} aria-labelledby="service-topic-title">
+      <section
+        className={`section ${styles.section}`}
+        data-search-highlight-scope="service-topic"
+        aria-labelledby="service-topic-title"
+      >
         <div className={`container ${styles.inner}`}>
           <h1 id="service-topic-title" className={styles.title}>
             {item.title}

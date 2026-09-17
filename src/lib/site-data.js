@@ -935,6 +935,8 @@ export const standardTermsPage = {
       intro:
         "For any contractual queries, notices, or communication, please contact:",
       email: "info@umitech.co.jp",
+      phone: "+91 789 503 9068",
+      phoneHref: "tel:+917895039068",
       location: "Yokohama, Japan",
     },
   ],
@@ -952,7 +954,7 @@ export const termsPage = {
       heading: "Interpretation and Definitions",
       paragraphs: [
         "The words of which the initial letter is capitalised have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.",
-        "“Company” means Umitech Marine Solutions (referred to as “the Company”, “We”, “Us” or “Our”), having its office at 4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002, Japan.",
+        "“Company” means Umitech Marine Solutions (referred to as “the Company”, “We”, “Us” or “Our”), having its office at 4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002.",
         "“Country” means Japan.",
         "“Device” means any device that can access the Service, such as a computer, a mobile phone or a digital tablet.",
         "“Service” means the Website and the information, content, materials, features and functionalities made available through the Website.",
@@ -1079,12 +1081,9 @@ export const termsPage = {
       intro:
         "If You have any questions about these Terms and Conditions, You can contact Us:",
       email: "info@umitech.co.jp",
-      contactPageHref: "/contact/",
-      contactPageLabel: "https://www.umitech.co.jp/contact/",
       phone: "+91 789 503 9068",
       phoneHref: "tel:+917895039068",
-      location:
-        "4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002, Japan",
+      location: "Yokohama, Japan",
     },
   ],
 };
@@ -1146,7 +1145,10 @@ export const cookiesPolicyPage = {
       heading: "Contact",
       contact: true,
       intro: "For cookie-related queries, contact:",
-    email: "info@umitech.co.jp",
+      email: "info@umitech.co.jp",
+      phone: "+91 789 503 9068",
+      phoneHref: "tel:+917895039068",
+      location: "Yokohama, Japan",
     },
   ],
 };
@@ -1250,9 +1252,10 @@ export const privacyPolicyPage = {
       contact: true,
       intro:
         "If you have any questions about this Privacy Policy, please contact:",
-      organization: "Umitech Marine Solutions",
-      location: "Yokohama, Japan",
       email: "info@umitech.co.jp",
+      phone: "+91 789 503 9068",
+      phoneHref: "tel:+917895039068",
+      location: "Yokohama, Japan",
     },
   ],
 };
@@ -1327,8 +1330,7 @@ export const disclaimerPage = {
       email: "info@umitech.co.jp",
       phone: "+91 789 503 9068",
       phoneHref: "tel:+917895039068",
-      location:
-        "4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002",
+      location: "Yokohama, Japan",
     },
   ],
 };

@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { HashScroll } from "@/components/HashScroll";
+import { SearchResultHighlighter } from "@/components/SearchResultHighlighter";
 import "./globals.css";
 
 const inter = Inter({
@@ -59,6 +61,8 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
         <Header />
+        <HashScroll />
+        <SearchResultHighlighter />
         {children}
         <Footer />
       </body>

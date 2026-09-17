@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { contactPage } from "@/lib/site-data";
+import { contactCardAnchor } from "@/lib/search-anchors";
 import { Reveal } from "@/components/Reveal";
 import styles from "./ContactCardsSection.module.css";
 
@@ -26,7 +27,12 @@ export function ContactCardsSection() {
 
             return (
             <li key={card.title}>
-              <Reveal as="article" className={styles.card} delay={80 + index * 60}>
+              <Reveal
+                as="article"
+                id={contactCardAnchor(card.title)}
+                className={styles.card}
+                delay={80 + index * 60}
+              >
                 <div
                   className={`${styles.media} ${
                     isCallOrMail ? styles.mediaCallMail : ""

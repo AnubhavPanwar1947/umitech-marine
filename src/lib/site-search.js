@@ -20,6 +20,16 @@ import {
   termsPage,
 } from "@/lib/site-data";
 import { cfdDocxPlainText } from "@/lib/cfd-docx-plaintext";
+import { cfdDocxSearchSections } from "@/lib/cfd-docx-search-sections";
+import {
+  LEGAL_PAGE_PREFIX,
+  blogSectionAnchor,
+  contactCardAnchor,
+  legalClauseAnchor,
+  legalSectionAnchor,
+  serviceTopicAnchor,
+  teamMemberAnchor,
+} from "@/lib/search-anchors";
 
 const SEARCH_SYNONYM_RULES = [
   { pattern: /\bmarine survey(?:ing)?\b/gi, replacement: "surveying" },
@@ -140,6 +150,8 @@ function joinSearchParts(parts) {
 }
 
 function buildLegalPageRecords(page, href, categoryPrefix, records, seen) {
+  const pagePrefix = LEGAL_PAGE_PREFIX[href] ?? slugifyLegalPrefix(categoryPrefix);
+
   pushRecord(records, seen, {
     title: page.title,
     href,
@@ -168,17 +180,43 @@ function buildLegalPageRecords(page, href, categoryPrefix, records, seen) {
       sectionParts.push(definition.term, definition.text);
     }
 
-    for (const clause of section.clauses ?? []) {
-      sectionParts.push(clause.id, clause.text, ...(clause.subItems ?? []));
-    }
+    const clauses = section.clauses ?? [];
 
     pushRecord(records, seen, {
       title: sectionTitle,
       href,
+      anchor: legalSectionAnchor(pagePrefix, section.number),
       category: `${categoryPrefix} · ${page.title}`,
       searchText: joinSearchParts(sectionParts),
     });
+
+    for (const clause of clauses) {
+      if (!clause.id) {
+        continue;
+      }
+      const clauseLabel = `${clause.id}. ${section.heading}`;
+      pushRecord(records, seen, {
+        title: clauseLabel,
+        href,
+        anchor: legalClauseAnchor(pagePrefix, clause.id),
+        category: `${categoryPrefix} · ${page.title}`,
+        searchText: joinSearchParts([
+          section.heading,
+          sectionTitle,
+          clause.id,
+          clause.text,
+          ...(clause.subItems ?? []),
+        ]),
+      });
+    }
   }
+}
+
+function slugifyLegalPrefix(value) {
+  return String(value ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export function buildSiteSearchIndex() {
@@ -248,6 +286,7 @@ export function buildSiteSearchIndex() {
   pushRecord(records, seen, {
     title: contactPage.title,
     href: "/contact",
+    anchor: "contact",
     category: "Contact",
     searchText: joinSearchParts([
       contactPage.title,
@@ -261,6 +300,31 @@ export function buildSiteSearchIndex() {
       footer.contact.phone,
       footer.contact.address,
       footer.contact.email,
+    ]),
+  });
+
+  for (const card of contactPage.cards) {
+    pushRecord(records, seen, {
+      title: card.title,
+      href: "/contact",
+      anchor: contactCardAnchor(card.title),
+      category: "Contact",
+      searchText: joinSearchParts([
+        card.title,
+        card.description,
+        card.imageAlt,
+      ]),
+    });
+  }
+
+  pushRecord(records, seen, {
+    title: contactPage.form.heading,
+    href: "/contact",
+    anchor: "contact-form",
+    category: "Contact",
+    searchText: joinSearchParts([
+      contactPage.form.heading,
+      contactPage.form.submitLabel,
     ]),
   });
 
@@ -321,6 +385,17 @@ export function buildSiteSearchIndex() {
   });
 
   pushRecord(records, seen, {
+    title: aboutPage.coreValues.heading,
+    href: "/about",
+    anchor: "core-values",
+    category: "About",
+    searchText: joinSearchParts([
+      aboutPage.coreValues.heading,
+      ...aboutPage.coreValues.paragraphs,
+    ]),
+  });
+
+  pushRecord(records, seen, {
     title: servicesPage.intro.title,
     href: "/services",
     category: "Services",
@@ -360,6 +435,7 @@ export function buildSiteSearchIndex() {
         pushRecord(records, seen, {
           title: item.title,
           href: `/services/${practice.id}/${item.slug}/`,
+          anchor: serviceTopicAnchor(),
           category: `${practiceLabel} · Services`,
           searchText: joinSearchParts([practiceLabel, practice.lead, ...itemParts]),
         });
@@ -393,7 +469,7 @@ export function buildSiteSearchIndex() {
     pushRecord(records, seen, {
       title: member.name,
       href: "/team",
-      anchor: "team-members",
+      anchor: teamMemberAnchor(member.name),
       category: "Team",
       searchText: joinSearchParts([
         member.name,
@@ -433,10 +509,28 @@ export function buildSiteSearchIndex() {
       searchText: joinSearchParts(articleParts),
     });
 
+    if (article.format === "docxHtml" && article.slug === "computational-fluid-dynamics") {
+      for (const cfdSection of cfdDocxSearchSections) {
+        pushRecord(records, seen, {
+          title: cfdSection.label || articleTitle,
+          href: `/blog/${article.slug}/`,
+          anchor: cfdSection.id,
+          category: `${articleTitle} · Blog`,
+          searchText: joinSearchParts([
+            articleTitle,
+            article.title,
+            cfdSection.label,
+            cfdSection.searchText,
+          ]),
+        });
+      }
+    }
+
     for (const section of article.sections ?? []) {
       pushRecord(records, seen, {
         title: section.heading,
         href: `/blog/${article.slug}/`,
+        anchor: blogSectionAnchor(section.heading),
         category: `${articleTitle} · Blog`,
         searchText: joinSearchParts([
           articleTitle,

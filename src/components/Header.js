@@ -25,6 +25,7 @@ export function Header() {
   const searchPanelRef = useRef(null);
   const desktopSearchRef = useRef(null);
   const mobileSearchRef = useRef(null);
+  const searchTriggerRef = useRef(null);
   const [searchPanelStyle, setSearchPanelStyle] = useState(undefined);
 
   useEffect(() => {
@@ -81,6 +82,9 @@ export function Header() {
         setMenuOpen(false);
       }
       setServicesDropdownOpen(false);
+      searchTriggerRef.current = window.matchMedia("(min-width: 960px)").matches
+        ? desktopSearchRef.current
+        : mobileSearchRef.current;
       setSearchOpen(true);
     };
 
@@ -181,10 +185,18 @@ export function Header() {
   }, [searchOpen]);
 
   const closeMenu = () => setMenuOpen(false);
-  const closeSearch = () => setSearchOpen(false);
+  const closeSearch = () => {
+    setSearchOpen(false);
+    const trigger = searchTriggerRef.current;
+    if (trigger instanceof HTMLElement) {
+      requestAnimationFrame(() => {
+        trigger.focus();
+      });
+    }
+  };
   const closeServicesDropdown = () => setServicesDropdownOpen(false);
 
-  const toggleSearch = () => {
+  const toggleSearch = (event) => {
     if (searchOpen) {
       closeSearch();
       return;
@@ -195,6 +207,11 @@ export function Header() {
     }
 
     closeServicesDropdown();
+    const trigger =
+      event?.currentTarget instanceof HTMLElement
+        ? event.currentTarget
+        : desktopSearchRef.current ?? mobileSearchRef.current;
+    searchTriggerRef.current = trigger;
     setSearchOpen(true);
   };
 
@@ -331,6 +348,14 @@ export function Header() {
         </div>
       </div>
 
+      {searchOpen ? (
+        <button
+          type="button"
+          className={styles.searchBackdrop}
+          aria-label="Close search"
+          onClick={closeSearch}
+        />
+      ) : null}
       <SearchPanel
         id={searchPanelId}
         ref={searchPanelRef}
