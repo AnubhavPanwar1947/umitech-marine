@@ -54,6 +54,7 @@
 .introTitleCol {
   min-width: 0;
   align-self: start;
+  padding-top: clamp(0.5rem, 1.5vw, 1.25rem);
 }
 
 .introMediaCol {

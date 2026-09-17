@@ -70,6 +70,9 @@ export const servicesPage = {
       "Our team consists of accredited Sire inspectors, Flag state inspectors and experienced marine surveyors, each having previously served management roles while sailing onboard. We collectively bring together decades of experience in varied fields ranging from conventional shipping to oil and gas offshore industry and marine engineering.",
       "We believe that with our collective experience we can bring added value to our customers and help them enhance their services by taking the path of sustainable growth. Our core value lies in providing our clients with innovative ways to fulfil their requirements.",
     ],
+    image: "/images/services-overview.jpg",
+    imageAlt:
+      "Marine technical studio with hull drawings and a ship model on a drafting table beside a shipyard window.",
   },
   practices: [
     {
@@ -369,18 +372,23 @@ export const servicesPage = {
           title: "UMISTAB-X",
           slug: "legal-consultancy",
           detail: [
-            "Our team of seasoned marine legal experts offers comprehensive legal support across the maritime sector. We specialize in drafting, reviewing, and analyzing contracts related to marine carriage, transportation, vessel sales, insurance, and international trade.",
-            "We also provide document validation services on behalf of our clients, including verification of official records, vessel registry, labor agreements, and administrative contracts. As certified sworn translators, we can prepare and process all required legal documents in English with precision and accuracy.",
-            "Our practicing maritime lawyers are equipped to negotiate on your behalf and safeguard your interests in both court proceedings and pre-litigation disputes. We represent clients across various jurisdictions—civil, criminal, labor, and administrative—and handle claims involving:",
+            "UMISTAB-X is a vessel-specific Windows loading instrument developed by Umitech Marine Solutions for bulk-carrier operations. It helps Masters and deck officers plan, evaluate, verify, and document cargo and ballast conditions. The manual applies to the bulk carrier Golden Soul (IMO No. 9950715), with approval stated for onboard use by ABS.",
+            "The system supports entry and management of ballast, fuel, freshwater, lubricating oil, stores, constants, grain cargo, homogeneous and non-homogeneous dry bulk cargo, discrete cargo parcels, and icing loads. It automatically calculates key hydrostatic and stability parameters, including displacement, drafts, trim, KG/VCG, LCG, GM, free-surface effects, and tank moments.",
+            "UMISTAB-X provides checks for intact stability, grain stability, damage stability, GZ curves, IMO criteria, visibility, draft surveys, and longitudinal strength. Shear forces and bending moments are calculated along the hull and compared with approved Class limits for intact conditions and predefined damage cases.",
           ],
           detailList: [
-            "Loss prevention and damage claims",
-            "Personal injury and liability cases",
-            "Maritime fines and sanctions",
-            "Preventive legal measures and ship arrests",
+            "Ballast, fuel, freshwater, lubricating oil, stores, constants, and icing loads",
+            "Grain cargo, homogeneous and non-homogeneous dry bulk cargo, and discrete cargo parcels",
+            "Intact, grain, and damage stability checks, including GZ curves and IMO criteria",
+            "Hydrostatic results including displacement, drafts, trim, KG/VCG, LCG, GM, free-surface effects, and tank moments",
+            "Longitudinal strength, with shear forces and bending moments compared against approved Class limits",
+            "Visibility and draft-survey checks",
+            "Graphical arrangement views, floating summaries, validation results, and stability and strength plots",
+            "Cargo and tank summaries and print-ready PDF reports for operational records, port authorities, surveyors, Class, and company review",
           ],
           detailAfter: [
-            "Whether you're navigating complex commercial transactions or facing legal challenges at sea or ashore, we are committed to delivering expert legal representation tailored to the maritime industry.",
+            "UMISTAB-X incorporates vessel-approved data and supports compliance with applicable IMO Grain Code, SOLAS, MARPOL, BLU Code, Load Line, and classification requirements. Accuracy verification should be performed using approved test conditions after installation, updates, hardware changes, or whenever results are questioned.",
+            "UMISTAB-X is an operational aid and does not replace the vessel’s approved Stability Booklet, Grain Loading Manual, SMS procedures, professional judgment, or the Master’s responsibility. Results depend on accurate user-entered data and must be cross-checked against actual onboard conditions. The software performs static calculations and does not replace assessment of dynamic wave effects, wind, sea state, hull deflection, or unapproved damage scenarios.",
           ],
         },
       ],
