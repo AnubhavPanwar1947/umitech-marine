@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { footer, teamPage } from "@/lib/site-data";
 import styles from "./CfdWireframeArticle.module.css";
-
-const CFD_CONTACT_PORTRAIT =
-  "/blog/computational-fluid-dynamics/blog-abhinav.png";
-
-const cfdContactMember =
-  teamPage.members.find((member) =>
-    member.name.includes("Abhinav Upadhyay"),
-  ) ?? teamPage.members[0];
 
 export function CfdWireframeArticle({
   title,
@@ -17,7 +8,9 @@ export function CfdWireframeArticle({
   headings,
   bodyHtml,
   heroImage,
-  heroImageAlt = "CFD laboratory simulation of marine vessel flow",
+  heroImageWidth = 1600,
+  heroImageHeight = 758,
+  heroImageAlt = "CFD Phase 2 volume fraction contour of a vessel hull at the free surface",
 }) {
   return (
     <section className={`section ${styles.section}`} aria-labelledby="cfd-article-title">
@@ -50,10 +43,11 @@ export function CfdWireframeArticle({
                 <Image
                   src={heroImage}
                   alt={heroImageAlt}
-                  width={1280}
-                  height={720}
+                  width={heroImageWidth}
+                  height={heroImageHeight}
+                  quality={100}
                   className={styles.introHeroImage}
-                  sizes="(min-width: 768px) 48vw, 100vw"
+                  sizes="(max-width: 767px) 100vw, 58vw"
                   priority
                 />
               </div>
@@ -111,33 +105,25 @@ export function CfdWireframeArticle({
         </div>
 
         <aside
-          className={styles.contactCard}
+          className={styles.contactAside}
           aria-labelledby="cfd-contact-heading"
         >
           <h2 id="cfd-contact-heading" className={styles.contactHeading}>
-            For more information, please contact
+            For more information, please contact us:
           </h2>
-          <div className={styles.contactCardBody}>
-            <div className={styles.contactPortraitFrame}>
-              <Image
-                src={CFD_CONTACT_PORTRAIT}
-                alt={cfdContactMember.imageAlt}
-                width={50}
-                height={100}
-                className={styles.contactPortrait}
-                sizes="50px"
+          <div className={styles.contactBlock}>
+            <p className={styles.contactLine}>
+              <img
+                src="/images/mail-us.svg"
+                alt=""
+                aria-hidden="true"
+                decoding="async"
+                className={styles.contactIcon}
               />
-            </div>
-            <div className={styles.contactDetails}>
-              <p className={styles.contactName}>{cfdContactMember.name}</p>
-              <p className={styles.contactRole}>{cfdContactMember.role}</p>
-              <p className={styles.contactLine}>
-                <a href={footer.contact.phoneHref}>{footer.contact.phone}</a>
-              </p>
-              <p className={styles.contactLine}>
-                <a href={footer.contact.emailHref}>{footer.contact.email}</a>
-              </p>
-            </div>
+              <Link href="mailto:info@umitech.co.jp" className={styles.contactLink}>
+                info@umitech.co.jp
+              </Link>
+            </p>
           </div>
         </aside>
 

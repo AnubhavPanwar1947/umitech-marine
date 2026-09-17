@@ -52,6 +52,8 @@ export default async function BlogArticlePage({ params }) {
           headings={headings}
           bodyHtml={docxHtml}
           heroImage={article.image}
+          heroImageWidth={article.imageWidth}
+          heroImageHeight={article.imageHeight}
           heroImageAlt={article.imageAlt}
         />
       </main>

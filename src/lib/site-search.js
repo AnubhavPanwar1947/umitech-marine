@@ -10,6 +10,7 @@ import {
   hero,
   navigation,
   privacyPolicyPage,
+  searchPopular,
   services,
   servicesPage,
   servicesSection,
@@ -18,6 +19,74 @@ import {
   termsPage,
 } from "@/lib/site-data";
 import { cfdDocxPlainText } from "@/lib/cfd-docx-plaintext";
+
+const SEARCH_SYNONYM_RULES = [
+  { pattern: /\bmarine survey(?:ing)?\b/gi, replacement: "surveying" },
+  { pattern: /\bship design\b/gi, replacement: "naval architecture" },
+  { pattern: /\bcfd\b/gi, replacement: "computational fluid dynamics" },
+  { pattern: /\btechnical consulting\b/gi, replacement: "engineering" },
+];
+
+export const RESULT_GROUP_LABELS = {
+  services: "Service",
+  articles: "Article",
+  team: "Team member",
+  about: "Company",
+  legal: "Legal",
+};
+
+export function expandQueryWithSynonyms(query) {
+  let expanded = String(query ?? "");
+  for (const rule of SEARCH_SYNONYM_RULES) {
+    expanded = expanded.replace(rule.pattern, rule.replacement);
+  }
+  return expanded;
+}
+
+export function getSearchTokensForQuery(query) {
+  return tokenizeSearchQuery(expandQueryWithSynonyms(query));
+}
+
+export function getRecordGroup(record) {
+  const href = String(record.href ?? "");
+  const category = normalizeSearchText(record.category);
+
+  if (href.startsWith("/blog") || category.includes("blog")) {
+    return "articles";
+  }
+  if (category.includes("team")) {
+    return "team";
+  }
+  if (
+    category.includes("legal") ||
+    category.includes("terms") ||
+    category.includes("cookies") ||
+    category.includes("privacy") ||
+    category.includes("standard")
+  ) {
+    return "legal";
+  }
+  if (
+    href.startsWith("/services") ||
+    category.includes("service") ||
+    category.includes("naval")
+  ) {
+    return "services";
+  }
+  if (
+    category.includes("about") ||
+    href === "/about" ||
+    href === "/contact" ||
+    category.includes("contact") ||
+    category.includes("navigation") ||
+    category.includes("footer") ||
+    href === "/"
+  ) {
+    return "about";
+  }
+
+  return "about";
+}
 
 export function normalizeSearchText(value) {
   return String(value ?? "")
@@ -428,7 +497,7 @@ function makeSnippet(text, query) {
   if (!text) {
     return "";
   }
-  const tokens = tokenizeSearchQuery(query);
+  const tokens = getSearchTokensForQuery(query);
   const lower = text.toLowerCase();
   let index = -1;
   for (const token of tokens) {
@@ -449,20 +518,23 @@ function makeSnippet(text, query) {
   return `${prefix}${slice}${suffix}`;
 }
 
-function scoreRecord(record, query) {
-  const tokens = tokenizeSearchQuery(query);
+function scoreRecord(record, query, { relaxed = false } = {}) {
+  const tokens = getSearchTokensForQuery(query);
   if (!tokens.length) {
     return null;
   }
 
-  const normalizedQuery = normalizeSearchText(query);
+  const normalizedQuery = normalizeSearchText(expandQueryWithSynonyms(query));
   const title = normalizeSearchText(record.title);
   const category = normalizeSearchText(record.category);
   const body = normalizeSearchText(record.searchText);
   const haystack = `${title} ${category} ${body}`;
 
-  const allTokensMatch = tokens.every((token) => haystack.includes(token));
-  if (!allTokensMatch) {
+  const matchedTokens = tokens.filter((token) => haystack.includes(token));
+  const allTokensMatch = matchedTokens.length === tokens.length;
+  const anyTokenMatch = matchedTokens.length > 0;
+
+  if (!allTokensMatch && !(relaxed && anyTokenMatch)) {
     return null;
   }
 
@@ -473,34 +545,40 @@ function scoreRecord(record, query) {
     score += 700;
   } else if (tokens.every((token) => title.includes(token))) {
     score += 500;
+  } else if (tokens.every((token) => category.includes(token))) {
+    score += 320;
+  } else if (tokens.every((token) => body.includes(token))) {
+    score += 120;
+  } else if (relaxed) {
+    score += matchedTokens.length * 25;
   }
 
   if (category.includes(normalizedQuery)) {
     score += 250;
   }
 
-  if (body.includes(normalizedQuery)) {
-    score += 200;
+  if (body.includes(normalizedQuery) && !title.includes(normalizedQuery)) {
+    score += 80;
   }
 
   score += tokens.filter((token) => title.includes(token)).length * 40;
-  score += tokens.filter((token) => body.includes(token)).length * 10;
+  score += tokens.filter((token) => category.includes(token)).length * 18;
+  score += tokens.filter((token) => body.includes(token)).length * 8;
+
+  const group = getRecordGroup(record);
 
   return {
     ...record,
+    group,
+    groupLabel: RESULT_GROUP_LABELS[group] ?? "Page",
     score,
     snippet: makeSnippet(record.searchText || record.title, query),
   };
 }
 
-export function searchSite(query) {
-  const trimmed = query.trim();
-  if (!trimmed) {
-    return { type: "hint" };
-  }
-
+function rankSearchResults(query, { relaxed = false, limit = 25 } = {}) {
   const ranked = getSiteSearchIndex()
-    .map((record) => scoreRecord(record, trimmed))
+    .map((record) => scoreRecord(record, query, { relaxed }))
     .filter(Boolean)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 
@@ -513,10 +591,112 @@ export function searchSite(query) {
     }
     seenKeys.add(key);
     items.push(item);
-    if (items.length >= 25) {
+    if (items.length >= limit) {
       break;
     }
   }
 
-  return { type: "results", items };
+  return { items, totalCount: ranked.length };
+}
+
+export function getAutocompleteSuggestions(query, limit = 6) {
+  const trimmed = query.trim();
+  if (trimmed.length < 2) {
+    return [];
+  }
+
+  const normalized = normalizeSearchText(expandQueryWithSynonyms(trimmed));
+  const suggestions = new Set();
+
+  for (const term of searchPopular) {
+    const normalizedTerm = normalizeSearchText(term);
+    if (
+      normalizedTerm.includes(normalized) ||
+      normalized.includes(normalizedTerm)
+    ) {
+      suggestions.add(term);
+    }
+  }
+
+  for (const record of getSiteSearchIndex()) {
+    const title = normalizeSearchText(record.title);
+    if (title.includes(normalized) || title.startsWith(normalized)) {
+      suggestions.add(record.title);
+    }
+    if (suggestions.size >= limit * 2) {
+      break;
+    }
+  }
+
+  return [...suggestions]
+    .filter((entry) => normalizeSearchText(entry) !== normalized)
+    .sort((a, b) => {
+      const aNorm = normalizeSearchText(a);
+      const bNorm = normalizeSearchText(b);
+      const aStarts = aNorm.startsWith(normalized) ? 0 : 1;
+      const bStarts = bNorm.startsWith(normalized) ? 0 : 1;
+      if (aStarts !== bStarts) {
+        return aStarts - bStarts;
+      }
+      return a.localeCompare(b);
+    })
+    .slice(0, limit);
+}
+
+export function getAlternativeSearchSuggestions(query, limit = 4) {
+  const normalized = normalizeSearchText(expandQueryWithSynonyms(query));
+  const picks = searchPopular.filter((term) => {
+    const termNorm = normalizeSearchText(term);
+    return termNorm !== normalized && !termNorm.includes(normalized);
+  });
+  return picks.slice(0, limit);
+}
+
+export function getRelatedServiceResults(limit = 3) {
+  const seen = new Set();
+  const items = [];
+
+  for (const record of getSiteSearchIndex()) {
+    if (getRecordGroup(record) !== "services") {
+      continue;
+    }
+    const key = `${record.href}|${record.title}`;
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    items.push({
+      ...record,
+      group: "services",
+      groupLabel: RESULT_GROUP_LABELS.services,
+      snippet: "",
+    });
+    if (items.length >= limit) {
+      break;
+    }
+  }
+
+  return items;
+}
+
+export function getClosestSearchResults(query, limit = 3) {
+  const { items } = rankSearchResults(query, { relaxed: true, limit });
+  return items;
+}
+
+export function searchSite(query) {
+  const trimmed = query.trim();
+  if (!trimmed) {
+    return { type: "hint" };
+  }
+
+  const { items, totalCount } = rankSearchResults(trimmed);
+  return { type: "results", items, totalCount };
+}
+
+export function filterSearchResultsByGroup(items, groupId) {
+  if (groupId === "all") {
+    return items;
+  }
+  return items.filter((item) => item.group === groupId);
 }

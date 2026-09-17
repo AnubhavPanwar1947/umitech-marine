@@ -2,7 +2,7 @@
   background: var(--bg-section);
   padding-block: clamp(1.5rem, 4vw, 2.5rem);
   min-width: 0;
-  overflow-x: clip;
+  overflow-x: visible;
 }
 
 .section > :global(.container) {
@@ -47,13 +47,24 @@
 .introHero {
   display: grid;
   gap: clamp(1.25rem, 3vw, 2rem);
-  align-items: center;
+  align-items: start;
   min-width: 0;
 }
 
-.introTitleCol,
-.introMediaCol {
+.introTitleCol {
   min-width: 0;
+  align-self: start;
+}
+
+.introMediaCol {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  padding: clamp(0.25rem, 1.5vw, 0.5rem);
+  box-sizing: border-box;
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  overflow: visible;
 }
 
 .articleTitle {
@@ -64,6 +75,8 @@
   line-height: 1.2;
   color: var(--color-heading-on-light);
   overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
 }
 
 .heroSeparator {
@@ -91,14 +104,17 @@
   width: 100%;
   max-width: 100%;
   height: auto;
-  border-radius: var(--radius-md);
+  min-width: 0;
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--radius-sm);
 }
 
 @media (min-width: 768px) {
   .introHero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
     gap: clamp(1.5rem, 3vw, 2.5rem);
-    align-items: center;
+    align-items: start;
   }
 }
 
@@ -248,12 +264,13 @@
   display: none;
 }
 
-.contactCard {
+.contactAside {
   margin-top: var(--space-6);
   min-width: 0;
-  max-width: 100%;
+  max-width: 52rem;
   padding-top: var(--space-5);
   border-top: 1px solid var(--color-sand-200);
+  overflow: visible;
 }
 
 .contactHeading {
@@ -266,82 +283,47 @@
   overflow-wrap: anywhere;
 }
 
-.contactCardBody {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--space-4);
+.contactBlock {
+  display: grid;
+  gap: var(--space-2);
   min-width: 0;
-}
-
-.contactPortraitFrame {
-  flex: 0 0 auto;
-  width: min(50px, 100%);
-  max-width: 100%;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-}
-
-.contactPortrait {
-  display: block;
-  width: 50px;
-  height: 100px;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-.contactDetails {
-  flex: 1 1 12rem;
-  min-width: 0;
-}
-
-@media (max-width: 319px) {
-  .contactCardBody {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .contactDetails {
-    flex-basis: 100%;
-    width: 100%;
-  }
-}
-
-.contactName {
-  margin: 0 0 var(--space-2);
-  font-weight: 600;
-  color: var(--color-heading-on-light);
-  overflow-wrap: anywhere;
-}
-
-.contactRole {
-  margin: 0 0 var(--space-3);
-  color: var(--text-on-light-muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
 }
 
 .contactLine {
-  margin: 0 0 var(--space-2);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  min-width: 0;
+  font-size: clamp(0.9rem, 2.1vw, 1.05rem);
+  line-height: 1.65;
 }
 
-.contactLine:last-child {
-  margin-bottom: 0;
+.contactIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(1.08);
+  transform-origin: center center;
 }
 
-.contactLine a {
+.contactLink {
   color: var(--link-accent);
   text-decoration: none;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
-.contactLine a:hover,
-.contactLine a:focus-visible {
+.contactLink:hover,
+.contactLink:focus-visible {
   text-decoration: underline;
+}
+
+.contactLink:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .tocAside {

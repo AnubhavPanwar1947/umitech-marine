@@ -628,9 +628,12 @@ export const blogPage = {
       summary:
         "CFD reveals how vessel-flow analysis can guide resistance reduction, fuel-efficiency improvements, and retrofit decisions before capital is committed.",
       image:
-        "/blog/computational-fluid-dynamics/CFD-Laboratory-Simulation.jpg",
-      imageAlt: "CFD laboratory simulation of marine vessel flow",
-      ctaLabel: "Read article",
+        "/blog/computational-fluid-dynamics/cfd-volume-fraction-contour.png",
+      imageWidth: 1600,
+      imageHeight: 758,
+    imageAlt:
+        "CFD Phase 2 volume fraction contour of a vessel hull at the free surface",
+    ctaLabel: "Read article",
     },
   ],
 };
@@ -647,8 +650,8 @@ export const standardTermsPage = {
   title: "Standard Terms & Conditions of Engagement",
   description:
     "Standard Terms and Conditions of Engagement for UMITECH MARINE consultancy services, including scope, fees, liability, and governing law.",
-  sections: [
-    {
+    sections: [
+      {
       number: "1",
       heading: "Interpretation",
       intro: "In these Conditions, the following definitions apply:",
@@ -937,18 +940,18 @@ export const termsPage = {
     {
       number: "1",
       heading: "Acceptance of Terms",
-      paragraphs: [
+        paragraphs: [
         "By accessing and using www.umitech.co.jp (“the Website”), you agree to be bound by these Terms and Conditions. If you do not agree, please discontinue use immediately.",
-      ],
-    },
-    {
+        ],
+      },
+      {
       number: "2",
       heading: "Ownership and Copyright",
-      paragraphs: [
+        paragraphs: [
         "All content, including text, images, logos, graphics, and materials on this Website, is the property of Umitech Marine Solutions unless otherwise stated. Unauthorized use, reproduction, or redistribution is prohibited.",
-      ],
-    },
-    {
+        ],
+      },
+      {
       number: "3",
       heading: "Use of the Website",
       paragraphs: [
@@ -958,19 +961,19 @@ export const termsPage = {
         "Violate any applicable laws or regulations.",
         "Infringe upon the rights of others.",
         "Interfere with Website functionality or security.",
-      ],
-    },
-    {
+        ],
+      },
+      {
       number: "4",
       heading: "Accuracy of Information",
-      paragraphs: [
+        paragraphs: [
         "We strive to maintain accurate and up-to-date information; however, Umitech Marine Solutions makes no warranties regarding completeness, accuracy, or reliability of content. The Website’s information is provided for general guidance only.",
-      ],
-    },
-    {
+        ],
+      },
+      {
       number: "5",
       heading: "Limitation of Liability",
-      paragraphs: [
+        paragraphs: [
         "To the fullest extent permitted by law, Umitech Marine Solutions shall not be liable for any direct, indirect, incidental, or consequential damages resulting from use or inability to use this Website.",
       ],
     },
@@ -1069,7 +1072,7 @@ export const cookiesPolicyPage = {
       heading: "Contact",
       contact: true,
       intro: "For cookie-related queries, contact:",
-      email: "info@umitech.co.jp",
+    email: "info@umitech.co.jp",
     },
   ],
 };
@@ -1214,6 +1217,19 @@ export const footer = {
 
 export const searchPopular = [
   "Naval Architecture",
-  "Surveying",
+  "Marine Surveying",
   "Engineering",
+  "CFD",
+  "Ship Design",
+  "Project Management",
+  "Technical Consulting",
+];
+
+export const searchFilterGroups = [
+  { id: "all", label: "All" },
+  { id: "services", label: "Services" },
+  { id: "articles", label: "Articles" },
+  { id: "team", label: "Team" },
+  { id: "about", label: "About" },
+  { id: "legal", label: "Legal" },
 ];

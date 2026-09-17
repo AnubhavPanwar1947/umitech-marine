@@ -33,18 +33,20 @@ export default function TeamPage() {
                   <article className="team-members__card" tabIndex={0}>
                     <div className="team-members__cardLayout">
                       <div className="team-members__mediaColumn">
-                        <Image
-                          src={member.image}
-                          alt={member.imageAlt}
-                          fill
-                          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 100vw, 50vw"
-                          className="team-members__image"
-                          style={
-                            member.imagePosition
-                              ? { objectPosition: member.imagePosition }
-                              : undefined
-                          }
-                        />
+                        <div className="team-members__mediaBleed">
+                          <Image
+                            src={member.image}
+                            alt={member.imageAlt}
+                            fill
+                            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 100vw, 50vw"
+                            className="team-members__image"
+                            style={
+                              member.imagePosition
+                                ? { objectPosition: member.imagePosition }
+                                : undefined
+                            }
+                          />
+                        </div>
                       </div>
 
                       <div className="team-members__contentColumn">

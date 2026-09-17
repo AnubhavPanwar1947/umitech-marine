@@ -57,6 +57,40 @@ export function Header() {
   }, [solidHeaderPage, pathname]);
 
   useEffect(() => {
+    const handleSearchShortcut = (event) => {
+      if (event.key !== "k" && event.key !== "K") {
+        return;
+      }
+      if (!(event.metaKey || event.ctrlKey)) {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT")
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      if (menuOpen) {
+        setMenuOpen(false);
+      }
+      setServicesDropdownOpen(false);
+      setSearchOpen(true);
+    };
+
+    document.addEventListener("keydown", handleSearchShortcut);
+    return () => {
+      document.removeEventListener("keydown", handleSearchShortcut);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     const handleEscape = (event) => {
       if (event.key !== "Escape") {
         return;

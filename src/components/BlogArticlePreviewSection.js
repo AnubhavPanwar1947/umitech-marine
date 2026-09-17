@@ -21,15 +21,17 @@ export function BlogArticlePreviewSection() {
                 <div className={styles.layout}>
                   <div className={styles.mediaColumn}>
                     <div className={styles.media}>
-                  <Image
-                    src={article.image}
-                    alt={
-                      article.imageAlt ||
-                      article.cardTitle ||
-                      article.title
-                    }
-                    fill
-                        sizes="(max-width: 959px) 100vw, 42vw"
+                      <Image
+                        src={article.image}
+                        alt={
+                          article.imageAlt ||
+                          article.cardTitle ||
+                          article.title
+                        }
+                        width={article.imageWidth ?? 1600}
+                        height={article.imageHeight ?? 758}
+                        quality={100}
+                        sizes="(max-width: 1279px) 100vw, 58vw"
                         className={styles.image}
                       />
                     </div>
