@@ -67,7 +67,7 @@ export const servicesPage = {
     lead:
       "Four practices delivering technical excellence across naval architecture, engineering, surveying, and legal consultancy.",
     bullets: [
-      "Our team consists of accredited Sire inspectors, Flag state inspectors and experienced marine surveyors, each having previously served management roles while sailing onboard. We collectively bring together decades of experience in varied fields ranging from conventional shipping to oil and gas offshore industry and marine engineering.",
+      "Our team consists of Master Mariners, Naval Architects, and accredited RISQ inspectors, each having previously served management roles while sailing onboard. We collectively bring together decades of experience in varied fields ranging from conventional shipping to oil and gas offshore industry and marine engineering.",
       "We believe that with our collective experience we can bring added value to our customers and help them enhance their services by taking the path of sustainable growth. Our core value lies in providing our clients with innovative ways to fulfil their requirements.",
     ],
     image: "/images/services-overview.jpg",
@@ -372,23 +372,7 @@ export const servicesPage = {
           title: "UMISTAB-X",
           slug: "legal-consultancy",
           detail: [
-            "UMISTAB-X is a vessel-specific Windows loading instrument developed by Umitech Marine Solutions for bulk-carrier operations. It helps Masters and deck officers plan, evaluate, verify, and document cargo and ballast conditions. The manual applies to the bulk carrier Golden Soul (IMO No. 9950715), with approval stated for onboard use by ABS.",
-            "The system supports entry and management of ballast, fuel, freshwater, lubricating oil, stores, constants, grain cargo, homogeneous and non-homogeneous dry bulk cargo, discrete cargo parcels, and icing loads. It automatically calculates key hydrostatic and stability parameters, including displacement, drafts, trim, KG/VCG, LCG, GM, free-surface effects, and tank moments.",
-            "UMISTAB-X provides checks for intact stability, grain stability, damage stability, GZ curves, IMO criteria, visibility, draft surveys, and longitudinal strength. Shear forces and bending moments are calculated along the hull and compared with approved Class limits for intact conditions and predefined damage cases.",
-          ],
-          detailList: [
-            "Ballast, fuel, freshwater, lubricating oil, stores, constants, and icing loads",
-            "Grain cargo, homogeneous and non-homogeneous dry bulk cargo, and discrete cargo parcels",
-            "Intact, grain, and damage stability checks, including GZ curves and IMO criteria",
-            "Hydrostatic results including displacement, drafts, trim, KG/VCG, LCG, GM, free-surface effects, and tank moments",
-            "Longitudinal strength, with shear forces and bending moments compared against approved Class limits",
-            "Visibility and draft-survey checks",
-            "Graphical arrangement views, floating summaries, validation results, and stability and strength plots",
-            "Cargo and tank summaries and print-ready PDF reports for operational records, port authorities, surveyors, Class, and company review",
-          ],
-          detailAfter: [
-            "UMISTAB-X incorporates vessel-approved data and supports compliance with applicable IMO Grain Code, SOLAS, MARPOL, BLU Code, Load Line, and classification requirements. Accuracy verification should be performed using approved test conditions after installation, updates, hardware changes, or whenever results are questioned.",
-            "UMISTAB-X is an operational aid and does not replace the vessel’s approved Stability Booklet, Grain Loading Manual, SMS procedures, professional judgment, or the Master’s responsibility. Results depend on accurate user-entered data and must be cross-checked against actual onboard conditions. The software performs static calculations and does not replace assessment of dynamic wave effects, wind, sea state, hull deflection, or unapproved damage scenarios.",
+            "UMISTAB-X is an onboard system for bulk-carrier loading, stability, and longitudinal-strength assessment. It manages cargo, ballast, fuel, freshwater, stores, grain, dry bulk, icing, tanks, and other weights. The software calculates displacement, drafts, trim, hydrostatics, stability criteria, shear forces, and bending moments for intact and predefined damage conditions. Users review GZ curves, validation results, visibility, draft surveys, load-line settings, and PDF reports. It supports applicable requirements but remains an operational aid; accurate input, verification, manuals, judgment, and Master’s responsibility are essential.",
           ],
         },
       ],
@@ -572,7 +556,7 @@ export const teamPage = {
       name: "Nishchay Maken",
       role: "Founder & Director",
       bio:
-        "Nishchay founded Pelagic Marine to solve, through engineering and design, the problems most firms only survey. Across more than two decades, including over a decade at sea on tankers, he has specialised in project cargo workscopes and stability — the work that inspired UMISTAB-X. His wider expertise spans regulatory compliance, audits and inspections, loss prevention and incident investigation for leading P&I clubs.",
+        "Nishchay founded Umitech Marine to solve, through engineering and design, the problems most firms only survey. Across more than two decades, including over a decade at sea on tankers, he has specialised in project cargo workscopes and stability — the work that inspired UMISTAB-X. His wider expertise spans regulatory compliance, audits and inspections, loss prevention and incident investigation for leading P&I clubs.",
       image: "/images/nishchay.png",
       imageAlt: "Portrait of Nishchay Maken, Founder & Director",
     },
@@ -580,7 +564,7 @@ export const teamPage = {
       name: "Bhanu Prabhakar",
       role: "Associate Consultant – Naval Architecture",
       bio:
-        "A Naval Architect with fifteen years across offshore structures and seagoing vessels, Bhanu leads Pelagic Marine's design and engineering practice. A graduate of IIT Kharagpur in Ocean Engineering and Naval Architecture, his core strengths lie in structural and finite-element analysis, intact and damage stability, hydrodynamics, mooring analysis and CFD.",
+        "A Naval Architect with fifteen years across offshore structures and seagoing vessels, Bhanu leads Umitech Marine's design and engineering practice. A graduate of IIT Kharagpur in Ocean Engineering and Naval Architecture, his core strengths lie in structural and finite-element analysis, intact and damage stability, hydrodynamics, mooring analysis and CFD.",
       image: "/images/bhanu.png",
       imageAlt:
         "Portrait of Bhanu Prabhakar, Associate Consultant – Naval Architecture",
@@ -597,7 +581,7 @@ export const teamPage = {
       name: "Capt. Abhinav Upadhyay",
       role: "Associate Consultant – Clean Fuels",
       bio:
-        "A Master Mariner with over twenty years in gas-carrier operations, Capt. Upadhyay is Pelagic Marine's specialist in clean and future fuels. He brings hands-on cargo experience across LNG, LPG, ethane, ethylene and ammonia, and advises on emerging fuels including methanol.",
+        "A Master Mariner with over twenty years in gas-carrier operations, Capt. Upadhyay is Umitech Marine's specialist in clean and future fuels. He brings hands-on cargo experience across LNG, LPG, ethane, ethylene and ammonia, and advises on emerging fuels including methanol.",
       image: "/images/abhinav.png",
       imageAlt:
         "Portrait of Capt. Abhinav Upadhyay, Associate Consultant – Clean Fuels",
@@ -606,7 +590,7 @@ export const teamPage = {
       name: "Capt. Harjit Singh Sidhu",
       role: "Associate Consultant – Marine Operations",
       bio:
-        "Capt. Sidhu brings a container-shipping background and sea time with Maersk to his role managing Pelagic Marine's operations and day-to-day delivery. He advises on container-ship stability, cargo planning and load optimisation, and is a certified practitioner of remote magnetic compass adjustment.",
+        "Capt. Sidhu brings a container-shipping background and sea time with Maersk to his role managing Umitech Marine's operations and day-to-day delivery. He advises on container-ship stability, cargo planning and load optimisation, and is a certified practitioner of remote magnetic compass adjustment.",
       image: "/images/harjit.png",
       imageAlt: "Portrait of Capt. Harjit Singh Sidhu, Associate Consultant – Marine Operations",
     },
