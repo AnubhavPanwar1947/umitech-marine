@@ -6,9 +6,9 @@ import {
   applyDestinationHighlights,
   clearDestinationHighlights,
   clearSearchNavHighlight,
+  getPageHighlightScope,
   locationMatchesPending,
   readSearchNavHighlight,
-  resolveHighlightScope,
   SEARCH_NAV_EVENT,
   scrollElementBelowHeader,
   scrollFirstDestinationHighlightIntoView,
@@ -36,17 +36,16 @@ export function SearchResultHighlighter() {
     };
 
     const scrollToMatch = () => {
-      if (scrollFirstDestinationHighlightIntoView()) {
-        return;
-      }
-
       const pending = readSearchNavHighlight();
       if (pending?.hash) {
         const target = document.getElementById(pending.hash);
         if (target) {
           scrollElementBelowHeader(target);
+          return;
         }
       }
+
+      scrollFirstDestinationHighlightIntoView();
     };
 
     const lockLandingScroll = () => {
@@ -103,8 +102,7 @@ export function SearchResultHighlighter() {
 
       appliedToken = pending.token;
       clearDestinationHighlights();
-      const scope = resolveHighlightScope(hashId);
-      applyDestinationHighlights(scope, pending.query);
+      applyDestinationHighlights(getPageHighlightScope(), pending.query);
       lockLandingScroll();
     };
 

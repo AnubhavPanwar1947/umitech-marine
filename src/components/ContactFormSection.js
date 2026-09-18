@@ -120,7 +120,7 @@ export function ContactFormSection() {
 
             {status === "success" ? (
               <p className={styles.success} role="status">
-                Thank you. Your email client should open so you can send your message.
+                Thanks for contacting us! We will be in touch with you shortly.
               </p>
             ) : null}
 

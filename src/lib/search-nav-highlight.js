@@ -315,6 +315,15 @@ export function resolveHighlightScope(hashId) {
   };
 }
 
+/** Highlight every in-page match inside `main` (excludes header/footer/search via text walker). */
+export function getPageHighlightScope() {
+  const main = document.querySelector("main");
+  if (!main) {
+    return null;
+  }
+  return { type: "element", root: main };
+}
+
 export function applyDestinationHighlights(scope, query) {
   const regex = getHighlightRegExpForQuery(query);
   if (!regex || !scope) {
