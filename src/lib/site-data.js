@@ -372,7 +372,7 @@ export const servicesPage = {
           title: "UMISTAB-X",
           slug: "legal-consultancy",
           detail: [
-            "UMISTAB-X is an onboard system for bulk-carrier loading, stability, and longitudinal-strength assessment. It manages cargo, ballast, fuel, freshwater, stores, grain, dry bulk, icing, tanks, and other weights. The software calculates displacement, drafts, trim, hydrostatics, stability criteria, shear forces, and bending moments for intact and predefined damage conditions. Users review GZ curves, validation results, visibility, draft surveys, load-line settings, and PDF reports. It supports applicable requirements but remains an operational aid; accurate input, verification, manuals, judgment, and Master’s responsibility are essential.",
+            "UMISTAB-X is an onboard system for bulk-carrier loading, stability, and longitudinal-strength assessment. It manages cargo, ballast, fuel, freshwater, stores, grain, dry bulk, icing, tanks, and other weights. The software calculates displacement, drafts, trim, hydrostatics, stability criteria, shear forces, and bending moments for intact and predefined damage conditions. Users review GZ curves, validation results, visibility, draft surveys, load-line settings, and PDF reports. It supports amendments to the Grain Code in accordance with NSC.552(101) and also includes an optional module for deck-loading calculations.",
           ],
         },
       ],
