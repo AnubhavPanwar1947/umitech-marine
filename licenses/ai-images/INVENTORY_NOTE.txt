@@ -1,0 +1,24 @@
+UMITECH MARINE — AI image license inventory (2026-09-21)
+========================================================
+
+PDFs generated in this folder (from public/images/*.LICENSE.txt):
+  - LicenseRecord_UMITECH_Marine_About_AI_2026_09_21.pdf
+  - LicenseRecord_UMITECH_Marine_Naval_AI_2026_09_21.pdf
+  - LicenseRecord_UMITECH_Marine_Engineering_AI_2026_09_21.pdf
+  - LicenseRecord_UMITECH_Marine_Services_Overview_AI_2026_09_21.pdf
+
+Skipped — no Cursor AI LICENSE.txt in repo (do not invent licenses):
+  - public/images/heroImage.jpeg
+      (stock license PDF kept in licenses/hero-image/)
+  - public/images/nishchay.png, bhanu.png, vipul.png, abhinav.png, harjit.png
+  - public/images/logo.png
+  - public/images/loadicator.png
+  - public/blog/computational-fluid-dynamics/* (CFD article assets)
+  - public/images/*.svg (service icons, contact icons, values icons, etc.)
+  - public/images/CFD-Laboratory-Simulation.jpg
+  - public/images/Inspections-Audits-Surveying-Team.jpg
+  - public/images/Marine-Engine-Room-Thermal.jpg
+      (likely Cursor-generated in project history but no LICENSE.txt on file)
+
+Naval / Engineering primary filenames in LICENSE.txt may differ from paths
+on disk (e.g. Naval-Architecture-Services.jpg); PDF covers the documented still.
