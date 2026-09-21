@@ -101,8 +101,8 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: clamp(0.25rem, 1.5vw, 0.5rem);
+  justify-content: space-between;
+  gap: clamp(0.35rem, 1.5vw, 0.65rem);
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;
@@ -112,11 +112,11 @@
   overscroll-behavior: contain;
   background: linear-gradient(
     180deg,
-    transparent 0%,
-    rgba(24, 41, 82, 0.4) 42%,
-    rgba(24, 41, 82, 0.95) 100%
+    #2a4575 0%,
+    #1f3460 45%,
+    #182952 100%
   );
-  color: var(--text-on-dark);
+  color: #ffffff;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -127,13 +127,37 @@
     transform 220ms ease;
 }
 
+.overlayTitle {
+  flex: 0 0 auto;
+  margin: 0;
+  padding-top: clamp(0.4rem, 2.2vw, 0.85rem);
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: #ffffff;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.overlayBottom {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(0.25rem, 1.5vw, 0.5rem);
+  min-width: 0;
+  min-height: 0;
+}
+
 .overlayLead {
   display: none;
 }
 
 .chipList {
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   flex-wrap: wrap;
   align-content: flex-end;
   gap: clamp(0.2rem, 1.2vw, 0.4rem);
@@ -157,10 +181,10 @@
   min-height: clamp(1.6rem, 6vw, 2rem);
   max-width: 100%;
   padding: clamp(0.2rem, 1vw, 0.35rem) clamp(0.35rem, 2vw, 0.55rem);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid #ffffff;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--text-on-dark);
+  color: #ffffff;
   font-family: var(--font-sans);
   font-size: clamp(0.5625rem, 1.75vw, 0.75rem);
   font-weight: 500;
@@ -176,8 +200,8 @@
 .chip:hover,
 .chip:focus-visible {
   background: rgba(255, 255, 255, 0.2);
-  border-color: #fff;
-  color: var(--text-on-dark);
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 .chip:focus-visible {
@@ -195,8 +219,9 @@
   min-height: clamp(1.5rem, 5vw, 2rem);
   margin-top: 0;
   padding: 0.15rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-  color: var(--text-on-dark);
+  padding-inline-start: clamp(0.35rem, 2vw, 0.55rem);
+  border-bottom: 1px solid #ffffff;
+  color: #ffffff;
   font-family: var(--font-sans);
   font-size: clamp(0.625rem, 1.75vw, 0.75rem);
   font-weight: 600;
@@ -207,8 +232,8 @@
 
 .explore:hover,
 .explore:focus-visible {
-  border-bottom-color: #fff;
-  color: var(--text-on-dark);
+  border-bottom-color: #ffffff;
+  color: #ffffff;
 }
 
 .explore:focus-visible {

@@ -4,13 +4,12 @@ const ICON_SRC = {
   naval: "/images/Naval Architecture.svg",
   engineering: "/images/Engineering.svg",
   inspection: "/images/Inspection, Audits and Surveying.svg",
-  legal: "/images/Loadicator.svg",
+  legal: "/images/LOADICATOR.svg",
 };
 
 const ICON_SCALE_CLASS = {
   naval: styles.iconNaval,
   inspection: styles.iconInspection,
-  legal: styles.iconLegal,
 };
 
 /** @param {{ practiceId: 'naval' | 'engineering' | 'inspection' | 'legal' }} props */

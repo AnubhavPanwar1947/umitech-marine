@@ -122,28 +122,31 @@ export function ServicesGrid() {
                       <div className={styles.overlayLight} aria-hidden />
 
                       <div className={styles.overlayPanel}>
-                        {practice?.lead ? (
-                          <p className={styles.overlayLead}>{practice.lead}</p>
-                        ) : null}
-                        <ul className={styles.chipList}>
-                          {chips.map((item) => (
-                            <li key={item.slug}>
-                              <Link
-                                href={`/services/${service.practiceId}/${item.slug}/`}
-                                className={styles.chip}
-                              >
-                                {item.title}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                        <Link
-                          href={`/services#${service.practiceId}`}
-                          className={styles.explore}
-                        >
-                          Read more
-                          <ReadMoreArrow />
-                        </Link>
+                        <p className={styles.overlayTitle}>{service.title}</p>
+                        <div className={styles.overlayBottom}>
+                          {practice?.lead ? (
+                            <p className={styles.overlayLead}>{practice.lead}</p>
+                          ) : null}
+                          <ul className={styles.chipList}>
+                            {chips.map((item) => (
+                              <li key={item.slug}>
+                                <Link
+                                  href={`/services/${service.practiceId}/${item.slug}/`}
+                                  className={styles.chip}
+                                >
+                                  {item.title}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                          <Link
+                            href={`/services#${service.practiceId}`}
+                            className={styles.explore}
+                          >
+                            Read more
+                            <ReadMoreArrow />
+                          </Link>
+                        </div>
                       </div>
 
                       {narrow ? (

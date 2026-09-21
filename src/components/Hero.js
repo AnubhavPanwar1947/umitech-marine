@@ -37,7 +37,7 @@ export function Hero() {
         <Reveal as="p" className={styles.subheadline} immediate delay={100}>
           {hero.subheadlinePrefix}
           <span className={styles.titleAccent}>{hero.subheadlineAccent}</span>
-          {hero.subheadlineSuffix}
+          <span className={styles.titleAccent}>{hero.subheadlineSuffix}</span>
         </Reveal>
         <Reveal as="p" className={styles.lead} immediate delay={200}>
           {hero.lead}
