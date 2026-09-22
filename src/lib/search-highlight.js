@@ -1,26 +1,19 @@
-import { getSearchTokensForQuery } from "@/lib/site-search";
+import {
+  buildWordAwareHighlightRegExp,
+  normalizeSearchTextForMatching,
+} from "@/lib/search-matching";
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-export function buildHighlightRegExp(query) {
-  const tokens = getSearchTokensForQuery(query);
-  if (!tokens.length) {
-    return null;
-  }
-
-  const pattern = tokens
-    .map((token) => escapeRegExp(token))
-    .sort((a, b) => b.length - a.length)
-    .join("|");
-
-  return new RegExp(`(${pattern})`, "gi");
+export function buildHighlightRegExp(query, sourceText) {
+  const source = String(sourceText ?? "");
+  const normalizedHaystack = source
+    ? normalizeSearchTextForMatching(source)
+    : undefined;
+  return buildWordAwareHighlightRegExp(query, normalizedHaystack, source);
 }
 
 export function splitTextByHighlights(text, query) {
   const source = String(text ?? "");
-  const regex = buildHighlightRegExp(query);
+  const regex = buildHighlightRegExp(query, source);
   if (!source || !regex) {
     return [{ text: source, highlight: false }];
   }

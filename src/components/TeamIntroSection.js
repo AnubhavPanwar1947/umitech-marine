@@ -21,6 +21,11 @@ export function TeamIntroSection() {
         <Reveal as="p" className={styles.lead} delay={80}>
           {intro.lead}
         </Reveal>
+        {intro.leadSupplement ? (
+          <Reveal as="p" className={styles.lead} delay={120}>
+            {intro.leadSupplement}
+          </Reveal>
+        ) : null}
       </div>
     </section>
   );

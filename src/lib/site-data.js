@@ -67,7 +67,7 @@ export const servicesPage = {
     lead:
       "Four practices delivering technical excellence across naval architecture, engineering, surveying, and legal consultancy.",
     bullets: [
-      "Our team consists of Master Mariners, Naval Architects, and accredited RISQ inspectors, each having previously served management roles while sailing onboard. We collectively bring together decades of experience in varied fields ranging from conventional shipping to oil and gas offshore industry and marine engineering.",
+      "Our team consists of Master Mariners, Naval Architects, and accredited RightShip inspectors, each having previously served management roles while sailing onboard. We collectively bring together decades of experience in varied fields ranging from conventional shipping to oil and gas offshore industry and marine engineering.",
       "We believe that with our collective experience we can bring added value to our customers and help them enhance their services by taking the path of sustainable growth. Our core value lies in providing our clients with innovative ways to fulfil their requirements.",
     ],
     image: "/images/services-overview.jpg",
@@ -267,7 +267,7 @@ export const servicesPage = {
           title: "Stability Calculation",
           slug: "stability-calculation",
           detail: [
-            "At UMITECH Marine Solutions, we provide comprehensive stability calculations tailored to the needs of our offshore and main fleet clients. Our services encompass a wide range of stability-related tasks, ensuring the safe and efficient operation of vessels.",
+            "At Umitech Marine Solutions, we provide comprehensive stability calculations tailored to the needs of our offshore and main fleet clients. Our services encompass a wide range of stability-related tasks, ensuring the safe and efficient operation of vessels.",
             "Our expertise includes:",
           ],
           detailList: [
@@ -288,7 +288,7 @@ export const servicesPage = {
       id: "inspection",
       heading: "Inspection, Audits and Surveying",
       lead:
-        "Accredited SIRE, Flag state and marine survey expertise from experienced inspectors.",
+        "Accredited RightShip, Flag state and marine survey expertise from experienced inspectors.",
       image: "/images/Inspections-Audits-Surveying-Team.jpg",
       imageAlt:
         "Three marine surveyors and engineers in protective workwear reviewing a tablet and engineering blueprint at a commercial shipyard, with a cargo ship behind.",
@@ -429,7 +429,7 @@ export const about = {
   titlePrefix: "Practical expertise for demanding ",
   titleAccent: "marine operations",
   paragraphs: [
-    "UMITECH MARINE began its journey in 2024, founded by experienced and forward-thinking professionals from the shipping and engineering industries. Established with a clear vision to deliver premium consultancy backed by practical, hands-on expertise, Umitech Marine is built on the foundation of technical excellence and real-world operational insight.",
+    "Umitech Marine Solutions began its journey in 2024, founded by experienced and forward-thinking professionals from the shipping and engineering industries. Established with a clear vision to deliver premium consultancy backed by practical, hands-on expertise, Umitech Marine Solutions is built on the foundation of technical excellence and real-world operational insight.",
     "We are driven by a commitment to precision, reliability and 24/7 support—delivering solutions that ensure maritime operations run safely, efficiently and seamlessly.",
   ],
   ctaLabel: "Know more",
@@ -443,7 +443,7 @@ export const aboutPage = {
   intro: {
     eyebrow: "About Us",
     paragraphs: [
-      "UMITECH MARINE began its journey in 2024, founded by experienced and forward-thinking professionals from the shipping and engineering industries. Established with a clear vision to deliver premium consultancy backed by practical, hands-on expertise, Umitech Marine is built on the foundation of technical excellence and real-world operational insight.",
+      "Umitech Marine Solutions began its journey in 2024, founded by experienced and forward-thinking professionals from the shipping and engineering industries. Established with a clear vision to deliver premium consultancy backed by practical, hands-on expertise, Umitech Marine Solutions is built on the foundation of technical excellence and real-world operational insight.",
       "With extensive experience spanning vessel operations, ship surveying, marine engineering & design and Clean fuel technology our team brings comprehensive expertise across every critical segment of the marine sector. We are driven by a commitment to precision, reliability and 24/7 support—delivering solutions that ensure maritime operations run safely, efficiently and seamlessly.",
     ],
     image: "/images/About.jpg",
@@ -494,13 +494,6 @@ export const aboutPage = {
         image: "/images/Integrity.svg",
         imageAlt: "Integrity",
       },
-    ],
-  },
-  coreValues: {
-    heading: "Core Values",
-    paragraphs: [
-      "Our team is made up of Naval Architects, Engineers, accredited RightShip inspectors and highly experienced marine surveyors, each having served in senior shipboard management roles. With decades of combined expertise spanning conventional shipping, offshore oil and gas and marine engineering, we deliver trusted solutions across the maritime spectrum.",
-      "At the core of our approach is a commitment to innovation, efficiency and sustainable growth. We partner closely with ship owners, charterers and operators to provide tailored strategies that drive operational excellence and long-term value.",
     ],
   },
 };
@@ -554,17 +547,17 @@ export const teamPage = {
   members: [
     {
       name: "Nishchay Maken",
-      role: "Founder & Director",
+      role: "CEO",
       bio:
-        "Nishchay founded Umitech Marine to solve, through engineering and design, the problems most firms only survey. Across more than two decades, including over a decade at sea on tankers, he has specialised in project cargo workscopes and stability — the work that inspired UMISTAB-X. His wider expertise spans regulatory compliance, audits and inspections, loss prevention and incident investigation for leading P&I clubs.",
+        "Nishchay founded Umitech Marine Solutions to solve, through engineering and design, the problems most firms only survey. Across more than two decades, including over a decade at sea on tankers, he has specialised in project cargo workscopes and stability — the work that inspired UMISTAB-X. His wider expertise spans regulatory compliance, audits and inspections, loss prevention and incident investigation for leading P&I clubs.",
       image: "/images/nishchay.png",
-      imageAlt: "Portrait of Nishchay Maken, Founder & Director",
+      imageAlt: "Portrait of Nishchay Maken, CEO",
     },
     {
       name: "Bhanu Prabhakar",
       role: "Associate Consultant – Naval Architecture",
       bio:
-        "A Naval Architect with fifteen years across offshore structures and seagoing vessels, Bhanu leads Umitech Marine's design and engineering practice. A graduate of IIT Kharagpur in Ocean Engineering and Naval Architecture, his core strengths lie in structural and finite-element analysis, intact and damage stability, hydrodynamics, mooring analysis and CFD.",
+        "A Naval Architect with fifteen years across offshore structures and seagoing vessels, Bhanu leads Umitech Marine Solutions' design and engineering practice. A graduate of IIT Kharagpur in Ocean Engineering and Naval Architecture, his core strengths lie in structural and finite-element analysis, intact and damage stability, hydrodynamics, mooring analysis and CFD.",
       image: "/images/bhanu.png",
       imageAlt:
         "Portrait of Bhanu Prabhakar, Associate Consultant – Naval Architecture",
@@ -581,7 +574,7 @@ export const teamPage = {
       name: "Capt. Abhinav Upadhyay",
       role: "Associate Consultant – Clean Fuels",
       bio:
-        "A Master Mariner with over twenty years in gas-carrier operations, Capt. Upadhyay is Umitech Marine's specialist in clean and future fuels. He brings hands-on cargo experience across LNG, LPG, ethane, ethylene and ammonia, and advises on emerging fuels including methanol.",
+        "A Master Mariner with over twenty years in gas-carrier operations, Capt. Upadhyay is Umitech Marine Solutions' specialist in clean and future fuels. He brings hands-on cargo experience across LNG, LPG, ethane, ethylene and ammonia, and advises on emerging fuels including methanol.",
       image: "/images/abhinav.png",
       imageAlt:
         "Portrait of Capt. Abhinav Upadhyay, Associate Consultant – Clean Fuels",
@@ -590,7 +583,7 @@ export const teamPage = {
       name: "Capt. Harjit Singh Sidhu",
       role: "Associate Consultant – Marine Operations",
       bio:
-        "Capt. Sidhu brings a container-shipping background and sea time with Maersk to his role managing Umitech Marine's operations and day-to-day delivery. He advises on container-ship stability, cargo planning and load optimisation, and is a certified practitioner of remote magnetic compass adjustment.",
+        "Capt. Sidhu brings a container-shipping background and sea time with Maersk to his role managing Umitech Marine Solutions' operations and day-to-day delivery. He advises on container-ship stability, cargo planning and load optimisation, and is a certified practitioner of remote magnetic compass adjustment.",
       image: "/images/harjit.png",
       imageAlt: "Portrait of Capt. Harjit Singh Sidhu, Associate Consultant – Marine Operations",
     },
@@ -830,7 +823,7 @@ export const standardTermsPage = {
         {
           id: "6.1",
           text:
-            "The Company’s total aggregate liability, whether in contract, tort, or otherwise, shall not exceed the amount of the Fees paid for the Services giving rise to the claim, subject to a maximum liability cap of USD 100,000.",
+            "The Company's total aggregate liability to the Client, whether arising in contract, tort (including negligence), or otherwise, in connection with the Services giving rise to the claim, shall not exceed the lower of (a) the total Fees paid by the Client for those Services, and (b) USD 100,000.",
         },
         {
           id: "6.2",
@@ -904,7 +897,7 @@ export const standardTermsPage = {
       clauses: [
         {
           text:
-            "This Agreement shall be governed by and construed in accordance with the laws of Japan, and where applicable, Indian law.",
+            "This Agreement shall be governed by and construed in accordance with the laws of Japan.",
         },
         {
           text:
@@ -1177,7 +1170,7 @@ export const privacyPolicyPage = {
       listItems: [
         "Consent – where you voluntarily provide data through our forms.",
         "Legitimate interest – to enhance user experience and ensure Website functionality.",
-        "Legal compliance – where applicable under Japanese (APPI) and Indian IT laws.",
+        "Legal compliance – where applicable under Japanese (APPI) laws.",
       ],
     },
     {
@@ -1209,7 +1202,7 @@ export const privacyPolicyPage = {
       number: "8",
       heading: "International Data Transfers",
       paragraphs: [
-        "As Umitech Marine Solutions operates internationally, your data may be transferred and processed outside Japan, including in India. All such transfers comply with applicable data protection laws.",
+        "As Umitech Marine Solutions operates internationally, your data may be transferred and processed outside Japan. All such transfers comply with applicable data protection laws.",
       ],
     },
     {

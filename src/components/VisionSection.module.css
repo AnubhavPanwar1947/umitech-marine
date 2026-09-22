@@ -29,3 +29,13 @@
 .quote p {
   margin: 0;
 }
+
+@media (max-width: 239px) {
+  .section {
+    padding-block: clamp(1.25rem, 10vw, 3rem);
+  }
+
+  .inner {
+    width: min(100% - 0.5rem, var(--container-max));
+  }
+}

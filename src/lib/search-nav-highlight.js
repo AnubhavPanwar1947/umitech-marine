@@ -1,9 +1,10 @@
-import { buildHighlightRegExp } from "@/lib/search-highlight";
 import {
+  buildWordAwareHighlightRegExp,
   expandQueryWithSynonyms,
+  getSearchTokensForQuery,
   normalizeSearchText,
-  tokenizeSearchQuery,
-} from "@/lib/site-search";
+  normalizeSearchTextForMatching,
+} from "@/lib/search-matching";
 
 const STORAGE_KEY = "umitech-search-nav-highlight";
 const MARK_CLASS = "search-destination-highlight";
@@ -232,13 +233,17 @@ function highlightTextNode(textNode, regex) {
   return true;
 }
 
-function getHighlightRegExpForQuery(query) {
-  const primary = buildHighlightRegExp(query);
+function getHighlightRegExpForQuery(query, scopeRoot) {
+  const originalHaystack = scopeRoot?.textContent ?? "";
+  const haystack = originalHaystack
+    ? normalizeSearchTextForMatching(originalHaystack)
+    : undefined;
+  const primary = buildWordAwareHighlightRegExp(query, haystack, originalHaystack);
   if (primary) {
     return primary;
   }
 
-  const fallbackTokens = tokenizeSearchQuery(expandQueryWithSynonyms(query));
+  const fallbackTokens = getSearchTokensForQuery(expandQueryWithSynonyms(query));
   if (!fallbackTokens.length) {
     return null;
   }
@@ -248,7 +253,7 @@ function getHighlightRegExpForQuery(query) {
     .sort((a, b) => b.length - a.length)
     .join("|");
 
-  return new RegExp(`(${pattern})`, "gi");
+  return new RegExp(`\\b(${pattern})\\b`, "gi");
 }
 
 export function resolveHighlightScope(hashId) {
@@ -294,7 +299,7 @@ export function resolveHighlightScope(hashId) {
     return { type: "element", root: target };
   }
 
-  if (["mission", "vision", "values", "core-values"].includes(id)) {
+  if (["mission", "vision", "values"].includes(id)) {
     return { type: "element", root: target };
   }
 
@@ -325,8 +330,14 @@ export function getPageHighlightScope() {
 }
 
 export function applyDestinationHighlights(scope, query) {
-  const regex = getHighlightRegExpForQuery(query);
-  if (!regex || !scope) {
+  if (!scope) {
+    return 0;
+  }
+
+  const scopeRoot =
+    scope.type === "range" ? scope.start : scope.root ?? null;
+  const regex = getHighlightRegExpForQuery(query, scopeRoot);
+  if (!regex) {
     return 0;
   }
 

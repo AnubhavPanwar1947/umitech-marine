@@ -6,6 +6,7 @@
   display: grid;
   gap: var(--space-8);
   align-items: center;
+  min-width: 0;
 }
 
 .copy {
@@ -51,6 +52,17 @@
   object-fit: cover;
   object-position: center 62%;
   filter: saturate(1.15) contrast(1.08);
+}
+
+@media (max-width: 239px) {
+  .section {
+    padding-block: clamp(1.25rem, 10vw, 3rem);
+  }
+
+  .layout {
+    width: min(100% - 0.5rem, var(--container-max));
+    gap: var(--space-5);
+  }
 }
 
 @media (min-width: 960px) {

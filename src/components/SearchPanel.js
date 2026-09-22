@@ -15,6 +15,7 @@ import { setSearchNavHighlight } from "@/lib/search-nav-highlight";
 import { addRecentSearch, readRecentSearches } from "@/lib/search-recent";
 import { searchPopular } from "@/lib/site-data";
 import {
+  DEFAULT_SEARCH_RESULTS_LIMIT,
   getAlternativeSearchSuggestions,
   getAutocompleteSuggestions,
   getClosestSearchResults,
@@ -143,6 +144,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const [recentSearches, setRecentSearches] = useState([]);
+  const [resultsLimit, setResultsLimit] = useState(DEFAULT_SEARCH_RESULTS_LIMIT);
 
   useEffect(() => {
     if (!open) {
@@ -151,6 +153,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
 
     setQuery("");
     setActiveIndex(-1);
+    setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
     setRecentSearches(readRecentSearches());
 
     const frame = requestAnimationFrame(() => {
@@ -160,7 +163,10 @@ export const SearchPanel = forwardRef(function SearchPanel(
     return () => cancelAnimationFrame(frame);
   }, [open]);
 
-  const searchResult = useMemo(() => searchSite(query), [query]);
+  const searchResult = useMemo(
+    () => searchSite(query, { limit: resultsLimit }),
+    [query, resultsLimit],
+  );
   const autocomplete = useMemo(
     () => getAutocompleteSuggestions(query),
     [query],
@@ -184,8 +190,8 @@ export const SearchPanel = forwardRef(function SearchPanel(
     if (searchResult.type !== "results" || searchResult.items.length > 0) {
       return [];
     }
-    return getRelatedServiceResults(3);
-  }, [searchResult]);
+    return getRelatedServiceResults(query, 3);
+  }, [searchResult, query]);
 
   const alternativeSuggestions = useMemo(() => {
     if (searchResult.type !== "results" || searchResult.items.length > 0) {
@@ -193,6 +199,16 @@ export const SearchPanel = forwardRef(function SearchPanel(
     }
     return getAlternativeSearchSuggestions(query);
   }, [searchResult, query]);
+
+  const trimmedQueryForNav = query.trim();
+  const isEmptyResultsState =
+    searchResult.type === "results" &&
+    trimmedQueryForNav.length > 0 &&
+    searchResult.items.length === 0;
+
+  const hasEmptyStateListbox =
+    isEmptyResultsState &&
+    (closestResults.length > 0 || relatedServices.length > 0);
 
   const navigableItems = useMemo(() => {
     const items = [];
@@ -202,12 +218,30 @@ export const SearchPanel = forwardRef(function SearchPanel(
     for (const item of filteredItems) {
       items.push({ kind: "result", item });
     }
+    if (isEmptyResultsState) {
+      for (const item of closestResults) {
+        items.push({ kind: "result", item });
+      }
+      for (const item of relatedServices) {
+        items.push({ kind: "result", item });
+      }
+    }
     return items;
-  }, [autocomplete, filteredItems]);
+  }, [
+    autocomplete,
+    filteredItems,
+    closestResults,
+    relatedServices,
+    isEmptyResultsState,
+  ]);
 
   useEffect(() => {
     setActiveIndex(-1);
   }, [query, filteredItems.length]);
+
+  useEffect(() => {
+    setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
+  }, [query]);
 
   if (!open) {
     return null;
@@ -217,7 +251,11 @@ export const SearchPanel = forwardRef(function SearchPanel(
   const hasQuery = trimmedQuery.length > 0;
   const showAutocomplete = trimmedQuery.length >= 2 && autocomplete.length > 0;
   const totalCount =
+    searchResult.type === "results" ? searchResult.totalCount : 0;
+  const visibleCount =
     searchResult.type === "results" ? filteredItems.length : 0;
+  const hasMoreResults =
+    searchResult.type === "results" && Boolean(searchResult.hasMore);
   const hasAnyResults =
     searchResult.type === "results" && searchResult.items.length > 0;
   const showFullEmpty =
@@ -230,7 +268,9 @@ export const SearchPanel = forwardRef(function SearchPanel(
       ? "Enter a search term."
       : showFullEmpty
         ? `No matches for “${trimmedQuery}”.`
-        : `${totalCount} result${totalCount === 1 ? "" : "s"} found`;
+        : hasMoreResults
+          ? `Showing ${visibleCount} of ${totalCount} results`
+          : `${totalCount} result${totalCount === 1 ? "" : "s"} found`;
 
   const navigateToSearchResult = (href, searchTerm) => {
     const term = String(searchTerm ?? trimmedQuery).trim();
@@ -349,8 +389,14 @@ export const SearchPanel = forwardRef(function SearchPanel(
           autoComplete="off"
           enterKeyHint="search"
           role="combobox"
-          aria-expanded={showAutocomplete || filteredItems.length > 0}
-          aria-controls={`${id}-listbox`}
+          aria-expanded={
+            showAutocomplete || filteredItems.length > 0 || hasEmptyStateListbox
+          }
+          aria-controls={
+            filteredItems.length > 0 || hasEmptyStateListbox
+              ? `${id}-listbox`
+              : undefined
+          }
           aria-autocomplete="list"
           aria-activedescendant={
             activeIndex >= 0 ? `${id}-option-${activeIndex}` : undefined
@@ -374,7 +420,9 @@ export const SearchPanel = forwardRef(function SearchPanel(
 
       {searchResult.type === "results" && hasQuery ? (
         <p className={styles.resultCount} aria-hidden="true">
-          {totalCount} result{totalCount === 1 ? "" : "s"} found
+          {hasMoreResults
+            ? `Showing ${visibleCount} of ${totalCount} results`
+            : `${totalCount} result${totalCount === 1 ? "" : "s"} found`}
         </p>
       ) : null}
 
@@ -461,15 +509,22 @@ export const SearchPanel = forwardRef(function SearchPanel(
               ))}
             </div>
           ) : null}
+          {closestResults.length > 0 || relatedServices.length > 0 ? (
+            <div id={`${id}-listbox`} role="listbox" aria-label="Suggested results">
           {closestResults.length > 0 ? (
             <>
               <p className={styles.popularEyebrow}>Closest matches</p>
-              <ul className={styles.results} id={`${id}-listbox`}>
-                {closestResults.map((item) => (
-                  <li key={`closest-${item.href}-${item.title}`}>
+              <ul className={styles.results}>
+                {closestResults.map((item, closestIndex) => {
+                  const navIndex = autocomplete.length + closestIndex;
+                  const isActive = activeIndex === navIndex;
+                  return (
+                  <li key={`closest-${item.href}-${item.title}`} role="option" aria-selected={isActive}>
                     <Link
+                      id={`${id}-option-${navIndex}`}
                       href={item.href}
                       className={styles.result}
+                      data-active={isActive ? "true" : undefined}
                       onClick={() =>
                         handleResultClick(trimmedQuery, item.href)
                       }
@@ -483,7 +538,8 @@ export const SearchPanel = forwardRef(function SearchPanel(
                       </span>
                     </Link>
                   </li>
-                ))}
+                );
+                })}
               </ul>
             </>
           ) : null}
@@ -491,11 +547,17 @@ export const SearchPanel = forwardRef(function SearchPanel(
             <>
               <p className={styles.popularEyebrow}>Related services</p>
               <ul className={styles.results}>
-                {relatedServices.map((item) => (
-                  <li key={`related-${item.href}-${item.title}`}>
+                {relatedServices.map((item, relatedIndex) => {
+                  const navIndex =
+                    autocomplete.length + closestResults.length + relatedIndex;
+                  const isActive = activeIndex === navIndex;
+                  return (
+                  <li key={`related-${item.href}-${item.title}`} role="option" aria-selected={isActive}>
                     <Link
+                      id={`${id}-option-${navIndex}`}
                       href={item.href}
                       className={styles.result}
+                      data-active={isActive ? "true" : undefined}
                       onClick={() =>
                         handleResultClick(trimmedQuery, item.href)
                       }
@@ -507,9 +569,12 @@ export const SearchPanel = forwardRef(function SearchPanel(
                       <span className={styles.resultTitle}>{item.title}</span>
                     </Link>
                   </li>
-                ))}
+                );
+                })}
               </ul>
             </>
+          ) : null}
+            </div>
           ) : null}
           <div className={styles.emptyActions}>
             <Link href="/services" className={styles.emptyLink} onClick={() => handleResultClick()}>
@@ -561,6 +626,18 @@ export const SearchPanel = forwardRef(function SearchPanel(
             );
           })}
         </ul>
+      ) : null}
+
+      {searchResult.type === "results" && hasMoreResults ? (
+        <button
+          type="button"
+          className={styles.showMoreButton}
+          onClick={() =>
+            setResultsLimit((current) => current + DEFAULT_SEARCH_RESULTS_LIMIT)
+          }
+        >
+          Show more results
+        </button>
       ) : null}
     </div>
   );

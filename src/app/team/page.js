@@ -9,7 +9,7 @@ import "./team-theme.css";
 export const metadata = {
   title: "Team",
   description:
-    "Meet the UMITECH MARINE team — naval architects and master mariners with experience in design, operations, and marine consultancy.",
+    "Meet the Umitech Marine Solutions team — naval architects and master mariners with experience in design, operations, and marine consultancy.",
 };
 
 export default function TeamPage() {

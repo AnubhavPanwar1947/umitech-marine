@@ -48,3 +48,17 @@
   border-radius: 50%;
   background: var(--color-navy-900);
 }
+
+@media (max-width: 239px) {
+  .section {
+    padding-block: clamp(1.25rem, 10vw, 3rem);
+  }
+
+  .inner {
+    width: min(100% - 0.5rem, var(--container-max));
+  }
+
+  .point {
+    padding-left: 0.9rem;
+  }
+}

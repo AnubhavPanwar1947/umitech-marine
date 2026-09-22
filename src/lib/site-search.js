@@ -9,7 +9,6 @@ import {
   disclaimerPage,
   footer,
   hero,
-  navigation,
   privacyPolicyPage,
   searchPopular,
   services,
@@ -30,13 +29,25 @@ import {
   serviceTopicAnchor,
   teamMemberAnchor,
 } from "@/lib/search-anchors";
+import {
+  expandQueryWithSynonyms,
+  findSnippetAnchorIndex,
+  getSearchTokensForQuery,
+  getVisibleMatchText,
+  normalizeSearchText,
+  recordHasHighlightableVisibleMatch,
+  recordMatchesQuery,
+  sanitizeVisibleSearchSource,
+  queryTokensSatisfied,
+  tokenMatchesInNormalizedText,
+} from "@/lib/search-matching";
 
-const SEARCH_SYNONYM_RULES = [
-  { pattern: /\bmarine survey(?:ing)?\b/gi, replacement: "surveying" },
-  { pattern: /\bship design\b/gi, replacement: "naval architecture" },
-  { pattern: /\bcfd\b/gi, replacement: "computational fluid dynamics" },
-  { pattern: /\btechnical consulting\b/gi, replacement: "engineering" },
-];
+export {
+  expandQueryWithSynonyms,
+  getSearchTokensForQuery,
+  normalizeSearchText,
+  tokenizeSearchQuery,
+} from "@/lib/search-matching";
 
 export const RESULT_GROUP_LABELS = {
   services: "Service",
@@ -45,18 +56,6 @@ export const RESULT_GROUP_LABELS = {
   about: "Company",
   legal: "Legal",
 };
-
-export function expandQueryWithSynonyms(query) {
-  let expanded = String(query ?? "");
-  for (const rule of SEARCH_SYNONYM_RULES) {
-    expanded = expanded.replace(rule.pattern, rule.replacement);
-  }
-  return expanded;
-}
-
-export function getSearchTokensForQuery(query) {
-  return tokenizeSearchQuery(expandQueryWithSynonyms(query));
-}
 
 export function getRecordGroup(record) {
   const href = String(record.href ?? "");
@@ -100,36 +99,6 @@ export function getRecordGroup(record) {
   return "about";
 }
 
-export function normalizeSearchText(value) {
-  return String(value ?? "")
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[\u2010-\u2015\u2212]/g, "-")
-    .replace(/&/g, " and ")
-    .replace(/[/\\]/g, " ")
-    .replace(/[^\p{L}\p{N}\s@.,%-]/gu, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-export function tokenizeSearchQuery(query) {
-  const normalized = normalizeSearchText(query);
-  if (!normalized) {
-    return [];
-  }
-  return normalized
-    .split(" ")
-    .map((token) => token.trim())
-    .filter(
-      (token) =>
-        token.length >= 2 ||
-        /^\d/.test(token) ||
-        token.includes("@") ||
-        token.includes("."),
-    );
-}
-
 function pushRecord(records, seen, record) {
   const href = record.anchor ? `${record.href}#${record.anchor}` : record.href;
   const key = `${href}|${record.title}`;
@@ -156,7 +125,7 @@ function buildLegalPageRecords(page, href, categoryPrefix, records, seen) {
     title: page.title,
     href,
     category: categoryPrefix,
-    searchText: joinSearchParts([page.title, page.description]),
+    searchText: joinSearchParts([page.title, page.lead]),
   });
 
   for (const section of page.sections ?? []) {
@@ -181,6 +150,10 @@ function buildLegalPageRecords(page, href, categoryPrefix, records, seen) {
     }
 
     const clauses = section.clauses ?? [];
+
+    for (const clause of clauses) {
+      sectionParts.push(clause.id, clause.text, ...(clause.subItems ?? []));
+    }
 
     pushRecord(records, seen, {
       title: sectionTitle,
@@ -237,7 +210,6 @@ export function buildSiteSearchIndex() {
       hero.subheadlineSuffix,
       hero.lead,
       hero.ctaLabel,
-      hero.imageAlt,
       servicesSection.title,
       servicesSection.lead,
       about.eyebrow,
@@ -245,43 +217,12 @@ export function buildSiteSearchIndex() {
       about.titleAccent,
       ...about.paragraphs,
       about.ctaLabel,
-      about.imageAlt,
       contactCta.title,
       contactCta.lead,
       contactCta.ctaLabel,
-      ...services.map((service) => [service.title, service.imageAlt].join(" ")),
+      ...services.map((service) => service.title),
     ]),
   });
-
-  for (const item of navigation) {
-    pushRecord(records, seen, {
-      title: item.label,
-      href: item.href,
-      category: "Navigation",
-      searchText: item.label,
-    });
-  }
-
-  for (const link of footer.information.links) {
-    pushRecord(records, seen, {
-      title: link.label,
-      href: link.href,
-      category: "Footer",
-      searchText: link.label,
-    });
-  }
-
-  for (const link of footer.legalLinks) {
-    if (link.href === "#") {
-      continue;
-    }
-    pushRecord(records, seen, {
-      title: link.label,
-      href: link.href,
-      category: "Legal",
-      searchText: link.label,
-    });
-  }
 
   pushRecord(records, seen, {
     title: contactPage.title,
@@ -292,9 +233,7 @@ export function buildSiteSearchIndex() {
       contactPage.title,
       contactCta.title,
       contactCta.lead,
-      ...contactPage.cards.map(
-        (card) => `${card.title} ${card.description} ${card.imageAlt ?? ""}`,
-      ),
+      ...contactPage.cards.map((card) => `${card.title} ${card.description}`),
       contactPage.form.heading,
       contactPage.form.submitLabel,
       footer.contact.phone,
@@ -309,11 +248,7 @@ export function buildSiteSearchIndex() {
       href: "/contact",
       anchor: contactCardAnchor(card.title),
       category: "Contact",
-      searchText: joinSearchParts([
-        card.title,
-        card.description,
-        card.imageAlt,
-      ]),
+      searchText: joinSearchParts([card.title, card.description]),
     });
   }
 
@@ -335,7 +270,6 @@ export function buildSiteSearchIndex() {
     searchText: joinSearchParts([
       aboutPage.intro.eyebrow,
       ...aboutPage.intro.paragraphs,
-      aboutPage.intro.imageAlt,
       aboutPage.mission.heading,
       ...aboutPage.mission.points,
       aboutPage.vision.heading,
@@ -344,10 +278,7 @@ export function buildSiteSearchIndex() {
       ...aboutPage.values.items.flatMap((item) => [
         item.title,
         item.description,
-        item.imageAlt,
       ]),
-      aboutPage.coreValues.heading,
-      ...aboutPage.coreValues.paragraphs,
     ]),
   });
 
@@ -385,17 +316,6 @@ export function buildSiteSearchIndex() {
   });
 
   pushRecord(records, seen, {
-    title: aboutPage.coreValues.heading,
-    href: "/about",
-    anchor: "core-values",
-    category: "About",
-    searchText: joinSearchParts([
-      aboutPage.coreValues.heading,
-      ...aboutPage.coreValues.paragraphs,
-    ]),
-  });
-
-  pushRecord(records, seen, {
     title: servicesPage.intro.title,
     href: "/services",
     category: "Services",
@@ -415,12 +335,7 @@ export function buildSiteSearchIndex() {
       href: "/services",
       anchor: practice.id,
       category: "Services",
-      searchText: joinSearchParts([
-        practiceLabel,
-        practice.heading,
-        practice.lead,
-        practice.imageAlt,
-      ]),
+      searchText: joinSearchParts([practiceLabel, practice.heading, practice.lead]),
     });
 
     for (const item of practice.items) {
@@ -437,7 +352,7 @@ export function buildSiteSearchIndex() {
           href: `/services/${practice.id}/${item.slug}/`,
           anchor: serviceTopicAnchor(),
           category: `${practiceLabel} · Services`,
-          searchText: joinSearchParts([practiceLabel, practice.lead, ...itemParts]),
+          searchText: joinSearchParts(itemParts),
         });
       } else {
         pushRecord(records, seen, {
@@ -445,7 +360,7 @@ export function buildSiteSearchIndex() {
           href: "/services",
           anchor: practice.id,
           category: `${practiceLabel} · Services`,
-          searchText: joinSearchParts([practiceLabel, ...itemParts]),
+          searchText: joinSearchParts(itemParts),
         });
       }
     }
@@ -471,12 +386,7 @@ export function buildSiteSearchIndex() {
       href: "/team",
       anchor: teamMemberAnchor(member.name),
       category: "Team",
-      searchText: joinSearchParts([
-        member.name,
-        member.role,
-        member.bio,
-        member.imageAlt,
-      ]),
+      searchText: joinSearchParts([member.name, member.role, member.bio]),
     });
   }
 
@@ -494,12 +404,11 @@ export function buildSiteSearchIndex() {
       article.title,
       article.excerpt,
       article.summary,
-      article.imageAlt,
       ...(article.intro ?? []),
     ];
 
     if (article.format === "docxHtml") {
-      articleParts.push(cfdDocxPlainText);
+      articleParts.push(sanitizeVisibleSearchSource(cfdDocxPlainText));
     }
 
     pushRecord(records, seen, {
@@ -520,7 +429,7 @@ export function buildSiteSearchIndex() {
             articleTitle,
             article.title,
             cfdSection.label,
-            cfdSection.searchText,
+            sanitizeVisibleSearchSource(cfdSection.searchText),
           ]),
         });
       }
@@ -598,23 +507,20 @@ export function getSiteSearchIndex() {
   return cachedIndex;
 }
 
+export function resetSiteSearchIndexCache() {
+  cachedIndex = undefined;
+}
+
 function makeSnippet(text, query) {
   if (!text) {
     return "";
   }
-  const tokens = getSearchTokensForQuery(query);
-  const lower = text.toLowerCase();
-  let index = -1;
-  for (const token of tokens) {
-    const found = lower.indexOf(token);
-    if (found >= 0) {
-      index = found;
-      break;
-    }
-  }
+
+  const index = findSnippetAnchorIndex(text, query);
   if (index < 0) {
-    index = 0;
+    return "";
   }
+
   const start = Math.max(0, index - 48);
   const end = Math.min(text.length, start + 150);
   const slice = text.slice(start, end).replace(/\s+/g, " ").trim();
@@ -624,51 +530,45 @@ function makeSnippet(text, query) {
 }
 
 function scoreRecord(record, query, { relaxed = false } = {}) {
-  const tokens = getSearchTokensForQuery(query);
-  if (!tokens.length) {
+  if (!recordMatchesQuery(record, query, { relaxed })) {
     return null;
   }
 
+  const tokens = getSearchTokensForQuery(query);
   const normalizedQuery = normalizeSearchText(expandQueryWithSynonyms(query));
   const title = normalizeSearchText(record.title);
-  const category = normalizeSearchText(record.category);
   const body = normalizeSearchText(record.searchText);
-  const haystack = `${title} ${category} ${body}`;
+  const visible = getVisibleMatchText(record);
 
-  const matchedTokens = tokens.filter((token) => haystack.includes(token));
-  const allTokensMatch = matchedTokens.length === tokens.length;
-  const anyTokenMatch = matchedTokens.length > 0;
-
-  if (!allTokensMatch && !(relaxed && anyTokenMatch)) {
-    return null;
-  }
+  const matchedTokens = tokens.filter((token) =>
+    tokenMatchesInNormalizedText(visible, token),
+  );
 
   let score = 0;
   if (title === normalizedQuery) {
     score += 1000;
-  } else if (title.includes(normalizedQuery)) {
+  } else if (tokens.length > 1 && queryTokensSatisfied(title, tokens)) {
     score += 700;
-  } else if (tokens.every((token) => title.includes(token))) {
+  } else if (queryTokensSatisfied(title, tokens)) {
     score += 500;
-  } else if (tokens.every((token) => category.includes(token))) {
-    score += 320;
-  } else if (tokens.every((token) => body.includes(token))) {
+  } else if (queryTokensSatisfied(body, tokens)) {
     score += 120;
   } else if (relaxed) {
     score += matchedTokens.length * 25;
   }
 
-  if (category.includes(normalizedQuery)) {
-    score += 250;
-  }
+  score += tokens.filter((token) => tokenMatchesInNormalizedText(title, token)).length * 40;
+  score += tokens.filter((token) => tokenMatchesInNormalizedText(body, token)).length * 8;
 
-  if (body.includes(normalizedQuery) && !title.includes(normalizedQuery)) {
-    score += 80;
+  const snippetSource = record.searchText || record.title;
+  const snippet = makeSnippet(snippetSource, query);
+  if (
+    !relaxed &&
+    !recordHasHighlightableVisibleMatch(snippetSource, query) &&
+    !recordHasHighlightableVisibleMatch(record.title, query)
+  ) {
+    return null;
   }
-
-  score += tokens.filter((token) => title.includes(token)).length * 40;
-  score += tokens.filter((token) => category.includes(token)).length * 18;
-  score += tokens.filter((token) => body.includes(token)).length * 8;
 
   const group = getRecordGroup(record);
 
@@ -677,31 +577,35 @@ function scoreRecord(record, query, { relaxed = false } = {}) {
     group,
     groupLabel: RESULT_GROUP_LABELS[group] ?? "Page",
     score,
-    snippet: makeSnippet(record.searchText || record.title, query),
+    snippet,
   };
 }
 
-function rankSearchResults(query, { relaxed = false, limit = 25 } = {}) {
+function rankSearchResults(query, { relaxed = false, limit = 25, offset = 0 } = {}) {
   const ranked = getSiteSearchIndex()
     .map((record) => scoreRecord(record, query, { relaxed }))
     .filter(Boolean)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 
   const seenKeys = new Set();
-  const items = [];
+  const allItems = [];
   for (const item of ranked) {
     const key = `${item.href}|${item.title}`;
     if (seenKeys.has(key)) {
       continue;
     }
     seenKeys.add(key);
-    items.push(item);
-    if (items.length >= limit) {
-      break;
-    }
+    allItems.push(item);
   }
 
-  return { items, totalCount: ranked.length };
+  const totalCount = allItems.length;
+  const items = allItems.slice(offset, offset + limit);
+
+  return {
+    items,
+    totalCount,
+    hasMore: offset + limit < totalCount,
+  };
 }
 
 export function getAutocompleteSuggestions(query, limit = 6) {
@@ -723,9 +627,14 @@ export function getAutocompleteSuggestions(query, limit = 6) {
     }
   }
 
+  const queryTokens = getSearchTokensForQuery(trimmed);
+
   for (const record of getSiteSearchIndex()) {
     const title = normalizeSearchText(record.title);
-    if (title.includes(normalized) || title.startsWith(normalized)) {
+    if (
+      title.startsWith(normalized) ||
+      queryTokens.every((token) => tokenMatchesInNormalizedText(title, token))
+    ) {
       suggestions.add(record.title);
     }
     if (suggestions.size >= limit * 2) {
@@ -757,25 +666,57 @@ export function getAlternativeSearchSuggestions(query, limit = 4) {
   return picks.slice(0, limit);
 }
 
-export function getRelatedServiceResults(limit = 3) {
-  const seen = new Set();
-  const items = [];
+const SUGGESTION_RECORD_OVERRIDES = {
+  "Technical Consulting": (records) =>
+    records.find((record) => record.href === "/services#engineering"),
+};
 
-  for (const record of getSiteSearchIndex()) {
-    if (getRecordGroup(record) !== "services") {
+function recordFromSuggestion(suggestion, query) {
+  const records = getSiteSearchIndex();
+  const override = SUGGESTION_RECORD_OVERRIDES[suggestion];
+  const record = override ? override(records) : records.find((r) => r.title === suggestion);
+  if (!record) {
+    return null;
+  }
+
+  const scored =
+    scoreRecord(record, query, { relaxed: true }) ??
+    scoreRecord(record, query, { relaxed: false });
+  if (scored) {
+    return scored;
+  }
+
+  const group = getRecordGroup(record);
+  return {
+    ...record,
+    group,
+    groupLabel: RESULT_GROUP_LABELS[group] ?? "Page",
+    score: 1,
+    snippet: makeSnippet(record.searchText || record.title, query),
+  };
+}
+
+export function getEmptyStateFallbackResults(query, limit = 3) {
+  const trimmed = String(query ?? "").trim();
+  if (!trimmed) {
+    return [];
+  }
+
+  const suggestions = getAutocompleteSuggestions(trimmed, limit);
+  const items = [];
+  const seen = new Set();
+
+  for (const suggestion of suggestions) {
+    const scored = recordFromSuggestion(suggestion, trimmed);
+    if (!scored) {
       continue;
     }
-    const key = `${record.href}|${record.title}`;
+    const key = `${scored.href}|${scored.title}`;
     if (seen.has(key)) {
       continue;
     }
     seen.add(key);
-    items.push({
-      ...record,
-      group: "services",
-      groupLabel: RESULT_GROUP_LABELS.services,
-      snippet: "",
-    });
+    items.push(scored);
     if (items.length >= limit) {
       break;
     }
@@ -786,17 +727,49 @@ export function getRelatedServiceResults(limit = 3) {
 
 export function getClosestSearchResults(query, limit = 3) {
   const { items } = rankSearchResults(query, { relaxed: true, limit });
-  return items;
+  if (items.length > 0) {
+    return items;
+  }
+  return getEmptyStateFallbackResults(query, limit);
 }
 
-export function searchSite(query) {
+export function getRelatedServiceResults(query, limit = 3) {
+  const trimmed = String(query ?? "").trim();
+  if (!trimmed) {
+    return [];
+  }
+
+  const { items } = rankSearchResults(trimmed, { relaxed: true, limit: 12 });
+  const serviceItems = items
+    .filter((item) => item.group === "services")
+    .slice(0, limit)
+    .map((item) => ({
+      ...item,
+      snippet: item.snippet || makeSnippet(item.searchText || item.title, trimmed),
+    }));
+
+  if (serviceItems.length > 0) {
+    return serviceItems;
+  }
+
+  return getEmptyStateFallbackResults(trimmed, limit)
+    .filter((item) => item.group === "services")
+    .slice(0, limit);
+}
+
+export const DEFAULT_SEARCH_RESULTS_LIMIT = 25;
+
+export function searchSite(query, { limit = DEFAULT_SEARCH_RESULTS_LIMIT, offset = 0 } = {}) {
   const trimmed = query.trim();
   if (!trimmed) {
     return { type: "hint" };
   }
 
-  const { items, totalCount } = rankSearchResults(trimmed);
-  return { type: "results", items, totalCount };
+  const { items, totalCount, hasMore } = rankSearchResults(trimmed, {
+    limit,
+    offset,
+  });
+  return { type: "results", items, totalCount, hasMore, limit, offset };
 }
 
 export function filterSearchResultsByGroup(items, groupId) {
