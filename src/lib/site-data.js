@@ -1,5 +1,5 @@
 export const brand = {
-  name: "UMITECH MARINE",
+  name: "Umitech Marine Solutions",
   tagline: "Marine Consultants",
 };
 
@@ -54,7 +54,7 @@ export const services = [
       "Unmarked vessel at berth with clipboard and closed tablet on the coaming, no people.",
   },
   {
-    practiceId: "legal",
+    practiceId: "loadicator",
     title: "Loadicator",
     image: "/images/Law.jpg",
     imageAlt: "Gavel and scales of justice with a business handshake in the background",
@@ -356,7 +356,7 @@ export const servicesPage = {
       ],
     },
     {
-      id: "legal",
+      id: "loadicator",
       heading: "Loadicator",
       lead:
         "Class-approved loading and stability tools for crews and fleet technical teams.",
@@ -370,7 +370,7 @@ export const servicesPage = {
       items: [
         {
           title: "UMISTAB-X",
-          slug: "legal-consultancy",
+          slug: "umistab-x",
           detail: [
             "UMISTAB-X is an onboard system for bulk-carrier loading, stability, and longitudinal-strength assessment. It manages cargo, ballast, fuel, freshwater, stores, grain, dry bulk, deck icing, tanks, and other weights. The software calculates displacement, drafts, trim, hydrostatics, stability criteria, shear forces, and bending moments for intact and damage conditions. Users review GZ curves, validation results, visibility, draft surveys, load-line settings, and PDF reports. It supports amendments to the Grain Code in accordance with MSC.552(101) and also includes an optional module for deck-loading calculations.",
           ],
@@ -384,7 +384,7 @@ const LINKED_SERVICE_PRACTICE_IDS = new Set([
   "naval",
   "engineering",
   "inspection",
-  "legal",
+  "loadicator",
 ]);
 
 export function getServiceTopicParams() {
@@ -429,8 +429,7 @@ export const about = {
   titlePrefix: "Practical expertise for demanding ",
   titleAccent: "marine operations",
   paragraphs: [
-    "Umitech Marine Solutions began its journey in 2024, founded by experienced and forward-thinking professionals from the shipping and engineering industries. Established with a clear vision to deliver premium consultancy backed by practical, hands-on expertise, Umitech Marine Solutions is built on the foundation of technical excellence and real-world operational insight.",
-    "We are driven by a commitment to precision, reliability and 24/7 support—delivering solutions that ensure maritime operations run safely, efficiently and seamlessly.",
+    "Umitech Marine Solutions brings Naval Architecture, Engineering Analysis, and Quality Assurance expertise to vessel owners, operators, and offshore projects across Japan and beyond. Every engagement draws on hands-on experience at sea and on the drafting table, backed by 24/7 support.",
   ],
   ctaLabel: "Know more",
   ctaHref: "/about",
@@ -461,7 +460,7 @@ export const aboutPage = {
   vision: {
     heading: "Vision",
     body:
-      "To redefine the future of marine, surveying, engineering, and design consultancy through bold innovation, unmatched expertise, and a relentless pursuit of excellence.",
+      "To redefine the future of marine engineering, design and quality assurance consultancy through innovation, expertise, and excellence",
   },
   values: {
     heading: "Values",
@@ -543,6 +542,8 @@ export const teamPage = {
     eyebrow: "Naval architects and Master Mariners",
     lead:
       "A team that has designed structure and stood on deck — so the advice you receive is grounded in both the analysis and the operation.",
+    leadSupplement:
+      "Umitech Marine Solutions draws on the wider technical bench of the Pelagic Marine group.",
   },
   members: [
     {
@@ -634,7 +635,7 @@ export function getBlogArticle(slug) {
 export const standardTermsPage = {
   title: "Standard Terms & Conditions of Engagement",
   description:
-    "Standard Terms and Conditions of Engagement for UMITECH MARINE consultancy services, including scope, fees, liability, and governing law.",
+    "Standard Terms and Conditions of Engagement for Umitech Marine Solutions consultancy services, including scope, fees, liability, and governing law.",
     sections: [
       {
       number: "1",
@@ -1068,7 +1069,7 @@ export const termsPage = {
 export const cookiesPolicyPage = {
   title: "Cookies Policy",
   description:
-    "How UMITECH MARINE uses cookies and similar technologies on its website, including essential, performance, and functional cookies.",
+    "How Umitech Marine Solutions uses cookies and similar technologies on its website, including essential, performance, and functional cookies.",
   sections: [
     {
       number: "1",
@@ -1133,7 +1134,7 @@ export const cookiesPolicyPage = {
 export const privacyPolicyPage = {
   title: "Privacy Policy",
   description:
-    "How UMITECH MARINE collects, uses, stores, and protects personal information on www.umitech.co.jp, and your privacy rights.",
+    "How Umitech Marine Solutions collects, uses, stores, and protects personal information on www.umitech.co.jp, and your privacy rights.",
   sections: [
     {
       number: "1",
@@ -1246,8 +1247,8 @@ export const disclaimerPage = {
       number: "1",
       heading: "Interpretation and Definitions",
       paragraphs: [
-        "“Company” means Umitech Marine Solutions (also referred to as “the Company”, “Umitech”, “We”, “Us” or “Our”), having its office at 4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002.",
-        "“Service” means the Website and the information, content, materials, features and functionalities made available through the Website, and the services provided by Umitech.",
+        "“Company” means Umitech Marine Solutions (also referred to as “the Company”, “We”, “Us” or “Our”), having its office at 4-54-6 Utsukushigaoka, Aoba Ward, Yokohama City, Postal Code 225-0002.",
+        "“Service” means the Website and the information, content, materials, features and functionalities made available through the Website, and the services provided by Umitech Marine Solutions.",
         "“Website” means the website operated by Umitech Marine Solutions, accessible from https://www.umitech.co.jp",
         "“You” means the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service.",
       ],

@@ -374,6 +374,7 @@ export function buildSiteSearchIndex() {
       teamPage.intro.title,
       teamPage.intro.eyebrow,
       teamPage.intro.lead,
+      teamPage.intro.leadSupplement,
       teamPage.cta.heading,
       teamPage.cta.lead,
       teamPage.cta.ctaLabel,

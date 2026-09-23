@@ -16,17 +16,17 @@ const siteUrl = "https://www.umitech.co.jp";
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "UMITECH MARINE | Marine Consultants",
-    template: "%s | UMITECH MARINE",
+    default: "Umitech Marine Solutions | Marine Consultants",
+    template: "%s | Umitech Marine Solutions",
   },
   description:
-    "UMITECH MARINE delivers premium marine consultancy across naval architecture, engineering, surveying, and legal consultancy with 24/7 support.",
+    "Umitech Marine Solutions delivers premium marine consultancy across naval architecture, engineering, surveying, and legal consultancy with 24/7 support.",
   openGraph: {
-    title: "UMITECH MARINE | Marine Consultants",
+    title: "Umitech Marine Solutions | Marine Consultants",
     description:
       "Premium marine consultancy backed by practical, hands-on expertise across naval architecture, engineering, surveying, and clean-fuel advisory.",
     url: siteUrl,
-    siteName: "UMITECH MARINE",
+    siteName: "Umitech Marine Solutions",
     locale: "en_US",
     type: "website",
     images: [
@@ -40,7 +40,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "UMITECH MARINE | Marine Consultants",
+    title: "Umitech Marine Solutions | Marine Consultants",
     description:
       "Premium marine consultancy backed by practical, hands-on expertise.",
     images: ["/images/heroImage.jpeg"],

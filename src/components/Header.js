@@ -263,12 +263,12 @@ export function Header() {
             <span
               className={styles.logoBrand}
               role="img"
-              aria-label="UMITECH MARINE"
+              aria-label="Umitech Marine Solutions"
             />
           ) : (
             <Image
               src="/images/logo.png"
-              alt="UMITECH MARINE"
+              alt="Umitech Marine Solutions"
               width={1024}
               height={297}
               className={styles.logo}

@@ -4,7 +4,7 @@ import { ContactFormSection } from "@/components/ContactFormSection";
 export const metadata = {
   title: "Contact",
   description:
-    "Contact UMITECH MARINE — visit us in Yokohama, call, email, or send a message through our contact form.",
+    "Contact Umitech Marine Solutions — visit us in Yokohama, call, email, or send a message through our contact form.",
 };
 
 export default function ContactPage() {

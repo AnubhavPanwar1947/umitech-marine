@@ -4,7 +4,7 @@ const ICON_SRC = {
   naval: "/images/Naval Architecture.svg",
   engineering: "/images/Engineering.svg",
   inspection: "/images/Inspection, Audits and Surveying.svg",
-  legal: "/images/LOADICATOR.svg",
+  loadicator: "/images/LOADICATOR.svg",
 };
 
 const ICON_SCALE_CLASS = {
@@ -12,7 +12,7 @@ const ICON_SCALE_CLASS = {
   inspection: styles.iconInspection,
 };
 
-/** @param {{ practiceId: 'naval' | 'engineering' | 'inspection' | 'legal' }} props */
+/** @param {{ practiceId: 'naval' | 'engineering' | 'inspection' | 'loadicator' }} props */
 export function ServiceCardIcon({ practiceId }) {
   const src = ICON_SRC[practiceId] ?? ICON_SRC.naval;
   const scaleClass = ICON_SCALE_CLASS[practiceId] ?? "";

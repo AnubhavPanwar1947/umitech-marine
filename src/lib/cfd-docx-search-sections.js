@@ -32,7 +32,7 @@ export const cfdDocxSearchSections = [
   {
     "id": "cfd-section-4",
     "label": "Industry Perspective",
-    "searchText": "Industry Perspective From our experience at Umitech Marine Consultants &amp; Surveyors, CFD is most effective when used as a performance verification and retrofit evaluation tool — not merely a visualization exercise. The objective is clear: Select the right energy-saving solution Support CII and GHG alignment Provide Class-ready technical reporting Empower informed decision-making Digital simulation must translate into operational outcome. <p"
+    "searchText": "Industry Perspective From our experience at Umitech Marine Solutions, CFD is most effective when used as a performance verification and retrofit evaluation tool — not merely a visualization exercise. The objective is clear: Select the right energy-saving solution Support CII and GHG alignment Provide Class-ready technical reporting Empower informed decision-making Digital simulation must translate into operational outcome. <p"
   },
   {
     "id": "cfd-section-5",

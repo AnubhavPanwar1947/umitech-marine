@@ -12,7 +12,7 @@ export function Footer() {
             <Link href="/" className={styles.brandLink}>
               <Image
                 src="/images/logo.png"
-                alt="UMITECH MARINE"
+                alt="Umitech Marine Solutions"
                 width={1024}
                 height={297}
                 className={styles.logo}
