@@ -760,17 +760,62 @@ export function getRelatedServiceResults(query, limit = 3) {
 
 export const DEFAULT_SEARCH_RESULTS_LIMIT = 25;
 
+export const SEARCH_MIN_QUERY_LENGTH = 2;
+
+export const SEARCH_VAGUE_QUERY_RESULTS_CAP = 6;
+
+export const SEARCH_VAGUE_STOPWORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "as",
+  "at",
+  "be",
+  "by",
+  "for",
+  "from",
+  "in",
+  "is",
+  "it",
+  "of",
+  "on",
+  "or",
+  "the",
+  "to",
+  "with",
+]);
+
+export function isVagueSingleTokenQuery(query) {
+  const trimmed = String(query ?? "").trim().toLowerCase();
+  const tokens = trimmed.split(/\s+/).filter(Boolean);
+  return tokens.length === 1 && SEARCH_VAGUE_STOPWORDS.has(tokens[0]);
+}
+
 export function searchSite(query, { limit = DEFAULT_SEARCH_RESULTS_LIMIT, offset = 0 } = {}) {
   const trimmed = query.trim();
-  if (!trimmed) {
+  if (!trimmed || trimmed.length < SEARCH_MIN_QUERY_LENGTH) {
     return { type: "hint" };
   }
 
+  const vagueQuery = isVagueSingleTokenQuery(trimmed);
+  const effectiveLimit = vagueQuery
+    ? Math.min(limit, SEARCH_VAGUE_QUERY_RESULTS_CAP)
+    : limit;
+
   const { items, totalCount, hasMore } = rankSearchResults(trimmed, {
-    limit,
+    limit: effectiveLimit,
     offset,
   });
-  return { type: "results", items, totalCount, hasMore, limit, offset };
+
+  return {
+    type: "results",
+    items,
+    totalCount,
+    hasMore: vagueQuery ? totalCount > items.length : hasMore,
+    limit: effectiveLimit,
+    offset,
+    vagueQuery,
+  };
 }
 
 export function filterSearchResultsByGroup(items, groupId) {
@@ -778,4 +823,12 @@ export function filterSearchResultsByGroup(items, groupId) {
     return items;
   }
   return items.filter((item) => item.group === groupId);
+}
+
+export function countSearchResultsByFilterGroup(items) {
+  const counts = { all: items.length };
+  for (const groupId of ["services", "articles", "team", "about", "legal"]) {
+    counts[groupId] = filterSearchResultsByGroup(items, groupId).length;
+  }
+  return counts;
 }

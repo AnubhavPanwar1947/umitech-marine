@@ -1350,8 +1350,8 @@ export const searchPopular = [
   "Marine Surveying",
   "Engineering",
   "CFD",
-  "Ship Design",
-  "Project Management",
+  "Flag state",
+  "Stability Calculation",
   "Technical Consulting",
 ];
 

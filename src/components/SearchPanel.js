@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   forwardRef,
@@ -12,10 +12,32 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { splitTextByHighlights } from "@/lib/search-highlight";
 import { setSearchNavHighlight } from "@/lib/search-nav-highlight";
-import { addRecentSearch, readRecentSearches } from "@/lib/search-recent";
-import { searchPopular } from "@/lib/site-data";
 import {
+  buildSearchInputDescribedBy,
+  getEnterFirstResultForQuery,
+  isFilterChipDisabled,
+  isFocusablePanelElement,
+  normalizeSearchPanelQuery,
+  resolveSearchPanelEscapeAction,
+  SEARCH_PANEL_FOCUSABLE_SELECTOR,
+  shouldFlushDebouncedQuery,
+  shouldPreventTabTrapWrap,
+} from "@/lib/search-panel-actions";
+import {
+  addRecentSearch,
+  clearRecentSearches,
+  dedupeRecentSearchEntries,
+  readRecentSearches,
+} from "@/lib/search-recent";
+import {
+  buildSearchPanelStatus,
+  SEARCH_DEBOUNCE_MS,
+} from "@/lib/search-panel-status";
+import { searchFilterGroups, searchPopular } from "@/lib/site-data";
+import {
+  countSearchResultsByFilterGroup,
   DEFAULT_SEARCH_RESULTS_LIMIT,
+  filterSearchResultsByGroup,
   getAlternativeSearchSuggestions,
   getAutocompleteSuggestions,
   getClosestSearchResults,
@@ -140,75 +162,207 @@ export const SearchPanel = forwardRef(function SearchPanel(
   const router = useRouter();
   const inputId = useId();
   const statusId = useId();
+  const escapeHintId = useId();
   const inputRef = useRef(null);
+  const debounceTimeoutRef = useRef(null);
   const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const [recentSearches, setRecentSearches] = useState([]);
   const [resultsLimit, setResultsLimit] = useState(DEFAULT_SEARCH_RESULTS_LIMIT);
+  const [resultGroupFilter, setResultGroupFilter] = useState("all");
 
   useEffect(() => {
     if (!open) {
       return;
     }
 
-    setQuery("");
-    setActiveIndex(-1);
-    setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
-    setRecentSearches(readRecentSearches());
-
     const frame = requestAnimationFrame(() => {
+      setQuery("");
+      setDebouncedQuery("");
+      setActiveIndex(-1);
+      setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
+      setResultGroupFilter("all");
+      setRecentSearches(dedupeRecentSearchEntries(readRecentSearches()));
       inputRef.current?.focus();
     });
 
     return () => cancelAnimationFrame(frame);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+    debounceTimeoutRef.current = window.setTimeout(() => {
+      setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
+      setDebouncedQuery(query);
+      debounceTimeoutRef.current = null;
+    }, SEARCH_DEBOUNCE_MS);
+    return () => {
+      if (debounceTimeoutRef.current) {
+        window.clearTimeout(debounceTimeoutRef.current);
+        debounceTimeoutRef.current = null;
+      }
+    };
+  }, [query, open]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const handleEscapeCapture = (event) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      const escapeAction = resolveSearchPanelEscapeAction(query);
+      if (escapeAction === "clear-query") {
+        setQuery("");
+        requestAnimationFrame(() => {
+          inputRef.current?.focus();
+        });
+        return;
+      }
+      onClose();
+    };
+
+    document.addEventListener("keydown", handleEscapeCapture, true);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeCapture, true);
+    };
+  }, [onClose, open, query]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const panel = typeof ref === "object" && ref ? ref.current : null;
+    if (!(panel instanceof HTMLElement)) {
+      return;
+    }
+
+    const getFocusableElements = () =>
+      [...panel.querySelectorAll(SEARCH_PANEL_FOCUSABLE_SELECTOR)].filter(
+        isFocusablePanelElement,
+      );
+
+    const handleTabTrap = (event) => {
+      if (event.key !== "Tab") {
+        return;
+      }
+      const focusable = getFocusableElements();
+      if (!focusable.length) {
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (
+        shouldPreventTabTrapWrap({
+          focusInsidePanel: panel.contains(active),
+          shiftKey: event.shiftKey,
+          activeIsFirst: active === first,
+          activeIsLast: active === last,
+        })
+      ) {
+        event.preventDefault();
+        if (!panel.contains(active)) {
+          first.focus();
+          return;
+        }
+        if (event.shiftKey) {
+          last.focus();
+        } else {
+          first.focus();
+        }
+      }
+    };
+
+    panel.addEventListener("keydown", handleTabTrap);
+    return () => {
+      panel.removeEventListener("keydown", handleTabTrap);
+    };
+  }, [open, ref, query, debouncedQuery, resultGroupFilter, resultsLimit]);
+
   const searchResult = useMemo(
-    () => searchSite(query, { limit: resultsLimit }),
-    [query, resultsLimit],
+    () => searchSite(debouncedQuery, { limit: resultsLimit }),
+    [debouncedQuery, resultsLimit],
   );
   const autocomplete = useMemo(
-    () => getAutocompleteSuggestions(query),
-    [query],
+    () => getAutocompleteSuggestions(debouncedQuery),
+    [debouncedQuery],
   );
 
-  const filteredItems = useMemo(() => {
+  const allResultItems = useMemo(() => {
     if (searchResult.type !== "results") {
       return [];
     }
     return searchResult.items;
   }, [searchResult]);
 
+  const filteredItems = useMemo(
+    () => filterSearchResultsByGroup(allResultItems, resultGroupFilter),
+    [allResultItems, resultGroupFilter],
+  );
+
+  const filterCounts = useMemo(
+    () => countSearchResultsByFilterGroup(allResultItems),
+    [allResultItems],
+  );
+
   const closestResults = useMemo(() => {
     if (searchResult.type !== "results" || searchResult.items.length > 0) {
       return [];
     }
-    return getClosestSearchResults(query, 3);
-  }, [searchResult, query]);
+    return getClosestSearchResults(debouncedQuery, 3);
+  }, [searchResult, debouncedQuery]);
 
   const relatedServices = useMemo(() => {
     if (searchResult.type !== "results" || searchResult.items.length > 0) {
       return [];
     }
-    return getRelatedServiceResults(query, 3);
-  }, [searchResult, query]);
+    return getRelatedServiceResults(debouncedQuery, 3);
+  }, [searchResult, debouncedQuery]);
 
   const alternativeSuggestions = useMemo(() => {
     if (searchResult.type !== "results" || searchResult.items.length > 0) {
       return [];
     }
-    return getAlternativeSearchSuggestions(query);
-  }, [searchResult, query]);
+    return getAlternativeSearchSuggestions(debouncedQuery);
+  }, [searchResult, debouncedQuery]);
 
-  const trimmedQueryForNav = query.trim();
+  const emptySuggestedChips = useMemo(() => {
+    if (closestResults.length > 0 || relatedServices.length > 0) {
+      return [];
+    }
+    return alternativeSuggestions;
+  }, [alternativeSuggestions, closestResults.length, relatedServices.length]);
+
+  const emptyStateNavResults = useMemo(() => {
+    const seen = new Set();
+
+    return [...closestResults, ...relatedServices].filter((item) => {
+      const key = `${item.href}\u0000${item.title}`;
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
+    });
+  }, [closestResults, relatedServices]);
+
+  const trimmedDebouncedQuery = normalizeSearchPanelQuery(debouncedQuery);
   const isEmptyResultsState =
     searchResult.type === "results" &&
-    trimmedQueryForNav.length > 0 &&
+    trimmedDebouncedQuery.length >= 2 &&
     searchResult.items.length === 0;
 
   const hasEmptyStateListbox =
-    isEmptyResultsState &&
-    (closestResults.length > 0 || relatedServices.length > 0);
+    isEmptyResultsState && emptyStateNavResults.length > 0;
 
   const navigableItems = useMemo(() => {
     const items = [];
@@ -219,10 +373,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
       items.push({ kind: "result", item });
     }
     if (isEmptyResultsState) {
-      for (const item of closestResults) {
-        items.push({ kind: "result", item });
-      }
-      for (const item of relatedServices) {
+      for (const item of emptyStateNavResults) {
         items.push({ kind: "result", item });
       }
     }
@@ -230,47 +381,49 @@ export const SearchPanel = forwardRef(function SearchPanel(
   }, [
     autocomplete,
     filteredItems,
-    closestResults,
-    relatedServices,
+    emptyStateNavResults,
     isEmptyResultsState,
   ]);
-
-  useEffect(() => {
-    setActiveIndex(-1);
-  }, [query, filteredItems.length]);
-
-  useEffect(() => {
-    setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
-  }, [query]);
 
   if (!open) {
     return null;
   }
 
-  const trimmedQuery = query.trim();
+  const trimmedQuery = normalizeSearchPanelQuery(query);
   const hasQuery = trimmedQuery.length > 0;
-  const showAutocomplete = trimmedQuery.length >= 2 && autocomplete.length > 0;
+  const showAutocomplete =
+    trimmedDebouncedQuery.length >= 2 && autocomplete.length > 0;
   const totalCount =
     searchResult.type === "results" ? searchResult.totalCount : 0;
-  const visibleCount =
-    searchResult.type === "results" ? filteredItems.length : 0;
+  const visibleCount = filteredItems.length;
   const hasMoreResults =
-    searchResult.type === "results" && Boolean(searchResult.hasMore);
-  const hasAnyResults =
-    searchResult.type === "results" && searchResult.items.length > 0;
-  const showFullEmpty =
     searchResult.type === "results" &&
-    trimmedQuery.length > 0 &&
-    !hasAnyResults;
+    Boolean(searchResult.hasMore) &&
+    !searchResult.vagueQuery;
+  const hasAnyResults =
+    searchResult.type === "results" && allResultItems.length > 0;
+  const showFullEmpty = isEmptyResultsState;
+  const showFilteredEmpty =
+    searchResult.type === "results" &&
+    trimmedDebouncedQuery.length >= 2 &&
+    hasAnyResults &&
+    resultGroupFilter !== "all" &&
+    filteredItems.length === 0;
+  const showResultFilters =
+    trimmedDebouncedQuery.length >= 2 && hasAnyResults;
 
-  const statusMessage =
-    searchResult.type === "hint"
-      ? "Enter a search term."
-      : showFullEmpty
-        ? `No matches for “${trimmedQuery}”.`
-        : hasMoreResults
-          ? `Showing ${visibleCount} of ${totalCount} results`
-          : `${totalCount} result${totalCount === 1 ? "" : "s"} found`;
+  const { message: statusMessage, showCountLine } = buildSearchPanelStatus({
+    searchResult,
+    trimmedQuery,
+    trimmedDebouncedQuery,
+    resultGroupFilter,
+    visibleCount,
+    loadedResultCount: allResultItems.length,
+    totalCount,
+    hasMoreResults,
+    showFullEmpty,
+    showFilteredEmpty,
+  });
 
   const navigateToSearchResult = (href, searchTerm) => {
     const term = String(searchTerm ?? trimmedQuery).trim();
@@ -293,9 +446,47 @@ export const SearchPanel = forwardRef(function SearchPanel(
     onClose();
   };
 
+  const flushDebouncedQuery = () => {
+    if (debounceTimeoutRef.current) {
+      window.clearTimeout(debounceTimeoutRef.current);
+      debounceTimeoutRef.current = null;
+    }
+    setResultsLimit(DEFAULT_SEARCH_RESULTS_LIMIT);
+    setDebouncedQuery(query);
+  };
+
   const handleClearQuery = () => {
     setQuery("");
+    setActiveIndex(-1);
     inputRef.current?.focus();
+  };
+
+  const handleClearRecentSearches = () => {
+    clearRecentSearches();
+    setRecentSearches([]);
+  };
+
+  const handleInputBlur = () => {
+    if (shouldFlushDebouncedQuery(query, debouncedQuery)) {
+      flushDebouncedQuery();
+    }
+  };
+
+  const syncDebouncedQueryIfNeeded = () => {
+    if (!shouldFlushDebouncedQuery(query, debouncedQuery)) {
+      return;
+    }
+    flushDebouncedQuery();
+  };
+
+  const handleResultGroupFilterChange = (groupId) => {
+    setResultGroupFilter(groupId);
+    setActiveIndex(-1);
+  };
+
+  const updateQuery = (nextQuery) => {
+    setQuery(nextQuery);
+    setActiveIndex(-1);
   };
 
   const activateNavigableItem = (index) => {
@@ -305,7 +496,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
     }
 
     if (entry.kind === "suggestion") {
-      setQuery(entry.suggestion);
+      updateQuery(entry.suggestion);
       return;
     }
 
@@ -337,18 +528,31 @@ export const SearchPanel = forwardRef(function SearchPanel(
     }
 
     if (event.key === "Enter") {
+      syncDebouncedQueryIfNeeded();
+
       if (activeIndex >= 0) {
         event.preventDefault();
         activateNavigableItem(activeIndex);
         return;
       }
-      if (filteredItems[0]) {
+
+      const firstResult = getEnterFirstResultForQuery(
+        trimmedQuery,
+        resultGroupFilter,
+        resultsLimit,
+      );
+      if (firstResult) {
         event.preventDefault();
-        navigateToSearchResult(filteredItems[0].href, trimmedQuery);
-        router.push(filteredItems[0].href);
+        navigateToSearchResult(firstResult.href, trimmedQuery);
+        router.push(firstResult.href);
       }
     }
   };
+
+  const inputDescribedBy = buildSearchInputDescribedBy({
+    escapeHintId,
+    hasQuery,
+  });
 
   return (
     <div
@@ -383,7 +587,8 @@ export const SearchPanel = forwardRef(function SearchPanel(
           type="search"
           className={styles.input}
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => updateQuery(event.target.value)}
+          onBlur={handleInputBlur}
           onKeyDown={handleInputKeyDown}
           placeholder="Search services, team members, articles…"
           autoComplete="off"
@@ -401,6 +606,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
           aria-activedescendant={
             activeIndex >= 0 ? `${id}-option-${activeIndex}` : undefined
           }
+          aria-describedby={inputDescribedBy}
         />
         {hasQuery ? (
           <button
@@ -414,15 +620,60 @@ export const SearchPanel = forwardRef(function SearchPanel(
         ) : null}
       </div>
 
+      {hasQuery ? (
+        <p id={escapeHintId} className={styles.escapeHint}>
+          Esc to clear · Esc again to close
+        </p>
+      ) : null}
+
+      {showResultFilters ? (
+        <div
+          className={styles.filterBar}
+          role="group"
+          aria-label="Filter results by type"
+        >
+          {searchFilterGroups.map((group) => {
+            const pressed = resultGroupFilter === group.id;
+            const count = filterCounts[group.id] ?? 0;
+            const chipDisabled = isFilterChipDisabled(group.id, filterCounts);
+            return (
+              <button
+                key={group.id}
+                type="button"
+                className={`${styles.filterChip} ${chipDisabled ? styles.filterChipDisabled : ""}`.trim()}
+                aria-pressed={pressed}
+                aria-disabled={chipDisabled ? "true" : undefined}
+                onClick={() => {
+                  if (chipDisabled) {
+                    return;
+                  }
+                  handleResultGroupFilterChange(group.id);
+                }}
+              >
+                {group.label} ({count})
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {statusMessage}
       </p>
 
-      {searchResult.type === "results" && hasQuery ? (
+      {searchResult.type === "results" &&
+      trimmedDebouncedQuery.length >= 2 &&
+      !showFilteredEmpty &&
+      showCountLine ? (
         <p className={styles.resultCount} aria-hidden="true">
-          {hasMoreResults
-            ? `Showing ${visibleCount} of ${totalCount} results`
-            : `${totalCount} result${totalCount === 1 ? "" : "s"} found`}
+          {statusMessage}
+        </p>
+      ) : null}
+
+      {showFilteredEmpty ? (
+        <p className={styles.message}>
+          No results in this category for the current query. Try another filter
+          or show more results.
         </p>
       ) : null}
 
@@ -430,14 +681,23 @@ export const SearchPanel = forwardRef(function SearchPanel(
         <div className={styles.idleState}>
           {recentSearches.length > 0 ? (
             <div className={styles.suggestionGroup}>
-              <p className={styles.popularEyebrow}>Recent searches</p>
+              <div className={styles.suggestionGroupHeader}>
+                <p className={styles.popularEyebrow}>Recent searches</p>
+                <button
+                  type="button"
+                  className={styles.clearRecentButton}
+                  onClick={handleClearRecentSearches}
+                >
+                  Clear
+                </button>
+              </div>
               <div className={styles.chips} role="group" aria-label="Recent searches">
                 {recentSearches.map((term) => (
                   <button
                     key={term}
                     type="button"
                     className={styles.chip}
-                    onClick={() => setQuery(term)}
+                    onClick={() => updateQuery(term)}
                   >
                     {term}
                   </button>
@@ -454,7 +714,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
                   key={suggestion}
                   type="button"
                   className={styles.chip}
-                  onClick={() => setQuery(suggestion)}
+                  onClick={() => updateQuery(suggestion)}
                 >
                   {suggestion}
                 </button>
@@ -478,7 +738,7 @@ export const SearchPanel = forwardRef(function SearchPanel(
                     type="button"
                     className={styles.autocompleteItem}
                     data-active={isActive ? "true" : undefined}
-                    onClick={() => setQuery(suggestion)}
+                    onClick={() => updateQuery(suggestion)}
                   >
                     <HighlightedText text={suggestion} query={query} />
                   </button>
@@ -492,88 +752,71 @@ export const SearchPanel = forwardRef(function SearchPanel(
       {showFullEmpty ? (
         <div className={styles.emptyState}>
           <p className={styles.message}>
-            We could not find an exact match for “{trimmedQuery}”. Try another
-            keyword or browse our services.
+            We could not find an exact match for “{trimmedDebouncedQuery}”. Try
+            another keyword or browse our services.
           </p>
-          {alternativeSuggestions.length > 0 ? (
-            <div className={styles.chips} role="group" aria-label="Try searching for">
-              {alternativeSuggestions.map((suggestion) => (
-                <button
-                  key={suggestion}
-                  type="button"
-                  className={styles.chip}
-                  onClick={() => setQuery(suggestion)}
-                >
-                  {suggestion}
-                </button>
-              ))}
+          {emptySuggestedChips.length > 0 ? (
+            <div className={styles.suggestionGroup}>
+              <p className={styles.popularEyebrow}>Suggested searches</p>
+              <div
+                className={styles.chips}
+                role="group"
+                aria-label="Suggested searches"
+              >
+                {emptySuggestedChips.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    className={styles.chip}
+                    onClick={() => updateQuery(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
           ) : null}
-          {closestResults.length > 0 || relatedServices.length > 0 ? (
-            <div id={`${id}-listbox`} role="listbox" aria-label="Suggested results">
-          {closestResults.length > 0 ? (
-            <>
-              <p className={styles.popularEyebrow}>Closest matches</p>
-              <ul className={styles.results}>
-                {closestResults.map((item, closestIndex) => {
-                  const navIndex = autocomplete.length + closestIndex;
+          {emptyStateNavResults.length > 0 ? (
+            <div className={styles.suggestionGroup}>
+              <p className={styles.popularEyebrow}>Suggested for you</p>
+              <ul
+                className={styles.results}
+                id={`${id}-listbox`}
+                role="listbox"
+                aria-label="Suggested for you"
+              >
+                {emptyStateNavResults.map((item, emptyIndex) => {
+                  const navIndex = autocomplete.length + emptyIndex;
                   const isActive = activeIndex === navIndex;
                   return (
-                  <li key={`closest-${item.href}-${item.title}`} role="option" aria-selected={isActive}>
-                    <Link
-                      id={`${id}-option-${navIndex}`}
-                      href={item.href}
-                      className={styles.result}
-                      data-active={isActive ? "true" : undefined}
-                      onClick={() =>
-                        handleResultClick(trimmedQuery, item.href)
-                      }
+                    <li
+                      key={`empty-${item.href}-${item.title}`}
+                      role="option"
+                      aria-selected={isActive}
                     >
-                      <span className={styles.resultMeta}>
-                        <GroupIcon group={item.group} />
-                        <span className={styles.resultType}>{item.groupLabel}</span>
-                      </span>
-                      <span className={styles.resultTitle}>
-                        <HighlightedText text={item.title} query={query} />
-                      </span>
-                    </Link>
-                  </li>
-                );
+                      <Link
+                        id={`${id}-option-${navIndex}`}
+                        href={item.href}
+                        className={styles.result}
+                        data-active={isActive ? "true" : undefined}
+                        onClick={() =>
+                          handleResultClick(trimmedQuery, item.href)
+                        }
+                      >
+                        <span className={styles.resultMeta}>
+                          <GroupIcon group={item.group} />
+                          <span className={styles.resultType}>
+                            {item.groupLabel}
+                          </span>
+                        </span>
+                        <span className={styles.resultTitle}>
+                          <HighlightedText text={item.title} query={query} />
+                        </span>
+                      </Link>
+                    </li>
+                  );
                 })}
               </ul>
-            </>
-          ) : null}
-          {relatedServices.length > 0 ? (
-            <>
-              <p className={styles.popularEyebrow}>Related services</p>
-              <ul className={styles.results}>
-                {relatedServices.map((item, relatedIndex) => {
-                  const navIndex =
-                    autocomplete.length + closestResults.length + relatedIndex;
-                  const isActive = activeIndex === navIndex;
-                  return (
-                  <li key={`related-${item.href}-${item.title}`} role="option" aria-selected={isActive}>
-                    <Link
-                      id={`${id}-option-${navIndex}`}
-                      href={item.href}
-                      className={styles.result}
-                      data-active={isActive ? "true" : undefined}
-                      onClick={() =>
-                        handleResultClick(trimmedQuery, item.href)
-                      }
-                    >
-                      <span className={styles.resultMeta}>
-                        <GroupIcon group={item.group} />
-                        <span className={styles.resultType}>{item.groupLabel}</span>
-                      </span>
-                      <span className={styles.resultTitle}>{item.title}</span>
-                    </Link>
-                  </li>
-                );
-                })}
-              </ul>
-            </>
-          ) : null}
             </div>
           ) : null}
           <div className={styles.emptyActions}>

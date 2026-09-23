@@ -48,11 +48,12 @@
 @media (max-width: 179px) {
   .panel {
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.25rem;
     max-height: min(85vh, 24rem);
   }
 
   .popularHint,
+  .escapeHint,
   .resultCategory,
   .resultSnippet,
   .resultType {
@@ -61,6 +62,7 @@
 
   .panelTitle {
     font-size: 0.5625rem;
+    min-width: 0;
   }
 }
 
@@ -187,6 +189,47 @@
   font-weight: 500;
   color: var(--color-muted);
   overflow-wrap: anywhere;
+}
+
+.escapeHint {
+  margin: -0.25rem 0 0;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}
+
+.suggestionGroupHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.375rem 0.5rem;
+  min-width: 0;
+}
+
+.clearRecentButton {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.125rem 0.25rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: #1a557c;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.clearRecentButton:hover,
+.clearRecentButton:focus-visible {
+  color: var(--color-navy-900);
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .idleState {
@@ -331,6 +374,69 @@
   font-weight: 700;
 }
 
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.filterChip {
+  flex: 0 1 auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 2rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-navy-900);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.filterChip[aria-pressed="true"] {
+  border-color: #1a557c;
+  background: var(--color-brand-blue);
+  color: #1a557c;
+}
+
+.filterChipDisabled,
+.filterChip[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filterChipDisabled:hover,
+.filterChipDisabled:focus-visible,
+.filterChip[aria-disabled="true"]:hover,
+.filterChip[aria-disabled="true"]:focus-visible {
+  border-color: var(--color-border);
+  background: var(--color-white);
+  color: var(--color-navy-900);
+}
+
+.filterChip:not([aria-disabled="true"]):hover,
+.filterChip:not([aria-disabled="true"]):focus-visible {
+  border-color: #1a557c;
+  background: var(--color-brand-blue);
+  color: #1a557c;
+}
+
+.filterChip:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 .chips {
   display: grid;
   gap: 0.375rem;
@@ -463,13 +569,99 @@
 }
 
 @media (max-width: 179px) {
+  .panel {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 0;
+  }
+
+  .panel::-webkit-scrollbar {
+    width: 2px;
+  }
+
   .closeButton {
-    width: 100%;
-    min-width: 0;
+    width: 1.5rem;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    min-height: 1.5rem;
+    font-size: 0.875rem;
   }
 
   .panelHeader {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+  }
+
+  .panelTitle {
+    display: none;
+  }
+
+  .inputIcon {
+    left: 0.25rem;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .input {
+    width: calc(100vw - 6px) !important;
+    max-width: calc(100vw - 6px) !important;
+    min-height: 2rem;
+    padding: 0.375rem 1.5rem 0.375rem 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .clearButton {
+    right: 0.125rem;
+    width: 1.25rem;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    min-height: 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .filterChip {
+    min-height: 1.5rem;
+    padding: 0.125rem 0.25rem;
+    font-size: 0.625rem;
+  }
+
+  .filterChipDisabled,
+  .filterChip[aria-disabled="true"] {
+    opacity: 0.55;
+  }
+
+  .clearRecentButton {
+    font-size: 0.625rem;
+    min-height: 1.5rem;
+  }
+
+  .autocompleteItem,
+  .result,
+  .chip,
+  .emptyLink,
+  .showMoreButton {
+    min-height: 2rem;
+    padding: 0.375rem 0.25rem;
+    font-size: 0.6875rem;
+  }
+
+  .emptyActions {
     flex-direction: column;
-    align-items: stretch;
+  }
+
+  .closeButton:focus-visible,
+  .input:focus-visible,
+  .clearButton:focus-visible,
+  .filterChip:focus-visible,
+  .chip:focus-visible,
+  .autocompleteItem:focus-visible,
+  .result:focus-visible,
+  .emptyLink:focus-visible,
+  .showMoreButton:focus-visible {
+    outline-offset: -1px;
   }
 }

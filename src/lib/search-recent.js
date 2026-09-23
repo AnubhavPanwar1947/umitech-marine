@@ -5,6 +5,29 @@ function isBrowser() {
   return typeof window !== "undefined" && typeof sessionStorage !== "undefined";
 }
 
+export function dedupeRecentSearchEntries(entries) {
+  const seen = new Set();
+  const deduped = [];
+
+  for (const entry of entries) {
+    if (typeof entry !== "string") {
+      continue;
+    }
+    const trimmed = entry.trim();
+    if (!trimmed) {
+      continue;
+    }
+    const key = trimmed.toLowerCase();
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    deduped.push(trimmed);
+  }
+
+  return deduped;
+}
+
 export function readRecentSearches() {
   if (!isBrowser()) {
     return [];
@@ -19,7 +42,7 @@ export function readRecentSearches() {
     if (!Array.isArray(parsed)) {
       return [];
     }
-    return parsed.filter((entry) => typeof entry === "string" && entry.trim());
+    return dedupeRecentSearchEntries(parsed);
   } catch {
     return [];
   }
